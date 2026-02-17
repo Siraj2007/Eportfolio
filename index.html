@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -15,321 +15,1043 @@
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
-                        bg: '#020617',         // Deepest Slate
-                        card: '#0f172a',       // Slate 900
-                        accent: '#38bdf8',     // Sky Blue
-                        gold: '#fbbf24',       // Amber 400
-                        vote: '#f43f5e',       // Rose 500
-                        ns: '#16a34a',         // Green (NS)
-                    },
-                    backgroundImage: {
-                        'hero-glow': 'radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.15) 0%, rgba(2, 6, 23, 0) 70%)',
+                        bg: '#020617',     /* Deep Navy (Slate 950) */
+                        card: '#0f172a',   /* Lighter Navy (Slate 900) */
+                        accent: '#3b82f6', /* Royal Blue (Blue 500) */
+                        gold: '#fbbf24',   /* Amber 400 */
+                        vote: '#f43f5e',   /* Rose 500 */
+                        ns: '#16a34a',     /* Green 600 */
                     }
                 }
             }
         }
     </script>
     <style>
-        body { background-color: #020617; color: #f8fafc; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background-color: #020617; 
+            color: #ffffff; 
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* Noise overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+        
+        /* Particle canvas */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* Custom cursor */
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #3b82f6;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
+            transform: translate(-50%, -50%);
+        }
+        .custom-cursor.hover {
+            width: 50px;
+            height: 50px;
+            background: rgba(59, 130, 246, 0.1);
+        }
+        
+        /* Glass panel */
         .glass-panel {
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
-        .bento-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
+        
+        /* Navigation */
+        .nav-hidden { transform: translateY(-100%); }
+        .nav-visible { transform: translateY(0); }
+        
+        /* Hero animations */
+        .hero-title span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(100px);
+            animation: letterReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-        @media (min-width: 768px) {
-            .bento-grid {
-                grid-template-columns: repeat(12, 1fr);
-                grid-template-rows: auto auto;
-            }
-            .col-span-4 { grid-column: span 4; }
-            .col-span-5 { grid-column: span 5; }
-            .col-span-6 { grid-column: span 6; }
-            .col-span-7 { grid-column: span 7; }
-            .col-span-8 { grid-column: span 8; }
-            .col-span-12 { grid-column: span 12; }
+        @keyframes letterReveal {
+            to { opacity: 1; transform: translateY(0); }
         }
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.025em;
+        
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Image hover effects */
+        .img-hover-zoom {
+            overflow: hidden;
+        }
+        .img-hover-zoom img {
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .img-hover-zoom:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Card 3D effect */
+        .card-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
+        }
+        
+        /* Marquee - FIXED SMOOTHNESS */
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        .marquee {
+            display: flex;
+            width: max-content; /* Critical for smooth looping */
+            animation: marquee 30s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        /* Counter animation */
+        .counter {
+            font-variant-numeric: tabular-nums;
+        }
+        
+        /* Glow effect */
+        .glow-accent {
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.3);
+        }
+        
+        /* Section styling */
+        section { position: relative; z-index: 2; }
+        
+        /* Button hover */
+        .btn-primary {
+            background: #3b82f6;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+        
+        /* Link underline animation */
+        .link-underline {
+            position: relative;
+        }
+        .link-underline::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        .link-underline:hover::after {
+            width: 100%;
+        }
+        
+        /* Testimonial card */
+        .testimonial-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .testimonial-card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        /* Service item */
+        .service-item {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+        .service-item:hover {
+            padding-left: 20px;
+            border-color: #3b82f6;
+        }
+        
+        /* FAQ accordion */
+        .faq-item {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        
+        /* Form styling */
+        .form-input {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            background: rgba(255,255,255,0.08);
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Stats card */
+        .stat-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(15, 23, 42, 0.8) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            height: 100%;
+        }
+        
+        /* Work card */
+        .work-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .work-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(2, 6, 23, 0.9), transparent);
+        }
+        
+        /* Achievement card */
+        .achievement-card {
+            transition: all 0.3s ease;
+        }
+        .achievement-card:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Background utilities */
+        .bg-navy-900 { background-color: #0f172a; }
+        .bg-navy-950 { background-color: #020617; }
     </style>
 </head>
-<body class="antialiased pb-20">
-
-    <nav class="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-4xl z-50 glass-panel rounded-full px-6 py-3 flex justify-between items-center shadow-2xl">
-        <span class="font-bold tracking-tight text-white text-lg">Siraj Munir</span>
-        <div class="flex space-x-8 text-sm font-medium text-slate-400">
-            <a href="#leadership" class="hover:text-white transition-colors">Leadership</a>
-            <a href="#community" class="hover:text-white transition-colors">Community</a>
-            <a href="#profile" class="text-accent hover:text-white transition-colors">Profile</a>
+<body>
+    <div class="noise-overlay"></div>
+    
+    <canvas id="particle-canvas"></canvas>
+    
+    <div class="custom-cursor hidden md:block"></div>
+    
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-transform duration-500 nav-hidden">
+        <div class="glass-panel px-6 py-4">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <a href="#hero" class="text-xl font-bold tracking-tight">SIRAJ MUNIR</a>
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-gray-400">
+                    <a href="#about" class="hover:text-white transition-colors link-underline">About</a>
+                    <a href="#experience" class="hover:text-white transition-colors link-underline">Experience</a>
+                    <a href="#leadership" class="hover:text-white transition-colors link-underline">Leadership</a>
+                    <a href="#impact" class="hover:text-white transition-colors link-underline">Impact</a>
+                    <a href="#contact" class="hover:text-white transition-colors link-underline">Contact</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-white">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
         </div>
     </nav>
+    
+    <div id="mobile-menu" class="fixed inset-0 bg-navy-950 z-40 hidden flex-col items-center justify-center space-y-8">
+        <a href="#about" class="text-2xl font-medium text-white mobile-link">About</a>
+        <a href="#experience" class="text-2xl font-medium text-white mobile-link">Experience</a>
+        <a href="#leadership" class="text-2xl font-medium text-white mobile-link">Leadership</a>
+        <a href="#impact" class="text-2xl font-medium text-white mobile-link">Impact</a>
+        <a href="#contact" class="text-2xl font-medium text-white mobile-link">Contact</a>
+        <button id="close-menu" class="absolute top-6 right-6 text-white">
+            <i class="fas fa-times text-2xl"></i>
+        </button>
+    </div>
 
-    <section class="pt-40 pb-12 bg-hero-glow relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 text-center z-10 relative">
-            <div data-aos="fade-down">
-                <span class="badge bg-ns/10 text-ns border border-ns/20 mb-6">
+    <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 z-0">
+             <div class="absolute inset-0 bg-gradient-to-b from-bg/60 via-bg/80 to-bg"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4 max-w-6xl mx-auto">
+            <div class="mb-6" data-aos="fade-down">
+                <span class="inline-flex items-center px-4 py-2 rounded-full text-xs font-semibold bg-ns/20 text-ns border border-ns/30">
                     <i class="fas fa-flag mr-2"></i> Current Role: Company IC (HTA 202 Intake)
                 </span>
             </div>
-            <h1 class="text-5xl md:text-8xl font-extrabold tracking-tight mb-6 text-white" data-aos="fade-up" data-aos-delay="100">
-                Leading with <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-blue-600">Purpose.</span>
+            
+            <h1 class="hero-title text-6xl md:text-9xl font-black tracking-tighter mb-6 text-white">
+                <span style="animation-delay: 0.1s">S</span><span style="animation-delay: 0.15s">I</span><span style="animation-delay: 0.2s">R</span><span style="animation-delay: 0.25s">A</span><span style="animation-delay: 0.3s">J</span>
+                <span class="block md:inline-block md:ml-8" style="animation-delay: 0.35s">M</span><span style="animation-delay: 0.4s">U</span><span style="animation-delay: 0.45s">N</span><span style="animation-delay: 0.5s">I</span><span style="animation-delay: 0.55s">R</span>
             </h1>
             
-            <p class="text-xl text-slate-400 max-w-2xl mx-auto mb-10 italic" data-aos="fade-up" data-aos-delay="200">
-                The true meaning of life is to plant trees, under whose shade we do not expect to sit
+            <p class="text-xl md:text-3xl text-gray-300 mb-8 font-light max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="600">
+                Leading with <span class="text-accent font-semibold">Purpose.</span> Serving with <span class="text-accent font-semibold">Heart.</span> Lighting the Path for <span class="text-accent font-semibold">Others.</span>
             </p>
             
-            <div class="flex flex-wrap justify-center gap-6 md:gap-12" data-aos="fade-up" data-aos-delay="300">
+            <p class="text-sm md:text-base text-gray-500 mb-12 tracking-widest uppercase" data-aos="fade-up" data-aos-delay="700">
+                Strategic Leadership | Grassroots Ops | Professional Emcee
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-8 md:gap-16" data-aos="fade-up" data-aos-delay="800">
                 <div class="text-center">
-                    <div class="text-3xl md:text-5xl font-bold text-white mb-1">10,000+</div>
-                    <div class="text-xs font-bold text-gold uppercase tracking-widest">Audience Reached</div>
+                    <div class="text-4xl md:text-6xl font-bold text-white counter" data-target="10000">0</div>
+                    <div class="text-xs font-bold text-gold uppercase tracking-widest mt-2">+ People Reached</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-3xl md:text-5xl font-bold text-white mb-1">1,000+</div>
-                    <div class="text-xs font-bold text-accent uppercase tracking-widest">Hours Volunteered</div>
+                    <div class="text-4xl md:text-6xl font-bold text-white counter" data-target="1000">0</div>
+                    <div class="text-xs font-bold text-accent uppercase tracking-widest mt-2">+ Volunteer Hours</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-3xl md:text-5xl font-bold text-white mb-1">1,500+</div>
-                    <div class="text-xs font-bold text-vote uppercase tracking-widest">Residents Engaged</div>
+                    <div class="text-4xl md:text-6xl font-bold text-white counter" data-target="1500">0</div>
+                    <div class="text-xs font-bold text-vote uppercase tracking-widest mt-2">+ Residents Engaged</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-500 text-xs">
+            © 2026 Siraj Munir
+        </div>
+    </section>
+
+    <section id="about" class="py-24 md:py-32 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1595590424283-b8f17842773f?w=800&q=80" alt="National Service" class="w-full h-[500px] object-cover rounded-2xl shadow-2xl shadow-blue-900/20">
+                        <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&q=80" alt="Community Service" class="absolute -bottom-8 -right-8 w-48 h-64 object-cover rounded-xl border-4 border-card shadow-2xl hidden md:block">
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <h2 class="text-4xl md:text-6xl font-bold mb-8 leading-tight">
+                        <span class="gradient-text">"The true meaning of life is to plant trees,</span><br>
+                        <span class="text-gray-500">under whose shade we do not expect to sit."</span>
+                    </h2>
+                    
+                    <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                        I am a dedicated leader committed to making tangible impact in my community. From serving as Company IC in National Service to coordinating grassroots operations with government leaders, I believe in leading by example and empowering those around me. My journey has been defined by service, integrity, and an unwavering commitment to positive change.
+                    </p>
+                    
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&q=80" alt="Siraj Munir" class="w-16 h-16 rounded-full object-cover border-2 border-accent">
+                        <div>
+                            <p class="font-bold text-white">Siraj Munir</p>
+                            <p class="text-sm text-gray-500">Company IC at Home Team Academy | Executive Member, Siglap Youth Network</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <main class="max-w-7xl mx-auto px-4" id="leadership">
-        <div class="bento-grid">
-
-            <div class="col-span-12 md:col-span-5 glass-panel rounded-3xl p-8 flex flex-col justify-between group border-l-4 border-ns" data-aos="fade-right">
-                <div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="h-10 w-10 rounded-full bg-ns/20 flex items-center justify-center text-ns">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h2 class="text-xl font-bold text-white">National Service Leadership</h2>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-2">Company IC (In-Charge)</h3>
-                    <p class="text-sm text-slate-400 mb-4">
-                        <strong>Home Team Academy (HTA) - 202 Intake</strong>
-                    </p>
-                    <p class="text-slate-300 leading-relaxed text-sm">
-                        Selected as the Company IC for the cohort. My role is to <strong>walk the journey</strong> alongside my men—fostering brotherhood, ensuring welfare, and pushing the company toward operational excellence together.
-                    </p>
-                </div>
-                <div class="mt-6 flex gap-2">
-                    <span class="badge bg-ns/10 text-ns">Top Appointment</span>
-                    <span class="badge bg-white/5 text-slate-300">POP: Mid-April 2026</span>
-                </div>
+    <section id="experience" class="py-24 md:py-32 px-4 bg-navy-900">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16 reveal">
+                <h2 class="text-5xl md:text-8xl font-black tracking-tighter mb-4">KEY EXPERIENCES</h2>
+                <p class="text-gray-500 text-lg">A curated collection of leadership milestones and community impact.</p>
             </div>
-
-            <div class="col-span-12 md:col-span-7 glass-panel rounded-3xl p-8 relative overflow-hidden group" data-aos="fade-left" id="community">
-                <div class="relative z-10">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="h-10 w-10 rounded-full bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-600/50">
-                            <i class="fas fa-landmark"></i>
-                        </div>
-                        <h2 class="text-xl font-bold text-white">Grassroots Operations</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="work-card rounded-2xl overflow-hidden img-hover-zoom reveal" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="Pre-University Seminar" class="w-full h-[400px] object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 z-10">
+                        <span class="text-xs text-gray-400 uppercase tracking-wider">Official Emcee</span>
+                        <h3 class="text-2xl font-bold text-white">Pre-University Seminar 2025</h3>
                     </div>
-                    
-                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                        <div class="bg-slate-800/50 p-4 rounded-xl border border-white/5">
-                            <h3 class="text-white font-bold text-sm leading-tight mb-1">Dr. Maliki Osman</h3>
-                            <p class="text-[10px] text-accent mb-2 font-semibold uppercase">Senior Advisor, NTU</p>
-                            
-                            <div class="space-y-1">
-                                <p class="text-[10px] text-slate-400">Former Minister in the PMO</p>
-                                <p class="text-[10px] text-slate-400">Fmr 2nd Minister for Education & Foreign Affairs</p>
-                                <p class="text-[10px] text-slate-400">Fmr Mayor, South East District</p>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-slate-800/50 p-4 rounded-xl border border-white/5">
-                            <h3 class="text-white font-bold text-sm leading-tight mb-1">Mr. Dinesh Vasu Dash</h3>
-                            <p class="text-[10px] text-green-400 mb-2 font-semibold uppercase">Minister of State</p>
-                            
-                            <div class="space-y-1">
-                                <p class="text-[10px] text-slate-400">Ministry of Culture, Community and Youth (MCCY)</p>
-                                <p class="text-[10px] text-slate-400">Ministry of Manpower (MOM)</p>
-                                <p class="text-[10px] text-slate-400">Mayor, South East District</p>
-                            </div>
-                        </div>
-
-                         <div class="bg-slate-800/50 p-4 rounded-xl border border-white/5">
-                            <h3 class="text-white font-bold text-sm leading-tight mb-1">Ms. Hazlina Halim</h3>
-                            <p class="text-[10px] text-vote mb-2 font-semibold uppercase">Member of Parliament</p>
-                            
-                            <div class="space-y-1">
-                                <p class="text-[10px] text-slate-400">MP for East Coast GRC (Fengshan)</p>
-                                <p class="text-[10px] text-slate-400">Vice-Chairman, East Coast Town Council</p>
-                                <p class="text-[10px] text-slate-400">CEO, Make-A-Wish / Pres. PPIS</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="border-t border-white/10 pt-4">
-                        <h3 class="text-sm font-bold text-white mb-3 uppercase tracking-wider">Key Operational Deployments</h3>
-                        <div class="space-y-3">
-                            <div class="flex items-start gap-3">
-                                <i class="fas fa-check-circle text-vote mt-0.5 text-xs"></i>
-                                <div>
-                                    <p class="text-sm text-white font-semibold">GE2025 Logistics & Deployment</p>
-                                    <p class="text-xs text-slate-400">Core ops team for election campaigning; managed volunteer schedules and rally logistics.</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-3">
-                                <i class="fas fa-check-circle text-gold mt-0.5 text-xs"></i>
-                                <div>
-                                    <p class="text-sm text-white font-semibold">Ubin Day '25 & SG Record</p>
-                                    <p class="text-xs text-slate-400">Main Committee. Led tour guide ops and secured <a href="https://singaporerecords.com/largest-logo-made-of-interwoven-strings/" target="_blank" class="text-accent underline hover:text-white transition-colors">Singapore Book of Records</a> for largest string logo.</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-3">
-                                <i class="fas fa-check-circle text-green-400 mt-0.5 text-xs"></i>
-                                <div>
-                                    <p class="text-sm text-white font-semibold">Weekly MPS Operations</p>
-                                    <p class="text-xs text-slate-400">Direct assistance to MOS Dinesh; managing resident cases and letters.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl -mr-16 -mt-16"></div>
-            </div>
-
-            <div class="col-span-12 glass-panel rounded-3xl p-8 flex flex-col md:flex-row justify-between items-center gap-8" data-aos="fade-up" data-aos-delay="100">
-                <div class="md:w-1/2">
-                    <div class="flex items-center gap-3 mb-4">
-                        <h2 class="text-2xl font-bold text-white">Youth Network Executive</h2>
-                        <span class="badge bg-gold/10 text-gold">1,000+ Hours</span>
-                    </div>
-                    <p class="text-slate-400 leading-relaxed mb-4">
-                        As an <strong>Executive Member</strong> of the Siglap Youth Network, I collaborate with a core team of 20 youths to empower the community.
-                    </p>
-                    
-                    <p class="text-slate-200 leading-relaxed font-semibold italic mb-4 border-l-2 border-accent pl-4">
-                        The strongest infrastructure for the future is not built from steel or cement, but rather it is built on the back of trust and true human connections that will drive us forward in this new world
-                    </p>
-                    
-                    <div class="flex flex-wrap gap-2">
-                        <span class="badge bg-accent/10 text-accent">Strategic Planning</span>
-                        <span class="badge bg-vote/10 text-vote">Crisis Management</span>
-                        <span class="badge bg-white/5 text-slate-300">Team Ops (20 Pax)</span>
-                    </div>
-                </div>
-                <div class="md:w-1/2 w-full bg-slate-800/50 p-6 rounded-2xl border border-white/5">
-                    <h3 class="text-sm font-bold text-white mb-4 uppercase tracking-widest text-center">Leadership Trajectory</h3>
-                    <div class="space-y-4">
-                        <div class="flex items-center gap-4">
-                            <div class="w-16 text-right text-xs text-slate-500 font-bold">2020-23</div>
-                            <div class="w-2 h-2 rounded-full bg-slate-600"></div>
-                            <div class="text-sm text-slate-300"><strong>Student Councillor</strong> & Robotics EXCO</div>
-                        </div>
-                        <div class="flex items-center gap-4">
-                            <div class="w-16 text-right text-xs text-slate-500 font-bold">2024-25</div>
-                            <div class="w-2 h-2 rounded-full bg-accent"></div>
-                            <div class="text-sm text-white"><strong>Executive Member</strong> (Siglap Youth Network)</div>
-                        </div>
-                         <div class="flex items-center gap-4">
-                            <div class="w-16 text-right text-xs text-slate-500 font-bold">2026</div>
-                            <div class="w-2 h-2 rounded-full bg-ns"></div>
-                            <div class="text-sm text-ns font-bold">HTA Company IC (Current)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-span-12 md:col-span-6 glass-panel rounded-3xl p-8" id="profile" data-aos="fade-up" data-aos-delay="200">
-                <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                    <i class="fas fa-microphone-alt text-gold"></i> Signature Hosting
-                </h3>
-                <div class="space-y-4">
-                    <div class="flex gap-4 items-start">
-                        <div class="w-12 h-12 rounded-lg bg-gold/10 flex items-center justify-center text-gold font-bold text-lg shrink-0">01</div>
-                        <div>
-                            <h4 class="text-white font-bold text-lg">Pre-University Seminar 2025</h4>
-                            <p class="text-sm text-slate-400">Official Emcee. National-level dialogue.</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-4 items-start">
-                        <div class="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center text-slate-300 font-bold text-lg shrink-0">02</div>
-                        <div>
-                            <h4 class="text-white font-bold text-lg">Edusave Awards (2024 & 2025)</h4>
-                            <p class="text-sm text-slate-400">Official Host for Siglap constituency.</p>
-                        </div>
-                    </div>
-                     <div class="flex gap-4 items-start">
-                        <div class="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center text-slate-300 font-bold text-lg shrink-0">03</div>
-                        <div>
-                            <h4 class="text-white font-bold text-lg">Siglap Pets Day 2025</h4>
-                            <p class="text-sm text-slate-400">Hosted 1,500+ attendees as Emcee & Mascot.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-span-12 md:col-span-6 glass-panel rounded-3xl p-8" data-aos="fade-up" data-aos-delay="300">
-                <div class="flex justify-between items-start mb-6">
-                    <h3 class="text-xl font-bold text-white">Profile & Welfare</h3>
-                    <span class="badge bg-green-500/10 text-green-400">Active NSF</span>
                 </div>
                 
-                <div class="grid grid-cols-2 gap-4 mb-6">
-                    <div class="bg-white/5 p-4 rounded-xl">
-                        <p class="text-xs text-slate-500 uppercase">Education</p>
-                        <p class="text-white font-semibold">Tampines Meridian JC</p>
-                        <p class="text-xs text-accent mt-1">Pre-U Seminar Official Emcee</p>
-                    </div>
-                    <div class="bg-white/5 p-4 rounded-xl">
-                        <p class="text-xs text-slate-500 uppercase">Secondary</p>
-                        <p class="text-white font-semibold">Hai Sing Catholic</p>
-                        <p class="text-xs text-slate-400 mt-1">Robotics EXCO (Logistics)</p>
+                <div class="work-card rounded-2xl overflow-hidden img-hover-zoom reveal" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&q=80" alt="GE2025" class="w-full h-[400px] object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 z-10">
+                        <span class="text-xs text-gray-400 uppercase tracking-wider">Logistics & Deployment</span>
+                        <h3 class="text-2xl font-bold text-white">GE2025 Campaign Operations</h3>
                     </div>
                 </div>
-
-                <h4 class="text-sm font-bold text-white mb-3">Community Projects</h4>
-                <div class="flex flex-wrap gap-2">
-                    <span class="badge bg-pink-500/10 text-pink-400 border border-pink-500/20">Wyse Active (Disability Care)</span>
-                    <span class="badge bg-green-500/10 text-green-400 border border-green-500/20">Elderly Engagement</span>
+                
+                <div class="work-card rounded-2xl overflow-hidden img-hover-zoom reveal" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=800&q=80" alt="Siglap Pets Day" class="w-full h-[400px] object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 z-10">
+                        <span class="text-xs text-gray-400 uppercase tracking-wider">1,500+ Attendees</span>
+                        <h3 class="text-2xl font-bold text-white">Siglap Pets Day 2025</h3>
+                    </div>
+                </div>
+                
+                <div class="work-card rounded-2xl overflow-hidden img-hover-zoom reveal" data-aos="fade-up" data-aos-delay="400">
+                    <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&q=80" alt="MPS Operations" class="w-full h-[400px] object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 z-10">
+                        <span class="text-xs text-gray-400 uppercase tracking-wider">Government Liaison</span>
+                        <h3 class="text-2xl font-bold text-white">Weekly MPS Operations</h3>
+                    </div>
                 </div>
             </div>
-
-            <div class="col-span-12 glass-panel rounded-full px-8 py-4 flex flex-col md:flex-row justify-between items-center group cursor-pointer hover:bg-white/5 transition-colors" onclick="location.href='mailto:sirajmunir.muzammil@gmail.com'" data-aos="fade-up" data-aos-delay="400">
-                <div class="flex items-center gap-4">
-                    <div class="h-10 w-10 rounded-full bg-accent flex items-center justify-center text-black">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <div>
-                        <p class="text-white font-bold">Ready to Serve</p>
-                        <p class="text-xs text-slate-400">sirajmunir.muzammil@gmail.com</p>
-                    </div>
-                </div>
-                <div class="hidden md:flex items-center gap-2 text-sm text-white font-medium group-hover:translate-x-2 transition-transform">
-                    View Resume <i class="fas fa-arrow-right ml-2 text-accent"></i>
-                </div>
-            </div>
-
         </div>
-    </main>
+    </section>
 
-    <footer class="text-center py-12 text-slate-500 text-sm">
-        <p>&copy; 2026 Siraj Munir. Leadership. Service. Integrity.</p>
+    <section id="leadership" class="py-24 md:py-32 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16 reveal">
+                <h2 class="text-5xl md:text-8xl font-black tracking-tighter mb-4">LEADERSHIP PILLARS</h2>
+                <p class="text-gray-500 text-lg">Four core areas where I drive meaningful impact and growth.</p>
+            </div>
+            
+            <div class="space-y-0">
+                <div class="service-item py-8 reveal" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex items-center gap-6">
+                            <span class="text-accent text-2xl font-bold">[01]</span>
+                            <h3 class="text-3xl md:text-5xl font-bold">National Service Leadership</h3>
+                        </div>
+                        <p class="text-gray-400 max-w-xl text-right">
+                            Selected as Company IC for HTA 202 Intake. Leading by walking the journey alongside my men—fostering brotherhood, ensuring welfare, and pushing toward operational excellence together. POP: Mid-April 2026.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="service-item py-8 reveal" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex items-center gap-6">
+                            <span class="text-accent text-2xl font-bold">[02]</span>
+                            <h3 class="text-3xl md:text-5xl font-bold">Grassroots Operations</h3>
+                        </div>
+                        <p class="text-gray-400 max-w-xl text-right">
+                            Core operations team for election campaigning, managing volunteer schedules and rally logistics. Direct assistance to MOS Dinesh Vasu Dash on weekly MPS operations and resident cases.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="service-item py-8 reveal" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex items-center gap-6">
+                            <span class="text-accent text-2xl font-bold">[03]</span>
+                            <h3 class="text-3xl md:text-5xl font-bold">Youth Network Executive</h3>
+                        </div>
+                        <p class="text-gray-400 max-w-xl text-right">
+                            Executive Member of Siglap Youth Network, collaborating with 20 youths to empower the community. 1,000+ volunteer hours dedicated to strategic planning and crisis management.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="service-item py-8 reveal" data-aos="fade-up" data-aos-delay="400">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex items-center gap-6">
+                            <span class="text-accent text-2xl font-bold">[04]</span>
+                            <h3 class="text-3xl md:text-5xl font-bold">Community Welfare</h3>
+                        </div>
+                        <p class="text-gray-400 max-w-xl text-right">
+                            Active involvement in Wyse Active disability care programs and elderly engagement initiatives. Committed to building infrastructure of trust and human connections.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 md:py-32 px-4 bg-navy-900">
+        <div class="max-w-4xl mx-auto">
+            <div class="mb-16 reveal">
+                <h2 class="text-5xl md:text-7xl font-black tracking-tighter mb-4">LEADERSHIP JOURNEY</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="faq-item py-6 reveal" data-aos="fade-up">
+                    <button class="faq-trigger w-full flex items-center justify-between text-left">
+                        <div>
+                            <span class="text-accent text-sm font-bold">2020-2023</span>
+                            <h3 class="text-xl md:text-2xl font-bold mt-1">Foundation Years</h3>
+                        </div>
+                        <span class="faq-icon text-2xl transition-transform duration-300">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 pt-4 pb-2">
+                            Student Councillor at Hai Sing Catholic School and Robotics EXCO member (Logistics). Developed foundational leadership skills through organizing school events and managing robotics competition logistics.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="faq-item py-6 reveal" data-aos="fade-up" data-aos-delay="100">
+                    <button class="faq-trigger w-full flex items-center justify-between text-left">
+                        <div>
+                            <span class="text-accent text-sm font-bold">2024-2025</span>
+                            <h3 class="text-xl md:text-2xl font-bold mt-1">Community Engagement</h3>
+                        </div>
+                        <span class="faq-icon text-2xl transition-transform duration-300">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 pt-4 pb-2">
+                            Executive Member of Siglap Youth Network. Coordinated Ubin Day '25 and secured Singapore Book of Records for largest string logo. Served as Official Emcee for Pre-University Seminar 2025 and Edusave Awards ceremonies.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="faq-item py-6 reveal" data-aos="fade-up" data-aos-delay="200">
+                    <button class="faq-trigger w-full flex items-center justify-between text-left">
+                        <div>
+                            <span class="text-ns text-sm font-bold">2026</span>
+                            <h3 class="text-xl md:text-2xl font-bold mt-1">National Service Leadership</h3>
+                        </div>
+                        <span class="faq-icon text-2xl transition-transform duration-300">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 pt-4 pb-2">
+                            Selected as Company IC (In-Charge) for Home Team Academy 202 Intake. Leading a company of National Servicemen through their training journey, with POP scheduled for Mid-April 2026.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="faq-item py-6 reveal" data-aos="fade-up" data-aos-delay="300">
+                    <button class="faq-trigger w-full flex items-center justify-between text-left">
+                        <div>
+                            <span class="text-accent text-sm font-bold">Education</span>
+                            <h3 class="text-xl md:text-2xl font-bold mt-1">Education Background</h3>
+                        </div>
+                        <span class="faq-icon text-2xl transition-transform duration-300">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 pt-4 pb-2">
+                            Tampines Meridian Junior College - Pre-University Seminar Official Emcee. Hai Sing Catholic School - Student Council & Robotics EXCO. Currently serving National Service with HTA.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="impact" class="py-24 md:py-32 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16 reveal">
+                <h2 class="text-5xl md:text-7xl font-black tracking-tighter mb-4">MENTORS & RECOGNITION</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="testimonial-card rounded-2xl p-8 reveal" data-aos="fade-up" data-aos-delay="100">
+                    <div>
+                        <i class="fas fa-quote-right text-4xl text-accent/30 mb-6"></i>
+                        <p class="text-gray-300 mb-8 leading-relaxed">
+                            "Siraj demonstrates exceptional leadership qualities and a genuine commitment to community service. His ability to coordinate complex operations while maintaining empathy for residents is remarkable."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&q=80" alt="Dr. Maliki Osman" class="w-14 h-14 rounded-full object-cover">
+                        <div>
+                            <p class="font-bold text-white">Dr. Maliki Osman</p>
+                            <p class="text-xs text-gray-400 leading-tight font-semibold mt-1">Current:</p>
+                            <p class="text-xs text-gray-500 leading-tight">Senior Advisor (President's Office), Nanyang Technological University (NTU) & Distinguished Fellow (RSIS)</p>
+                            
+                            <p class="text-xs text-gray-400 leading-tight font-semibold mt-2">Former:</p>
+                            <ul class="text-xs text-gray-500 leading-tight space-y-1">
+                                <li>Minister in the Prime Minister's Office</li>
+                                <li>Second Minister for Education & Foreign Affairs</li>
+                                <li>Senior Minister of State (Defence & Foreign Affairs)</li>
+                                <li>Mayor (South East District)</li>
+                                <li>Senior Parliamentary Secretary (National Development & Defence)</li>
+                                <li>Parliamentary Secretary (Community Development, Youth & Sports | Health)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card rounded-2xl p-8 reveal" data-aos="fade-up" data-aos-delay="200">
+                    <div>
+                        <i class="fas fa-quote-right text-4xl text-accent/30 mb-6"></i>
+                        <p class="text-gray-300 mb-8 leading-relaxed">
+                            "Siraj brings a military precision to grassroots operations that is truly impressive. His reliability in managing resident cases and his proactive leadership during critical campaign periods have been invaluable assets to our team."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&q=80" alt="Mr. Dinesh Vasu Dash" class="w-14 h-14 rounded-full object-cover">
+                        <div>
+                            <p class="font-bold text-white">Mr. Dinesh Vasu Dash</p>
+                            <p class="text-xs text-gray-500 leading-tight">Minister of State, Ministry of Culture, Community and Youth & Ministry of Manpower | Mayor, South East District</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card rounded-2xl p-8 reveal" data-aos="fade-up" data-aos-delay="300">
+                    <div>
+                        <i class="fas fa-quote-right text-4xl text-accent/30 mb-6"></i>
+                        <p class="text-gray-300 mb-8 leading-relaxed">
+                            "Siraj's 1,000+ volunteer hours speak volumes about his character. He leads with integrity, inspires his peers, and consistently delivers results that benefit the entire community."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80" alt="Youth Network Director" class="w-14 h-14 rounded-full object-cover">
+                        <div>
+                            <p class="font-bold text-white">Youth Network Director</p>
+                            <p class="text-sm text-gray-500">Siglap Youth Network</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 md:py-32 px-4 bg-navy-900">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16 reveal">
+                <h2 class="text-5xl md:text-7xl font-black tracking-tighter mb-4">IMPACT METRICS</h2>
+                <p class="text-gray-500 text-lg">Quantifiable results from years of dedicated service and leadership.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="stat-card rounded-2xl p-8 reveal" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-5xl md:text-7xl font-black text-white mb-2">
+                        <span class="counter" data-target="10000">0</span>+
+                    </div>
+                    <div class="text-accent font-bold uppercase tracking-wider mb-4">People Reached</div>
+                    <ul class="text-gray-400 text-sm space-y-2">
+                        <li><i class="fas fa-check text-ns mr-2"></i>Audience reached through events</li>
+                        <li><i class="fas fa-check text-ns mr-2"></i>Pre-University Seminar emcee</li>
+                        <li><i class="fas fa-check text-ns mr-2"></i>Siglap Pets Day host</li>
+                        <li><i class="fas fa-check text-ns mr-2"></i>Edusave Awards ceremonies</li>
+                    </ul>
+                    <button class="mt-6 text-accent text-sm font-semibold hover:underline">View Full Resume →</button>
+                </div>
+                
+                <div class="stat-card rounded-2xl p-8 reveal border-accent/50" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute top-4 right-4 text-xs text-accent font-bold bg-accent/10 px-2 py-1 rounded">FEATURED</div>
+                    <div class="text-5xl md:text-7xl font-black text-white mb-2">
+                        <span class="counter" data-target="1000">0</span>+
+                    </div>
+                    <div class="text-accent font-bold uppercase tracking-wider mb-4">Volunteer Hours</div>
+                    <ul class="text-gray-400 text-sm space-y-2">
+                        <li><i class="fas fa-check text-ns mr-2"></i>Siglap Youth Network Executive</li>
+                        <li><i class="fas fa-check text-ns mr-2"></i>Strategic planning & ops</li>
+                        <li><i class="fas fa-check text-ns mr-2"></i>Crisis management response</li>
+                        <li><i class="fas fa-check text-ns mr-2"></i>Team leadership</li>
+                    </ul>
+                    <button class="mt-6 text-accent text-sm font-semibold hover:underline">View Full Resume →</button>
+                </div>
+                
+                <div class="stat-card rounded-2xl p-8 reveal" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-5xl md:text-7xl font-black text-white mb-2">
+                        <span class="counter" data-target="1500">0</span>+
+                    </div>
+                    <div class="text-accent font-bold uppercase tracking-wider mb-4">Residents & Youths Engaged</div>
+                    <ul class="text-gray-400 text-sm space-y-2">
+                        <li><i class="fas fa-check text-ns mr-2"></i>Weekly MPS operations</li>
+                        <li><i class="fas fa-check text-ns mr-2"></i>Grassroots campaign support</li>
+                        <li><i class="fas fa-check text-ns mr-2"></i>Youth mentorship & empowerment</li>
+                        <li><i class="fas fa-check text-ns mr-2"></i>Elderly engagement initiatives</li>
+                    </ul>
+                    <button class="mt-6 text-accent text-sm font-semibold hover:underline">View Full Resume →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 md:py-32 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16 reveal">
+                <h2 class="text-5xl md:text-7xl font-black tracking-tighter mb-4">NOTABLE ACHIEVEMENTS</h2>
+                <p class="text-gray-500 text-lg">Recognition and milestones from my leadership journey.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="achievement-card rounded-2xl overflow-hidden bg-card reveal" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&q=80" alt="Singapore Book of Records" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-xs font-bold bg-accent/20 text-accent px-2 py-1 rounded">Achievement</span>
+                            <span class="text-xs text-gray-500">2025</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Singapore Book of Records</h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Led tour guide operations at Ubin Day '25 and secured the Singapore Book of Records for the largest logo made of interwoven strings as part of the Main Committee.
+                        </p>
+                        <a href="https://singaporerecords.com/largest-logo-made-of-interwoven-strings/" target="_blank" class="text-accent text-sm font-semibold hover:underline">Learn More →</a>
+                    </div>
+                </div>
+                
+                <div class="achievement-card rounded-2xl overflow-hidden bg-card reveal" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="Pre-University Seminar" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-xs font-bold bg-gold/20 text-gold px-2 py-1 rounded">Recognition</span>
+                            <span class="text-xs text-gray-500">2025</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Pre-University Seminar Emcee</h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Selected as Official Emcee for the National-level Pre-University Seminar 2025, demonstrating public speaking excellence and the ability to engage diverse audiences.
+                        </p>
+                        <a href="#" class="text-accent text-sm font-semibold hover:underline">Learn More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 md:py-32 px-4 bg-navy-900">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <h2 class="text-5xl md:text-7xl font-black tracking-tighter mb-6">Let's Connect</h2>
+                    <p class="text-gray-400 text-lg mb-8">
+                        Interested in discussing leadership opportunities, community initiatives, or my journey? I'd love to hear from you.
+                    </p>
+                    
+                    <form class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Name *</label>
+                            <input type="text" class="form-input w-full px-4 py-3 rounded-lg text-white" placeholder="Your name">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Email *</label>
+                            <input type="email" class="form-input w-full px-4 py-3 rounded-lg text-white" placeholder="your@email.com">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Inquiry Type</label>
+                            <select class="form-input w-full px-4 py-3 rounded-lg text-white">
+                                <option>Select...</option>
+                                <option>University Admissions</option>
+                                <option>Leadership Opportunities</option>
+                                <option>Community Collaboration</option>
+                                <option>Mentorship Request</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Message</label>
+                            <textarea class="form-input w-full px-4 py-3 rounded-lg text-white h-32" placeholder="Your message..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary w-full py-4 rounded-lg font-bold text-white">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="reveal hidden md:block">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80" alt="Contact" class="w-full h-[600px] object-cover rounded-2xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 px-4 border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="marquee-container mb-12">
+                <div class="marquee">
+                    <span class="text-6xl md:text-8xl font-black text-white/10 mx-4">
+                        <span class="glow-accent text-white/30">S</span>ERVICE • 
+                        <span class="glow-accent text-white/30">I</span>NTEGRITY • 
+                        <span class="glow-accent text-white/30">R</span>ESILIENCE • 
+                        <span class="glow-accent text-white/30">A</span>DAPTABLE • 
+                        <span class="glow-accent text-white/30">J</span>OURNEY • 
+                    </span>
+                    <span class="text-6xl md:text-8xl font-black text-white/10 mx-4">
+                        <span class="glow-accent text-white/30">S</span>ERVICE • 
+                        <span class="glow-accent text-white/30">I</span>NTEGRITY • 
+                        <span class="glow-accent text-white/30">R</span>ESILIENCE • 
+                        <span class="glow-accent text-white/30">A</span>DAPTABLE • 
+                        <span class="glow-accent text-white/30">J</span>OURNEY • 
+                    </span>
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex gap-8">
+                    <a href="#hero" class="text-gray-400 hover:text-white transition-colors">Home</a>
+                    <a href="#about" class="text-gray-400 hover:text-white transition-colors">About</a>
+                    <a href="#experience" class="text-gray-400 hover:text-white transition-colors">Experience</a>
+                </div>
+                
+                <div class="flex gap-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="mailto:sirajmunir.muzammil@gmail.com" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </a>
+                </div>
+                
+                <a href="#contact" class="btn-primary px-6 py-3 rounded-full font-semibold text-white">
+                    Get In Touch <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+            
+            <div class="text-center mt-12 text-gray-600 text-sm">
+                <p>© 2026 Siraj Munir. All rights reserved.</p>
+                <p class="mt-2">Leadership. Service. Integrity.</p>
+            </div>
+        </div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 800, once: true });
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+        
+        // Particle System
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouseX = 0;
+        let mouseY = 0;
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+            
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                
+                // Mouse interaction
+                const dx = mouseX - this.x;
+                const dy = mouseY - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 100) {
+                    this.x -= dx * 0.01;
+                    this.y -= dy * 0.01;
+                }
+                
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            
+            draw() {
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        function initParticles() {
+            particles = [];
+            const particleCount = window.innerWidth < 768 ? 25 : 50;
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+        initParticles();
+        
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw connections
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 100) {
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * (1 - distance / 100)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+        
+        // Mouse tracking
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+        
+        // Custom Cursor
+        const cursor = document.querySelector('.custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+        
+        // Navigation scroll effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.classList.remove('nav-hidden');
+                navbar.classList.add('nav-visible');
+            } else {
+                navbar.classList.add('nav-hidden');
+                navbar.classList.remove('nav-visible');
+            }
+            
+            lastScroll = currentScroll;
+        });
+        
+        // Mobile menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenu = document.getElementById('close-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            mobileMenu.classList.add('flex');
+        });
+        
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            mobileMenu.classList.remove('flex');
+        });
+        
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+            });
+        });
+        
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+        
+        // Counter animation
+        const counters = document.querySelectorAll('.counter');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    const duration = 2000;
+                    const step = target / (duration / 16);
+                    let current = 0;
+                    
+                    const updateCounter = () => {
+                        current += step;
+                        if (current < target) {
+                            counter.textContent = Math.floor(current).toLocaleString();
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.textContent = target.toLocaleString();
+                        }
+                    };
+                    
+                    updateCounter();
+                    counterObserver.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        counters.forEach(counter => counterObserver.observe(counter));
+        
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const trigger = item.querySelector('.faq-trigger');
+            trigger.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                faqItems.forEach(i => i.classList.remove('active'));
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
