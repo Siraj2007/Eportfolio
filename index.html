@@ -221,6 +221,10 @@
             pointer-events: none;
             z-index: 0;
         }
+        
+        .glow-accent {
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -274,9 +278,8 @@
                 </span>
             </div>
             
-            <h1 class="text-6xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter mb-8 text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 leading-none text-center">
-                <span style="animation-delay: 0.1s">S</span><span style="animation-delay: 0.15s">I</span><span style="animation-delay: 0.2s">R</span><span style="animation-delay: 0.25s">A</span><span style="animation-delay: 0.3s">J</span>
-                <span class="block md:inline-block md:ml-8" style="animation-delay: 0.35s">M</span><span style="animation-delay: 0.4s">U</span><span style="animation-delay: 0.45s">N</span><span style="animation-delay: 0.5s">I</span><span style="animation-delay: 0.55s">R</span>
+            <h1 class="text-6xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter mb-8 text-white leading-none text-center" data-aos="fade-up" data-aos-delay="400">
+                SIRAJ MUNIR
             </h1>
             
             <p class="text-xl md:text-3xl text-gray-400 mb-10 font-medium max-w-3xl mx-auto leading-relaxed text-center tracking-tight" data-aos="fade-up" data-aos-delay="600">
@@ -303,10 +306,10 @@
             </div>
         </div>
         
-        <div class="relative z-10 mt-16 flex flex-col items-center gap-4 opacity-40 hover:opacity-100 transition-opacity duration-300">
+        <a href="#about" class="relative z-10 mt-16 flex flex-col items-center gap-4 opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
             <span class="text-[10px] uppercase tracking-widest font-bold text-white">Explore</span>
             <div class="w-px h-12 bg-gradient-to-b from-white to-transparent"></div>
-        </div>
+        </a>
     </section>
 
     <section id="about" class="py-24 md:py-40 px-4 relative">
@@ -348,7 +351,7 @@
                 <div class="apple-card rounded-[2rem] p-2" data-aos="fade-up" data-aos-delay="100">
                     <div class="overflow-hidden rounded-[1.5rem] aspect-[4/3] img-hover-zoom relative">
                         <img src="PreUsem pic.JPEG" alt="Pre-University Seminar" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/60 to-transparent opacity-95"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/70 to-transparent opacity-95"></div>
                         <div class="absolute bottom-0 left-0 p-8 w-full z-10">
                             <h3 class="text-2xl font-semibold tracking-tight text-white mb-2">Pre-University Seminar 2025</h3>
                             <span class="text-xs text-accent uppercase font-bold tracking-widest block">Official Emcee</span>
@@ -359,7 +362,7 @@
                 <div class="apple-card rounded-[2rem] p-2" data-aos="fade-up" data-aos-delay="200">
                     <div class="overflow-hidden rounded-[1.5rem] aspect-[4/3] img-hover-zoom relative">
                         <img src="PAP ops.JPEG" alt="GE2025" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/60 to-transparent opacity-95"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/70 to-transparent opacity-95"></div>
                         <div class="absolute bottom-0 left-0 p-8 w-full z-10">
                             <h3 class="text-2xl font-semibold tracking-tight text-white mb-2">GE2025 Campaign Operations</h3>
                             <span class="text-xs text-accent uppercase font-bold tracking-widest block">Logistics & Deployment</span>
@@ -370,7 +373,7 @@
                 <div class="apple-card rounded-[2rem] p-2" data-aos="fade-up" data-aos-delay="300">
                     <div class="overflow-hidden rounded-[1.5rem] aspect-[4/3] img-hover-zoom relative">
                         <img src="siglap pets day.JPEG" alt="Siglap Pets Day" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/60 to-transparent opacity-95"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/70 to-transparent opacity-95"></div>
                         <div class="absolute bottom-0 left-0 p-8 w-full z-10">
                             <h3 class="text-2xl font-semibold tracking-tight text-white mb-2">Siglap Pets Day 2025</h3>
                             <span class="text-xs text-accent uppercase font-bold tracking-widest block">1,500+ Attendees</span>
@@ -381,7 +384,7 @@
                 <div class="apple-card rounded-[2rem] p-2" data-aos="fade-up" data-aos-delay="400">
                     <div class="overflow-hidden rounded-[1.5rem] aspect-[4/3] img-hover-zoom relative">
                         <img src="MPS OPS.JPEG" alt="MPS Operations" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/60 to-transparent opacity-95"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/70 to-transparent opacity-95"></div>
                         <div class="absolute bottom-0 left-0 p-8 w-full z-10">
                             <h3 class="text-2xl font-semibold tracking-tight text-white mb-2">Weekly MPS Operations</h3>
                             <span class="text-xs text-accent uppercase font-bold tracking-widest block">Government Liaison</span>
@@ -392,7 +395,7 @@
                 <div class="apple-card rounded-[2rem] p-2" data-aos="fade-up" data-aos-delay="500">
                     <div class="overflow-hidden rounded-[1.5rem] aspect-[4/3] img-hover-zoom relative">
                         <img src="SG60 record.JPEG" alt="Singapore Book of Records" class="w-full h-full object-cover object-right">
-                        <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/60 to-transparent opacity-95"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/70 to-transparent opacity-95"></div>
                         <div class="absolute bottom-0 left-0 p-8 w-full z-10">
                             <h3 class="text-2xl font-semibold tracking-tight text-white mb-2">Singapore Book of Records</h3>
                             <span class="text-xs text-accent uppercase font-bold tracking-widest block">National Record</span>
@@ -403,7 +406,7 @@
                 <div class="apple-card rounded-[2rem] p-2" data-aos="fade-up" data-aos-delay="600">
                     <div class="overflow-hidden rounded-[1.5rem] aspect-[4/3] img-hover-zoom relative">
                         <img src="WYSE pic.JPEG" alt="Wyse Active" class="w-full h-full object-cover object-top">
-                        <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/60 to-transparent opacity-95"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/70 to-transparent opacity-95"></div>
                         <div class="absolute bottom-0 left-0 p-8 w-full z-10">
                             <h3 class="text-2xl font-semibold tracking-tight text-white mb-2">Wyse Active Programs</h3>
                             <span class="text-xs text-accent uppercase font-bold tracking-widest block">Community Welfare</span>
@@ -628,28 +631,28 @@
                 </p>
             </div>
             
-            <form class="space-y-6" data-aos="fade-up" data-aos-delay="100">
+            <form action="https://formspree.io/f/mnjgngyr" method="POST" class="space-y-6" data-aos="fade-up" data-aos-delay="100">
                 <div class="grid md:grid-cols-2 gap-6">
                     <div>
-                        <input type="text" class="form-input-apple w-full text-white text-base placeholder-gray-500 font-medium" placeholder="Your name">
+                        <input type="text" name="name" required class="form-input-apple w-full text-white text-base placeholder-gray-500 font-medium" placeholder="Your name">
                     </div>
                     <div>
-                        <input type="email" class="form-input-apple w-full text-white text-base placeholder-gray-500 font-medium" placeholder="Your email">
+                        <input type="email" name="email" required class="form-input-apple w-full text-white text-base placeholder-gray-500 font-medium" placeholder="Your email">
                     </div>
                 </div>
                 
                 <div>
-                    <select class="form-input-apple w-full text-white text-base text-gray-400 appearance-none font-medium">
+                    <select name="inquiry_type" required class="form-input-apple w-full text-white text-base text-gray-400 appearance-none font-medium">
                         <option value="" disabled selected>Nature of inquiry</option>
-                        <option class="text-black">University Admissions</option>
-                        <option class="text-black">Leadership Opportunities</option>
-                        <option class="text-black">Community Collaboration</option>
-                        <option class="text-black">Other</option>
+                        <option value="University Admissions" class="text-black">University Admissions</option>
+                        <option value="Leadership Opportunities" class="text-black">Leadership Opportunities</option>
+                        <option value="Community Collaboration" class="text-black">Community Collaboration</option>
+                        <option value="Other" class="text-black">Other</option>
                     </select>
                 </div>
                 
                 <div>
-                    <textarea class="form-input-apple w-full text-white text-base placeholder-gray-500 h-40 resize-none font-medium" placeholder="Your message"></textarea>
+                    <textarea name="message" required class="form-input-apple w-full text-white text-base placeholder-gray-500 h-40 resize-none font-medium" placeholder="Your message"></textarea>
                 </div>
                 
                 <div class="pt-8 text-center">
