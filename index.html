@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siraj Munir | Leadership Portfolio</title>
+    <title>Siraj Munir | Leadership & Growth Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -19,12 +19,12 @@
                         sans: ['Inter', 'sans-serif']
                     },
                     colors: {
-                        bg: '#020617',     
-                        card: '#0f172a',   
-                        border: '#1e293b',
-                        accent: '#3b82f6', 
-                        gold: '#fbbf24',   
-                        vote: '#f43f5e',   
+                        bg: '#c4d2dc',     
+                        card: '#ffffff',   
+                        border: '#e5e5e5',
+                        accent: '#2563eb', 
+                        gold: '#d97706',   
+                        vote: '#e11d48',   
                         ns: '#16a34a',     
                     }
                 }
@@ -34,8 +34,8 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
-            background-color: #020617; 
-            color: #ffffff; 
+            background-color: #c4d2dc; 
+            color: #0f172a; 
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
@@ -52,6 +52,7 @@
             z-index: 9999;
             opacity: 0.03;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            mix-blend-mode: multiply;
         }
         
         #particle-canvas {
@@ -68,7 +69,7 @@
             position: fixed;
             width: 20px;
             height: 20px;
-            border: 2px solid #3b82f6;
+            border: 2px solid #2563eb;
             border-radius: 50%;
             pointer-events: none;
             z-index: 10000;
@@ -78,17 +79,17 @@
         .custom-cursor.hover {
             width: 60px;
             height: 60px;
-            background: rgba(59, 130, 246, 0.15);
-            border-color: rgba(59, 130, 246, 0.6);
-            backdrop-filter: blur(4px);
+            background: rgba(37, 99, 235, 0.1);
+            border-color: rgba(37, 99, 235, 0.4);
+            backdrop-filter: blur(2px);
         }
         
         .glass-pill {
-            background: rgba(15, 23, 42, 0.7);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
         }
         
         .nav-hidden { transform: translate(-50%, -150%); opacity: 0; }
@@ -125,16 +126,15 @@
         }
         
         .apple-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
+            background: #ffffff;
+            border: 1px solid #f0f0f0;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
         }
         .apple-card:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(255, 255, 255, 0.1);
+            border-color: #e5e5e5;
             transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
         }
         
         .marquee-wrapper {
@@ -161,25 +161,26 @@
         section { position: relative; z-index: 2; }
         
         .btn-primary {
-            background: #ffffff;
-            color: #020617;
+            background: #0f172a;
+            color: #ffffff;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .btn-primary:hover {
+            background: #2563eb;
             transform: scale(1.02);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
         }
         
         .service-item {
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid #e5e5e5;
             transition: all 0.4s ease;
         }
         .service-item:hover {
-            border-color: rgba(255,255,255,0.2);
+            border-color: #2563eb;
         }
         
         .faq-item {
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid #e5e5e5;
         }
         .faq-answer {
             max-height: 0;
@@ -187,30 +188,10 @@
             transition: max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .faq-item.active .faq-answer {
-            max-height: 500px;
+            max-height: 800px;
         }
         .faq-item.active .faq-icon {
             transform: rotate(45deg);
-        }
-        
-        .form-input-apple {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 16px;
-            padding: 16px 24px;
-            transition: all 0.3s ease;
-        }
-        .form-input-apple:focus {
-            outline: none;
-            border-color: rgba(59, 130, 246, 0.5);
-            background: rgba(255,255,255,0.06);
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
-        }
-        
-        .gradient-text {
-            background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
         
         .ambient-glow {
@@ -221,13 +202,9 @@
             pointer-events: none;
             z-index: 0;
         }
-        
-        .glow-accent {
-            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.3);
-        }
     </style>
 </head>
-<body>
+<body class="bg-bg">
     <div class="noise-overlay"></div>
     
     <canvas id="particle-canvas"></canvas>
@@ -235,476 +212,459 @@
     <div class="custom-cursor hidden md:block"></div>
     
     <nav id="navbar" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 nav-hidden w-[90%] md:w-auto">
-        <div class="glass-pill px-8 py-4 rounded-full flex justify-between items-center gap-12">
-            <a href="#hero" class="text-sm font-bold tracking-widest text-white hover:text-accent transition-colors">SIRAJ</a>
-            <div class="hidden md:flex space-x-8 text-xs font-semibold tracking-wide text-gray-400">
-                <a href="#about" class="hover:text-white transition-colors">About</a>
-                <a href="#experience" class="hover:text-white transition-colors">Experience</a>
-                <a href="#leadership" class="hover:text-white transition-colors">Leadership</a>
-                <a href="#impact" class="hover:text-white transition-colors">Impact</a>
+        <div class="glass-pill px-6 py-3 rounded-full flex justify-between items-center gap-10">
+            <a href="#hero" class="text-xs font-bold tracking-widest text-slate-900 hover:text-accent transition-colors">SIRAJ</a>
+            <div class="hidden md:flex space-x-6 text-[11px] font-semibold tracking-wide text-slate-500">
+                <a href="#impact" class="hover:text-slate-900 transition-colors">Testimonials</a>
+                <a href="#about" class="hover:text-slate-900 transition-colors">About</a>
+                <a href="#experience" class="hover:text-slate-900 transition-colors">Experience</a>
+                <a href="#leadership" class="hover:text-slate-900 transition-colors">Growth</a>
             </div>
-            <a href="#contact" class="hidden md:block text-xs font-bold bg-white text-bg px-5 py-2.5 rounded-full hover:scale-105 transition-transform">
-                Connect
-            </a>
-            <button id="mobile-menu-btn" class="md:hidden text-white">
+            <button id="mobile-menu-btn" class="md:hidden text-slate-900 ml-auto">
                 <i class="fas fa-bars text-lg"></i>
             </button>
         </div>
     </nav>
     
-    <div id="mobile-menu" class="fixed inset-0 bg-bg/95 backdrop-blur-3xl z-50 hidden flex-col items-center justify-center space-y-8">
-        <a href="#about" class="text-3xl font-semibold tracking-tight text-white mobile-link">About</a>
-        <a href="#experience" class="text-3xl font-semibold tracking-tight text-white mobile-link">Experience</a>
-        <a href="#leadership" class="text-3xl font-semibold tracking-tight text-white mobile-link">Leadership</a>
-        <a href="#impact" class="text-3xl font-semibold tracking-tight text-white mobile-link">Impact</a>
-        <a href="#contact" class="text-3xl font-semibold tracking-tight text-white mobile-link">Contact</a>
-        <button id="close-menu" class="absolute top-10 right-10 text-white p-4">
+    <div id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-3xl z-50 hidden flex-col items-center justify-center space-y-8">
+        <a href="#impact" class="text-3xl font-semibold tracking-tight text-slate-900 mobile-link">Testimonials</a>
+        <a href="#about" class="text-3xl font-semibold tracking-tight text-slate-900 mobile-link">About</a>
+        <a href="#experience" class="text-3xl font-semibold tracking-tight text-slate-900 mobile-link">Experience</a>
+        <a href="#leadership" class="text-3xl font-semibold tracking-tight text-slate-900 mobile-link">Growth Path</a>
+        <button id="close-menu" class="absolute top-10 right-10 text-slate-900 p-4">
             <i class="fas fa-times text-2xl"></i>
         </button>
     </div>
 
-    <section id="hero" class="min-h-screen flex flex-col items-center justify-center relative overflow-hidden pt-28 pb-12">
-        <div class="ambient-glow bg-accent w-[600px] h-[600px] top-[-200px] left-[-200px]"></div>
-        <div class="ambient-glow bg-blue-900 w-[500px] h-[500px] bottom-[-100px] right-[-100px]"></div>
+    <section id="hero" class="min-h-screen flex flex-col items-center justify-center relative overflow-hidden pt-16 pb-6">
+        <div class="ambient-glow bg-blue-100 w-[600px] h-[600px] top-[-200px] left-[-200px]"></div>
+        <div class="ambient-glow bg-indigo-50 w-[500px] h-[500px] bottom-[-100px] right-[-100px]"></div>
         
         <div class="absolute inset-0 z-0">
              <div class="absolute inset-0 bg-gradient-to-b from-transparent via-bg/80 to-bg"></div>
         </div>
         
-        <div class="relative z-10 flex-grow flex flex-col items-center justify-center w-full max-w-6xl mx-auto px-4">
-            <div class="mb-10" data-aos="fade-down">
-                <span class="inline-flex items-center px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase border border-white/10 bg-white/5 backdrop-blur-md shadow-2xl">
-                    <i class="fas fa-flag mr-3 text-accent"></i> Company IC (HTA 202 Intake)
-                </span>
-            </div>
+        <div class="relative z-10 flex-grow flex flex-col items-center justify-center w-full max-w-6xl mx-auto px-4 mt-8">
             
-            <h1 class="text-6xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter mb-8 text-white leading-none text-center" data-aos="fade-up" data-aos-delay="400">
-                SIRAJ MUNIR
-            </h1>
-            
-            <p class="text-xl md:text-3xl text-gray-400 mb-10 font-medium max-w-3xl mx-auto leading-relaxed text-center tracking-tight" data-aos="fade-up" data-aos-delay="600">
-                Leading with <span class="text-white">Purpose.</span> Serving with <span class="text-white">Heart.</span> Lighting the Path for <span class="text-white">Others.</span>
-            </p>
-            
-            <p class="text-xs md:text-sm text-gray-500 mb-16 tracking-widest uppercase font-semibold text-center" data-aos="fade-up" data-aos-delay="700">
-                Strategic Leadership &nbsp;·&nbsp; Grassroots Ops &nbsp;·&nbsp; Professional Emcee
-            </p>
-            
-            <div class="flex flex-wrap justify-center gap-8 md:gap-32 w-full" data-aos="fade-up" data-aos-delay="800">
-                <div class="text-center group">
-                    <div class="text-5xl md:text-6xl font-bold tracking-tighter text-white mb-3 transition-transform duration-500 group-hover:scale-110 group-hover:text-gold"><span class="counter" data-target="10000">0</span>+</div>
-                    <div class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">People Reached</div>
-                </div>
-                <div class="text-center group">
-                    <div class="text-5xl md:text-6xl font-bold tracking-tighter text-white mb-3 transition-transform duration-500 group-hover:scale-110 group-hover:text-accent"><span class="counter" data-target="1000">0</span>+</div>
-                    <div class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Volunteer Hours</div>
-                </div>
-                <div class="text-center group">
-                    <div class="text-5xl md:text-6xl font-bold tracking-tighter text-white mb-3 transition-transform duration-500 group-hover:scale-110 group-hover:text-vote"><span class="counter" data-target="1500">0</span>+</div>
-                    <div class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Residents Engaged</div>
-                </div>
-            </div>
-        </div>
-        
-        <a href="#about" class="relative z-10 mt-16 flex flex-col items-center gap-4 opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
-            <span class="text-[10px] uppercase tracking-widest font-bold text-white">Explore</span>
-            <div class="w-px h-12 bg-gradient-to-b from-white to-transparent"></div>
-        </a>
-    </section>
-
-    <section id="about" class="py-24 md:py-40 px-4 relative">
-        <div class="absolute inset-0 bg-white/[0.01] border-t border-white/5"></div>
-        <div class="max-w-5xl mx-auto text-center relative z-10">
-            <h2 class="text-4xl md:text-6xl font-semibold tracking-tight mb-12 leading-tight" data-aos="fade-up">
-                <span class="text-white">"The true meaning of life is to plant trees,</span><br>
-                <span class="text-gray-500">under whose shade we do not expect to sit."</span>
-            </h2>
-            
-            <p class="text-gray-400 text-lg md:text-2xl font-normal leading-relaxed mb-20 max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-                I am a dedicated leader committed to making a tangible impact in my community. From serving as Company IC in National Service to coordinating grassroots operations with government leaders, I believe in leading by example and empowering those around me. My journey has been defined by service, integrity, and an unwavering commitment to positive change.
-            </p>
-            
-            <div class="flex flex-col items-center gap-6" data-aos="fade-up" data-aos-delay="200">
-                <div class="w-40 h-40 md:w-56 md:h-56 rounded-full overflow-hidden border border-white/10 p-2 bg-white/5 backdrop-blur-xl shrink-0 mx-auto shadow-2xl">
-                    <div class="w-full h-full rounded-full overflow-hidden bg-bg">
+            <div class="flex flex-col items-center justify-center mb-6" data-aos="fade-down">
+                <div class="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden border border-slate-200 p-2 bg-white shadow-xl shrink-0 mx-auto mb-4">
+                    <div class="w-full h-full rounded-full overflow-hidden bg-slate-100">
                         <img src="siraj headshot.png" alt="Siraj Munir" class="w-full h-full object-cover object-top">
                     </div>
                 </div>
-                <div class="mt-4">
-                    <p class="text-white text-3xl md:text-4xl tracking-tight font-bold">Siraj Munir</p>
-                    <p class="text-sm text-accent mt-3 font-semibold tracking-widest uppercase">Company IC at Home Team Academy | Executive Member, Siglap Youth</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="experience" class="py-24 md:py-40 px-4 relative">
-        <div class="max-w-7xl mx-auto">
-            <div class="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6" data-aos="fade-up">
-                <div>
-                    <h2 class="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-4">Selected Works.</h2>
-                    <p class="text-gray-400 text-xl font-medium tracking-tight">A curated collection of leadership milestones.</p>
-                </div>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="apple-card rounded-[2rem] p-2" data-aos="fade-up" data-aos-delay="100">
-                    <div class="overflow-hidden rounded-[1.5rem] aspect-[4/3] img-hover-zoom relative">
-                        <img src="PreUsem pic.JPEG" alt="Pre-University Seminar" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/70 to-transparent opacity-95"></div>
-                        <div class="absolute bottom-0 left-0 p-8 w-full z-10">
-                            <h3 class="text-2xl font-semibold tracking-tight text-white mb-2">Pre-University Seminar 2025</h3>
-                            <span class="text-xs text-accent uppercase font-bold tracking-widest block">Official Emcee</span>
-                        </div>
-                    </div>
-                </div>
                 
-                <div class="apple-card rounded-[2rem] p-2" data-aos="fade-up" data-aos-delay="200">
-                    <div class="overflow-hidden rounded-[1.5rem] aspect-[4/3] img-hover-zoom relative">
-                        <img src="PAP ops.JPEG" alt="GE2025" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/70 to-transparent opacity-95"></div>
-                        <div class="absolute bottom-0 left-0 p-8 w-full z-10">
-                            <h3 class="text-2xl font-semibold tracking-tight text-white mb-2">GE2025 Campaign Operations</h3>
-                            <span class="text-xs text-accent uppercase font-bold tracking-widest block">Logistics & Deployment</span>
-                        </div>
-                    </div>
-                </div>
+                <h1 class="text-5xl md:text-7xl lg:text-[8rem] font-bold tracking-tighter mb-4 text-slate-900 leading-none text-center">
+                    SIRAJ MUNIR
+                </h1>
                 
-                <div class="apple-card rounded-[2rem] p-2" data-aos="fade-up" data-aos-delay="300">
-                    <div class="overflow-hidden rounded-[1.5rem] aspect-[4/3] img-hover-zoom relative">
-                        <img src="siglap pets day.JPEG" alt="Siglap Pets Day" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/70 to-transparent opacity-95"></div>
-                        <div class="absolute bottom-0 left-0 p-8 w-full z-10">
-                            <h3 class="text-2xl font-semibold tracking-tight text-white mb-2">Siglap Pets Day 2025</h3>
-                            <span class="text-xs text-accent uppercase font-bold tracking-widest block">1,500+ Attendees</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="apple-card rounded-[2rem] p-2" data-aos="fade-up" data-aos-delay="400">
-                    <div class="overflow-hidden rounded-[1.5rem] aspect-[4/3] img-hover-zoom relative">
-                        <img src="MPS OPS.JPEG" alt="MPS Operations" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/70 to-transparent opacity-95"></div>
-                        <div class="absolute bottom-0 left-0 p-8 w-full z-10">
-                            <h3 class="text-2xl font-semibold tracking-tight text-white mb-2">Weekly MPS Operations</h3>
-                            <span class="text-xs text-accent uppercase font-bold tracking-widest block">Government Liaison</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="apple-card rounded-[2rem] p-2" data-aos="fade-up" data-aos-delay="500">
-                    <div class="overflow-hidden rounded-[1.5rem] aspect-[4/3] img-hover-zoom relative">
-                        <img src="SG60 record.JPEG" alt="Singapore Book of Records" class="w-full h-full object-cover object-right">
-                        <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/70 to-transparent opacity-95"></div>
-                        <div class="absolute bottom-0 left-0 p-8 w-full z-10">
-                            <h3 class="text-2xl font-semibold tracking-tight text-white mb-2">Singapore Book of Records</h3>
-                            <span class="text-xs text-accent uppercase font-bold tracking-widest block">National Record</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="apple-card rounded-[2rem] p-2" data-aos="fade-up" data-aos-delay="600">
-                    <div class="overflow-hidden rounded-[1.5rem] aspect-[4/3] img-hover-zoom relative">
-                        <img src="WYSE pic.JPEG" alt="Wyse Active" class="w-full h-full object-cover object-top">
-                        <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/70 to-transparent opacity-95"></div>
-                        <div class="absolute bottom-0 left-0 p-8 w-full z-10">
-                            <h3 class="text-2xl font-semibold tracking-tight text-white mb-2">Wyse Active Programs</h3>
-                            <span class="text-xs text-accent uppercase font-bold tracking-widest block">Community Welfare</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="leadership" class="py-24 md:py-40 px-4 border-t border-white/5 relative">
-        <div class="absolute inset-0 bg-white/[0.01]"></div>
-        <div class="max-w-6xl mx-auto relative z-10">
-            <div class="mb-20" data-aos="fade-up">
-                <h2 class="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-4">Core Pillars.</h2>
-                <p class="text-gray-400 font-medium text-xl tracking-tight">Areas where I drive meaningful impact.</p>
-            </div>
-            
-            <div class="space-y-0 border-t border-white/10">
-                <div class="service-item py-12" data-aos="fade-up" data-aos-delay="100">
-                    <div class="grid md:grid-cols-12 gap-8 items-start">
-                        <div class="md:col-span-2 text-sm font-bold text-accent tracking-widest">01</div>
-                        <div class="md:col-span-4">
-                            <h3 class="text-3xl font-semibold tracking-tight text-white">National Service</h3>
-                        </div>
-                        <div class="md:col-span-6">
-                            <p class="text-gray-400 font-normal leading-relaxed text-lg">
-                                Selected as Company IC for HTA 202 Intake. Leading by walking the journey alongside my men, fostering brotherhood, ensuring welfare, and pushing toward operational excellence together. POP Mid April 2026.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="service-item py-12" data-aos="fade-up" data-aos-delay="200">
-                    <div class="grid md:grid-cols-12 gap-8 items-start">
-                        <div class="md:col-span-2 text-sm font-bold text-accent tracking-widest">02</div>
-                        <div class="md:col-span-4">
-                            <h3 class="text-3xl font-semibold tracking-tight text-white">Grassroots Ops</h3>
-                        </div>
-                        <div class="md:col-span-6">
-                            <p class="text-gray-400 font-normal leading-relaxed text-lg">
-                                Served under Dr Maliki Osman for several years aiding in numerous community activities throughout 2024 and 2025. Currently providing direct assistance to MOS Dinesh Vasu Dash on weekly MPS operations and resident cases alongside core operations for election campaigning.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="service-item py-12" data-aos="fade-up" data-aos-delay="300">
-                    <div class="grid md:grid-cols-12 gap-8 items-start">
-                        <div class="md:col-span-2 text-sm font-bold text-accent tracking-widest">03</div>
-                        <div class="md:col-span-4">
-                            <h3 class="text-3xl font-semibold tracking-tight text-white">Youth Executive</h3>
-                        </div>
-                        <div class="md:col-span-6">
-                            <p class="text-gray-400 font-normal leading-relaxed text-lg">
-                                Executive Member of Siglap Youth Network, collaborating with 20 youths to empower the community. 1,000+ volunteer hours dedicated to strategic planning and crisis management.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="service-item py-12" data-aos="fade-up" data-aos-delay="400">
-                    <div class="grid md:grid-cols-12 gap-8 items-start">
-                        <div class="md:col-span-2 text-sm font-bold text-accent tracking-widest">04</div>
-                        <div class="md:col-span-4">
-                            <h3 class="text-3xl font-semibold tracking-tight text-white">Community Welfare</h3>
-                        </div>
-                        <div class="md:col-span-6">
-                            <p class="text-gray-400 font-normal leading-relaxed text-lg">
-                                Active involvement in Wyse Active disability care programs and elderly engagement initiatives. Committed to building an infrastructure of trust and human connections.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-24 md:py-40 px-4 relative">
-        <div class="max-w-4xl mx-auto">
-            <div class="mb-20" data-aos="fade-up">
-                <h2 class="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-4">Leadership Journey.</h2>
-            </div>
-            
-            <div class="space-y-6">
-                <div class="faq-item py-8" data-aos="fade-up">
-                    <button class="faq-trigger w-full flex items-center justify-between text-left">
-                        <div>
-                            <span class="text-accent text-sm font-bold tracking-widest uppercase">2020—2023</span>
-                            <h3 class="text-2xl md:text-3xl font-semibold tracking-tight text-white mt-3">Foundation Years</h3>
-                        </div>
-                        <span class="faq-icon text-3xl text-white transition-transform duration-300 font-light">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p class="text-gray-400 pt-6 pb-2 text-lg font-normal leading-relaxed">
-                            Student Councillor at Hai Sing Catholic School and Robotics EXCO member (Logistics). Developed foundational leadership skills through organizing school events and managing robotics competition logistics.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="faq-item py-8" data-aos="fade-up" data-aos-delay="100">
-                    <button class="faq-trigger w-full flex items-center justify-between text-left">
-                        <div>
-                            <span class="text-accent text-sm font-bold tracking-widest uppercase">2024—2025</span>
-                            <h3 class="text-2xl md:text-3xl font-semibold tracking-tight text-white mt-3">Community Engagement</h3>
-                        </div>
-                        <span class="faq-icon text-3xl text-white transition-transform duration-300 font-light">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p class="text-gray-400 pt-6 pb-2 text-lg font-normal leading-relaxed">
-                            Executive Member of Siglap Youth Network. Coordinated Ubin Day '25 and secured Singapore Book of Records for largest string logo. Served as Official Emcee for Pre-University Seminar 2025 and Edusave Awards ceremonies.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="faq-item py-8" data-aos="fade-up" data-aos-delay="200">
-                    <button class="faq-trigger w-full flex items-center justify-between text-left">
-                        <div>
-                            <span class="text-ns text-sm font-bold tracking-widest uppercase">2026</span>
-                            <h3 class="text-2xl md:text-3xl font-semibold tracking-tight text-white mt-3">National Service Leadership</h3>
-                        </div>
-                        <span class="faq-icon text-3xl text-white transition-transform duration-300 font-light">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p class="text-gray-400 pt-6 pb-2 text-lg font-normal leading-relaxed">
-                            Selected as Company IC (In-Charge) for Home Team Academy 202 Intake. Leading a company of National Servicemen through their training journey, with POP scheduled for Mid-April 2026.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="faq-item py-8" data-aos="fade-up" data-aos-delay="300">
-                    <button class="faq-trigger w-full flex items-center justify-between text-left">
-                        <div>
-                            <span class="text-accent text-sm font-bold tracking-widest uppercase">Education</span>
-                            <h3 class="text-2xl md:text-3xl font-semibold tracking-tight text-white mt-3">Academic Background</h3>
-                        </div>
-                        <span class="faq-icon text-3xl text-white transition-transform duration-300 font-light">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p class="text-gray-400 pt-6 pb-2 text-lg font-normal leading-relaxed">
-                            Tampines Meridian Junior College (Pre-University Seminar Official Emcee). Hai Sing Catholic School (Student Council & Robotics EXCO). Currently serving National Service with HTA.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="impact" class="py-24 md:py-40 px-4 relative border-t border-white/5">
-        <div class="absolute inset-0 bg-white/[0.01]"></div>
-        <div class="max-w-7xl mx-auto relative z-10">
-            <div class="mb-20" data-aos="fade-up">
-                <h2 class="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-4">Mentors & Recognition.</h2>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="apple-card p-10 rounded-[2rem] flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
-                    <div>
-                        <i class="fas fa-quote-left text-3xl text-white/20 mb-8 block"></i>
-                        <p class="text-gray-300 font-normal text-lg mb-12 leading-relaxed">
-                            "Siraj demonstrates exceptional leadership qualities and a genuine commitment to community service. His ability to coordinate complex operations while maintaining empathy for residents is remarkable."
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <div class="w-14 h-14 rounded-full overflow-hidden border border-white/10 shrink-0">
-                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&q=80" alt="Dr. Maliki Osman" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <p class="font-semibold tracking-tight text-white text-lg">Dr. Maliki Osman</p>
-                            <p class="text-xs text-gray-400 mt-1 font-medium">Senior Advisor, NTU & Distinguished Fellow</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="apple-card p-10 rounded-[2rem] flex flex-col justify-between" data-aos="fade-up" data-aos-delay="200">
-                    <div>
-                        <i class="fas fa-quote-left text-3xl text-white/20 mb-8 block"></i>
-                        <p class="text-gray-300 font-normal text-lg mb-12 leading-relaxed">
-                            "Siraj brings a military precision to grassroots operations that is truly impressive. His reliability in managing resident cases and proactive leadership have been invaluable assets."
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <div class="w-14 h-14 rounded-full overflow-hidden border border-white/10 shrink-0">
-                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&q=80" alt="Mr. Dinesh Vasu Dash" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <p class="font-semibold tracking-tight text-white text-lg">Mr. Dinesh Vasu Dash</p>
-                            <p class="text-xs text-gray-400 mt-1 font-medium">Minister of State, MCCY & MOM | Mayor</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="apple-card p-10 rounded-[2rem] flex flex-col justify-between" data-aos="fade-up" data-aos-delay="300">
-                    <div>
-                        <i class="fas fa-quote-left text-3xl text-white/20 mb-8 block"></i>
-                        <p class="text-gray-300 font-normal text-lg mb-12 leading-relaxed">
-                            "Siraj's 1,000+ volunteer hours speak volumes about his character. He leads with integrity, inspires his peers, and consistently delivers results that benefit the entire community."
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <div class="w-14 h-14 rounded-full overflow-hidden border border-white/10 shrink-0">
-                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80" alt="Youth Network Director" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <p class="font-semibold tracking-tight text-white text-lg">Youth Network Director</p>
-                            <p class="text-xs text-gray-400 mt-1 font-medium">Siglap Youth Network</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="py-24 md:py-40 px-4 relative overflow-hidden border-t border-white/5">
-        <div class="ambient-glow bg-accent w-[600px] h-[600px] bottom-[-200px] right-[-200px]"></div>
-        
-        <div class="max-w-3xl mx-auto relative z-10">
-            <div class="text-center mb-20" data-aos="fade-up">
-                <h2 class="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-6">Let's Connect.</h2>
-                <p class="text-gray-400 font-medium text-xl max-w-xl mx-auto">
-                    Interested in discussing leadership opportunities, community initiatives, or my journey. I would love to hear from you.
+                <p class="text-[10px] md:text-xs text-accent tracking-widest uppercase font-bold text-center max-w-4xl leading-relaxed">
+                    Siglap Youth Network Executive Member <span class="mx-1 md:mx-2">·</span> Eastwood Ria Network Executive Member<br>
+                    <span class="inline-block mt-1">Professional Emcee</span>
                 </p>
             </div>
             
-            <form action="https://formspree.io/f/mnjgngyr" method="POST" class="space-y-6" data-aos="fade-up" data-aos-delay="100">
-                <div class="grid md:grid-cols-2 gap-6">
+            <p class="text-lg md:text-2xl text-slate-500 mb-10 font-medium max-w-3xl mx-auto leading-relaxed text-center tracking-tight" data-aos="fade-up" data-aos-delay="200">
+                Driven to <span class="text-slate-900">learn.</span> Committed to <span class="text-slate-900">serve.</span> Growing to make a greater <span class="text-accent">impact.</span>
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-6 md:gap-24 w-full" data-aos="fade-up" data-aos-delay="400">
+                <div class="text-center group">
+                    <div class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2 transition-transform duration-500 group-hover:scale-110 group-hover:text-accent"><span class="counter" data-target="10000">0</span>+</div>
+                    <div class="text-[9px] text-slate-500 font-bold uppercase tracking-widest">People Reached</div>
+                </div>
+                <div class="text-center group">
+                    <div class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2 transition-transform duration-500 group-hover:scale-110 group-hover:text-accent"><span class="counter" data-target="1000">0</span>+</div>
+                    <div class="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Volunteer Hours</div>
+                </div>
+                <div class="text-center group">
+                    <div class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2 transition-transform duration-500 group-hover:scale-110 group-hover:text-accent"><span class="counter" data-target="1500">0</span>+</div>
+                    <div class="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Residents Engaged</div>
+                </div>
+            </div>
+        </div>
+        
+        <a href="#impact" class="relative z-10 mt-8 flex flex-col items-center gap-3 opacity-50 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+            <span class="text-[9px] uppercase tracking-widest font-bold text-slate-500">Testimonials</span>
+            <div class="w-px h-8 bg-gradient-to-b from-slate-400 to-transparent"></div>
+        </a>
+    </section>
+
+    <section id="impact" class="min-h-screen flex flex-col justify-center py-12 px-4 relative border-t border-slate-200">
+        <div class="max-w-7xl mx-auto w-full relative z-10">
+            <div class="mb-8 text-center" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2">Testimonials</h2>
+                <p class="text-slate-500 font-medium text-sm">Guidance that shapes my perspective and approach.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-4 lg:gap-6 items-stretch">
+                <div class="apple-card p-6 lg:p-8 rounded-[1.5rem] flex flex-col border-none h-full" data-aos="fade-up" data-aos-delay="100">
                     <div>
-                        <input type="text" name="name" required class="form-input-apple w-full text-white text-base placeholder-gray-500 font-medium" placeholder="Your name">
+                        <i class="fas fa-quote-left text-2xl text-accent/30 mb-4 block"></i>
+                        <p class="text-slate-700 font-medium text-sm leading-relaxed mb-6">
+                            "Siraj demonstrates <mark class="bg-blue-50 text-accent font-bold px-1 rounded">exceptional empathy</mark> and a <mark class="bg-blue-50 text-accent font-bold px-1 rounded">genuine willingness to learn</mark> through community service. His ability to listen to residents and coordinate operations is remarkable."
+                        </p>
                     </div>
+                    <div class="flex items-center gap-3 pt-5 border-t border-slate-100 mt-auto">
+                        <div class="w-10 h-10 rounded-full overflow-hidden shrink-0">
+                            <img src="maliki pic.jpg" alt="Dr. Maliki Osman" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <p class="font-bold tracking-tight text-slate-900 text-[13px]">Dr. Maliki Osman</p>
+                            <div class="text-[9px] text-slate-500 mt-1 font-medium leading-tight space-y-1">
+                                <p>Senior Advisor, Nanyang Technological University (NTU) & Distinguished Fellow</p>
+                                <p>Former Minister in the Prime Minister's Office, Second Minister for Education, and Second Minister for Foreign Affairs</p>
+                                <p>Former Mayor of South East District</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="apple-card p-6 lg:p-8 rounded-[1.5rem] flex flex-col border-none h-full" data-aos="fade-up" data-aos-delay="200">
                     <div>
-                        <input type="email" name="email" required class="form-input-apple w-full text-white text-base placeholder-gray-500 font-medium" placeholder="Your email">
+                        <i class="fas fa-quote-left text-2xl text-accent/30 mb-4 block"></i>
+                        <p class="text-slate-700 font-medium text-sm leading-relaxed mb-6">
+                            "Siraj brings incredible dedication to grassroots learning. His <mark class="bg-blue-50 text-accent font-bold px-1 rounded">proactive mindset</mark> in managing resident cases and <mark class="bg-blue-50 text-accent font-bold px-1 rounded">absorbing feedback</mark> makes him an <mark class="bg-blue-50 text-accent font-bold px-1 rounded">invaluable asset</mark> to any team."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 pt-5 border-t border-slate-100 mt-auto">
+                        <div class="w-10 h-10 rounded-full overflow-hidden shrink-0">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&q=80" alt="Mr. Dinesh Vasu Dash" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <p class="font-bold tracking-tight text-slate-900 text-[13px]">Mr. Dinesh Vasu Dash</p>
+                            <div class="text-[9px] text-slate-500 mt-1 font-medium leading-tight space-y-1">
+                                <p>Minister of State, Ministry of Culture, Community and Youth, and Ministry of Manpower</p>
+                                <p>Mayor of South East District</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                <div>
-                    <select name="inquiry_type" required class="form-input-apple w-full text-white text-base text-gray-400 appearance-none font-medium">
-                        <option value="" disabled selected>Nature of inquiry</option>
-                        <option value="University Admissions" class="text-black">University Admissions</option>
-                        <option value="Leadership Opportunities" class="text-black">Leadership Opportunities</option>
-                        <option value="Community Collaboration" class="text-black">Community Collaboration</option>
-                        <option value="Other" class="text-black">Other</option>
-                    </select>
+                <div class="apple-card p-6 lg:p-8 rounded-[1.5rem] flex flex-col border-none h-full" data-aos="fade-up" data-aos-delay="300">
+                    <div>
+                        <i class="fas fa-quote-left text-2xl text-accent/30 mb-4 block"></i>
+                        <p class="text-slate-700 font-medium text-[12px] leading-relaxed mb-6">
+                            "Siraj has consistently shown a <mark class="bg-blue-50 text-accent font-bold px-1 rounded">positive attitude</mark> towards community service. He is approachable, respectful, and works well with fellow volunteers and grassroots leaders. His <mark class="bg-blue-50 text-accent font-bold px-1 rounded">reliability</mark> and willingness to step forward when assistance is needed have made him a valued member of the volunteer team. In addition, Siraj has demonstrated maturity and a strong sense of responsibility in balancing his volunteer commitments with his other responsibilities. His continued involvement reflects a <mark class="bg-blue-50 text-accent font-bold px-1 rounded">genuine interest in serving the community</mark> and contributing positively to initiatives that benefit residents."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 pt-5 border-t border-slate-100 mt-auto">
+                        <div class="w-10 h-10 rounded-full overflow-hidden shrink-0 flex items-center justify-center border border-slate-100 bg-white">
+                            <img src="ERRN PIC.JPEG" alt="Mdm Sharifah Zainon" class="w-full h-full object-cover scale-[1.7]">
+                        </div>
+                        <div>
+                            <p class="font-bold tracking-tight text-slate-900 text-[13px]">Mdm Sharifah Zainon</p>
+                            <div class="text-[9px] text-slate-500 mt-1 font-medium leading-tight">
+                                <p>Chairman, Eastwood Ria Residents' Network (ERRN)</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
-                <div>
-                    <textarea name="message" required class="form-input-apple w-full text-white text-base placeholder-gray-500 h-40 resize-none font-medium" placeholder="Your message"></textarea>
-                </div>
-                
-                <div class="pt-8 text-center">
-                    <button type="submit" class="btn-primary px-12 py-5 rounded-full font-bold tracking-widest text-sm uppercase flex items-center justify-center gap-3 mx-auto shadow-2xl shadow-white/10">
-                        Send Message 
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-            </form>
+            </div>
         </div>
     </section>
 
-    <footer class="py-16 px-4 border-t border-white/10 relative overflow-hidden bg-[#01030a]">
+    <section id="about" class="min-h-screen flex flex-col justify-center py-12 px-4 relative border-t border-slate-200">
+        <div class="max-w-5xl mx-auto w-full text-center relative z-10">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-8 leading-snug text-balance mx-auto" data-aos="fade-up">
+                <span class="text-slate-900">Leadership is not defined by the roles we are given but by the problems we choose to solve. </span>
+                <span class="text-slate-500">It is about having the empathy to listen to every single voice, especially those often unheard, and the drive to build solutions that truly leave no one behind.</span>
+            </h2>
+            
+            <p class="text-slate-600 text-base md:text-lg font-normal leading-relaxed mb-8 max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                My drive comes from a simple desire to be genuinely useful to the people around me. I am naturally pragmatic and always looking for ways to improve, treating every new responsibility as a chance to upgrade my skills so I can serve more effectively. I believe in advocating for individuals of all abilities and ensuring that everyone, regardless of the unique and sometimes unseen hurdles they face, has a strong place in our community. Whether I am sitting down with residents to sort out everyday problems at the Meet the People Sessions, engaging crowds at the Edusave Awards, or planning initiatives with the Siglap Youth Network and the Eastwood Ria Residents Network, my mindset is the same. Even while guiding my peers in National Service, I focus on understanding vastly different perspectives and building real connections. Ultimately, I want to keep pushing my own boundaries and learning as much as I can. Stepping up to empower others is the best way to ensure our entire community grows and prospers together in the future.
+            </p>
+        </div>
+    </section>
+
+    <section id="experience" class="min-h-screen flex flex-col justify-center py-12 px-4 relative border-t border-slate-200">
+        <div class="max-w-7xl mx-auto w-full">
+            <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4" data-aos="fade-up">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2">Key Events</h2>
+                    <p class="text-slate-500 text-sm font-medium tracking-tight">Experiences that broaden my understanding of community.</p>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-4 lg:gap-5">
+                <div class="apple-card rounded-2xl p-2" data-aos="fade-up" data-aos-delay="100">
+                    <div class="overflow-hidden rounded-xl aspect-video relative">
+                        <img src="EDUSAVE PIC2.JPEG" alt="Edusave Awards Ceremony" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent opacity-90"></div>
+                        <div class="absolute bottom-0 left-0 p-5 w-full z-10">
+                            <h3 class="text-lg font-bold tracking-tight text-white mb-1 leading-snug">Edusave Awards Ceremony</h3>
+                            <span class="text-[9px] text-blue-300 uppercase font-bold tracking-widest block">Official Emcee</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="apple-card rounded-2xl p-2" data-aos="fade-up" data-aos-delay="200">
+                    <div class="overflow-hidden rounded-xl aspect-video relative">
+                        <img src="ERRN pic 1.JPEG" alt="Eastwood Ria Residents' Network" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent opacity-90"></div>
+                        <div class="absolute bottom-0 left-0 p-5 w-full z-10">
+                            <h3 class="text-lg font-bold tracking-tight text-white mb-1 leading-snug">Eastwood Ria Network (ERRN)</h3>
+                            <span class="text-[9px] text-blue-300 uppercase font-bold tracking-widest block">Community Initiatives</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="apple-card rounded-2xl p-2" data-aos="fade-up" data-aos-delay="300">
+                    <div class="overflow-hidden rounded-xl aspect-video relative">
+                        <img src="PreUsem pic.JPEG" alt="Pre-University Seminar" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent opacity-90"></div>
+                        <div class="absolute bottom-0 left-0 p-5 w-full z-10">
+                            <h3 class="text-lg font-bold tracking-tight text-white mb-1 leading-snug">Pre-University Seminar 2025</h3>
+                            <span class="text-[9px] text-blue-300 uppercase font-bold tracking-widest block">Official Emcee</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="apple-card rounded-2xl p-2" data-aos="fade-up" data-aos-delay="400">
+                    <div class="overflow-hidden rounded-xl aspect-video relative">
+                        <img src="PAP ops.JPEG" alt="GE2025" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent opacity-90"></div>
+                        <div class="absolute bottom-0 left-0 p-5 w-full z-10">
+                            <h3 class="text-lg font-bold tracking-tight text-white mb-1 leading-snug">GE2025 Campaign Operations</h3>
+                            <span class="text-[9px] text-blue-300 uppercase font-bold tracking-widest block">Logistics & Deployment</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="apple-card rounded-2xl p-2" data-aos="fade-up" data-aos-delay="500">
+                    <div class="overflow-hidden rounded-xl aspect-video relative">
+                        <img src="siglap pets day.JPEG" alt="Siglap Pets Day" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent opacity-90"></div>
+                        <div class="absolute bottom-0 left-0 p-5 w-full z-10">
+                            <h3 class="text-lg font-bold tracking-tight text-white mb-1 leading-snug">Siglap Pets Day 2025</h3>
+                            <span class="text-[9px] text-blue-300 uppercase font-bold tracking-widest block">1,500+ Attendees</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="apple-card rounded-2xl p-2" data-aos="fade-up" data-aos-delay="600">
+                    <div class="overflow-hidden rounded-xl aspect-video relative">
+                        <img src="MPS OPS.JPEG" alt="MPS Operations" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent opacity-90"></div>
+                        <div class="absolute bottom-0 left-0 p-5 w-full z-10">
+                            <h3 class="text-lg font-bold tracking-tight text-white mb-1 leading-snug">Weekly MPS Operations</h3>
+                            <span class="text-[9px] text-blue-300 uppercase font-bold tracking-widest block">Government Liaison</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="apple-card rounded-2xl p-2" data-aos="fade-up" data-aos-delay="700">
+                    <div class="overflow-hidden rounded-xl aspect-video relative">
+                        <img src="SG60 record.JPEG" alt="Singapore Book of Records" class="w-full h-full object-cover object-right">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent opacity-90"></div>
+                        <div class="absolute bottom-0 left-0 p-5 w-full z-10">
+                            <h3 class="text-lg font-bold tracking-tight text-white mb-1 leading-snug">Singapore Book of Records</h3>
+                            <span class="text-[9px] text-blue-300 uppercase font-bold tracking-widest block">National Record</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="apple-card rounded-2xl p-2" data-aos="fade-up" data-aos-delay="800">
+                    <div class="overflow-hidden rounded-xl aspect-video relative">
+                        <img src="WYSE pic.JPEG" alt="Wyse Active" class="w-full h-full object-cover object-top">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent opacity-90"></div>
+                        <div class="absolute bottom-0 left-0 p-5 w-full z-10">
+                            <h3 class="text-lg font-bold tracking-tight text-white mb-1 leading-snug">Wyse Active Programs</h3>
+                            <span class="text-[9px] text-blue-300 uppercase font-bold tracking-widest block">Community Welfare</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="apple-card rounded-2xl p-2" data-aos="fade-up" data-aos-delay="900">
+                    <div class="overflow-hidden rounded-xl aspect-video relative">
+                        <img src="YN PIC 1.JPEG" alt="Siglap Youth Network" class="w-full h-full object-cover object-center">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent opacity-90"></div>
+                        <div class="absolute bottom-0 left-0 p-5 w-full z-10">
+                            <h3 class="text-lg font-bold tracking-tight text-white mb-1 leading-snug">Siglap Youth Network</h3>
+                            <span class="text-[9px] text-blue-300 uppercase font-bold tracking-widest block">Executive Member</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="leadership" class="min-h-screen flex flex-col justify-center py-12 px-4 relative border-t border-slate-200">
+        <div class="max-w-6xl mx-auto w-full relative z-10">
+            <div class="mb-8" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2">Core Foundations</h2>
+                <p class="text-slate-500 font-medium text-sm tracking-tight">The pillars of my growth and service journey.</p>
+            </div>
+            
+            <div class="space-y-0 border-t border-slate-200">
+                <div class="service-item py-6 lg:py-8" data-aos="fade-up" data-aos-delay="100">
+                    <div class="grid md:grid-cols-12 gap-6 items-start">
+                        <div class="md:col-span-2 text-xs font-bold text-accent tracking-widest">01</div>
+                        <div class="md:col-span-4">
+                            <h3 class="text-xl font-bold tracking-tight text-slate-900">Youth Collaboration</h3>
+                        </div>
+                        <div class="md:col-span-6">
+                            <p class="text-slate-600 text-sm font-normal leading-relaxed">
+                                Executive Member of Siglap Youth Network. Collaborating with diverse youths taught me the importance of inclusive strategic planning and collective crisis management across 1,000+ volunteer hours.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-item py-6 lg:py-8" data-aos="fade-up" data-aos-delay="200">
+                    <div class="grid md:grid-cols-12 gap-6 items-start">
+                        <div class="md:col-span-2 text-xs font-bold text-accent tracking-widest">02</div>
+                        <div class="md:col-span-4">
+                            <h3 class="text-xl font-bold tracking-tight text-slate-900">Grassroots Ops</h3>
+                        </div>
+                        <div class="md:col-span-6">
+                            <p class="text-slate-600 text-sm font-normal leading-relaxed">
+                                Expanding my awareness of community policy and individual needs under Dr. Maliki Osman and MOS Dinesh Vasu Dash. Engaging in weekly MPS operations allows me to listen directly to residents and build practical problem-solving skills.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-item py-6 lg:py-8" data-aos="fade-up" data-aos-delay="300">
+                    <div class="grid md:grid-cols-12 gap-6 items-start">
+                        <div class="md:col-span-2 text-xs font-bold text-accent tracking-widest">03</div>
+                        <div class="md:col-span-4">
+                            <h3 class="text-xl font-bold tracking-tight text-slate-900">Community Welfare & ERRN</h3>
+                        </div>
+                        <div class="md:col-span-6">
+                            <p class="text-slate-600 text-sm font-normal leading-relaxed">
+                                Active involvement in Wyse Active disability care, elderly initiatives, and the Eastwood Ria Network (ERRN). These experiences ground me in humility and highlight the importance of human connections.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-item py-6 lg:py-8" data-aos="fade-up" data-aos-delay="400">
+                    <div class="grid md:grid-cols-12 gap-6 items-start">
+                        <div class="md:col-span-2 text-xs font-bold text-accent tracking-widest">04</div>
+                        <div class="md:col-span-4">
+                            <h3 class="text-xl font-bold tracking-tight text-slate-900">National Service</h3>
+                        </div>
+                        <div class="md:col-span-6">
+                            <p class="text-slate-600 text-sm font-normal leading-relaxed">
+                                Serving as Company IC for HTA 202 Intake. A profound opportunity to learn empathy, foster brotherhood, and understand team dynamics alongside my peers while striving for operational excellence.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="min-h-screen flex flex-col justify-center py-12 px-4 border-t border-slate-200 relative">
+        <div class="max-w-4xl mx-auto w-full">
+            <div class="mb-8" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2">Learning Journey</h2>
+            </div>
+            
+            <div class="space-y-2">
+                <div class="faq-item py-4 active" data-aos="fade-up">
+                    <button class="faq-trigger w-full flex items-center justify-between text-left">
+                        <div>
+                            <span class="text-accent text-[10px] font-bold tracking-widest uppercase">2020—2023</span>
+                            <h3 class="text-lg md:text-xl font-bold tracking-tight text-slate-900 mt-1">Building Foundations</h3>
+                        </div>
+                        <span class="faq-icon text-2xl text-slate-400 transition-transform duration-300 font-light">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-slate-600 text-sm pt-3 pb-1 font-normal leading-relaxed">
+                            Student Councillor at Hai Sing Catholic School and Robotics EXCO member. Developed foundational organizational skills and an early appreciation for teamwork through school events and logistics.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="faq-item py-4 active" data-aos="fade-up" data-aos-delay="100">
+                    <button class="faq-trigger w-full flex items-center justify-between text-left">
+                        <div>
+                            <span class="text-accent text-[10px] font-bold tracking-widest uppercase">2024—2025</span>
+                            <h3 class="text-lg md:text-xl font-bold tracking-tight text-slate-900 mt-1">Community Immersion</h3>
+                        </div>
+                        <span class="faq-icon text-2xl text-slate-400 transition-transform duration-300 font-light">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-slate-600 text-sm pt-3 pb-1 font-normal leading-relaxed">
+                            Executive Member of Siglap Youth Network. Coordinated Ubin Day '25. Served as Official Emcee for Pre-University Seminar 2025 and Edusave Awards, focusing on active listening and public engagement.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="faq-item py-4 active" data-aos="fade-up" data-aos-delay="200">
+                    <button class="faq-trigger w-full flex items-center justify-between text-left">
+                        <div>
+                            <span class="text-ns text-[10px] font-bold tracking-widest uppercase">2026</span>
+                            <h3 class="text-lg md:text-xl font-bold tracking-tight text-slate-900 mt-1">Continued Service</h3>
+                        </div>
+                        <span class="faq-icon text-2xl text-slate-400 transition-transform duration-300 font-light">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-slate-600 text-sm pt-3 pb-1 font-normal leading-relaxed">
+                            Serving as Company IC for Home Team Academy 202 Intake. Applying empathy and structural problem-solving in team environments, continuing my personal growth alongside my peers.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="faq-item py-4 active" data-aos="fade-up" data-aos-delay="300">
+                    <button class="faq-trigger w-full flex items-center justify-between text-left">
+                        <div>
+                            <span class="text-accent text-[10px] font-bold tracking-widest uppercase">Education</span>
+                            <h3 class="text-lg md:text-xl font-bold tracking-tight text-slate-900 mt-1">Academic Background</h3>
+                        </div>
+                        <span class="faq-icon text-2xl text-slate-400 transition-transform duration-300 font-light">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p class="text-slate-600 text-sm pt-3 pb-1 font-normal leading-relaxed">
+                            Tampines Meridian Junior College (Pre-University Seminar Official Emcee). Hai Sing Catholic School (Student Council & Robotics EXCO). Constantly seeking pathways for higher education to expand my capacity to serve.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 px-4 border-t border-slate-200 relative overflow-hidden">
         <div class="max-w-full mx-auto">
-            <div class="marquee-wrapper mb-20 opacity-20">
+            <div class="marquee-wrapper mb-8 opacity-10">
                 <div class="marquee-content">
-                    <span class="text-6xl md:text-8xl font-bold tracking-tighter text-white mx-6">
-                        <span class="text-accent glow-accent">S</span>ERVICE • 
-                        <span class="text-accent glow-accent">I</span>NTEGRITY • 
-                        <span class="text-accent glow-accent">R</span>ESILIENCE • 
-                        <span class="text-accent glow-accent">A</span>DAPTABLE • 
-                        <span class="text-accent glow-accent">J</span>OURNEY • 
+                    <span class="text-5xl md:text-7xl font-bold tracking-tighter text-slate-900 mx-6">
+                        <span class="text-accent">S</span>ERVICE • 
+                        <span class="text-accent">I</span>NTEGRITY • 
+                        <span class="text-accent">R</span>ESILIENCE • 
+                        <span class="text-accent">A</span>DAPTABLE • 
+                        <span class="text-accent">J</span>OURNEY • 
                     </span>
                 </div>
                 <div class="marquee-content" aria-hidden="true">
-                    <span class="text-6xl md:text-8xl font-bold tracking-tighter text-white mx-6">
-                        <span class="text-accent glow-accent">S</span>ERVICE • 
-                        <span class="text-accent glow-accent">I</span>NTEGRITY • 
-                        <span class="text-accent glow-accent">R</span>ESILIENCE • 
-                        <span class="text-accent glow-accent">A</span>DAPTABLE • 
-                        <span class="text-accent glow-accent">J</span>OURNEY • 
+                    <span class="text-5xl md:text-7xl font-bold tracking-tighter text-slate-900 mx-6">
+                        <span class="text-accent">S</span>ERVICE • 
+                        <span class="text-accent">I</span>NTEGRITY • 
+                        <span class="text-accent">R</span>ESILIENCE • 
+                        <span class="text-accent">A</span>DAPTABLE • 
+                        <span class="text-accent">J</span>OURNEY • 
                     </span>
                 </div>
             </div>
             
-            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
-                <div class="text-sm font-bold tracking-widest text-white uppercase">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
+                <div class="text-[10px] font-bold tracking-widest text-slate-900 uppercase">
                     SIRAJ MUNIR © 2026
                 </div>
                 
-                <div class="flex gap-10 text-xs font-bold tracking-widest uppercase text-gray-500">
-                    <a href="#about" class="hover:text-white transition-colors">About</a>
-                    <a href="#experience" class="hover:text-white transition-colors">Works</a>
-                    <a href="#leadership" class="hover:text-white transition-colors">Pillars</a>
+                <div class="flex gap-6 text-[10px] font-bold tracking-widest uppercase text-slate-500">
+                    <a href="#about" class="hover:text-accent transition-colors">About</a>
+                    <a href="#experience" class="hover:text-accent transition-colors">Works</a>
+                    <a href="#leadership" class="hover:text-accent transition-colors">Growth</a>
                 </div>
                 
-                <div class="flex gap-6">
-                    <a href="#" class="text-gray-500 hover:text-white transition-colors">
-                        <i class="fab fa-linkedin text-2xl"></i>
+                <div class="flex gap-5">
+                    <a href="#" class="text-slate-400 hover:text-accent transition-colors">
+                        <i class="fab fa-linkedin text-lg"></i>
                     </a>
-                    <a href="mailto:sirajmunir.muzammil@gmail.com" class="text-gray-500 hover:text-white transition-colors">
-                        <i class="fas fa-envelope text-2xl"></i>
+                    <a href="mailto:sirajmunir.muzammil@gmail.com" class="text-slate-400 hover:text-accent transition-colors">
+                        <i class="fas fa-envelope text-lg"></i>
                     </a>
                 </div>
             </div>
@@ -783,6 +743,16 @@
             });
         }
         
+        const revealElements = document.querySelectorAll('.reveal:not([data-aos])');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => revealObserver.observe(el));
+        
         const counters = document.querySelectorAll('.counter');
         const speed = 150; 
 
@@ -818,11 +788,7 @@
             const trigger = item.querySelector('.faq-trigger');
             if (trigger) {
                 trigger.addEventListener('click', () => {
-                    const isActive = item.classList.contains('active');
-                    faqItems.forEach(i => i.classList.remove('active'));
-                    if (!isActive) {
-                        item.classList.add('active');
-                    }
+                    item.classList.toggle('active');
                 });
             }
         });
@@ -834,10 +800,26 @@
                 if (targetId && targetId !== '#') {
                     const target = document.querySelector(targetId);
                     if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
+                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+                        const startPosition = window.pageYOffset;
+                        const distance = targetPosition - startPosition;
+                        const duration = 1200;
+                        let start = null;
+
+                        window.requestAnimationFrame(step);
+
+                        function step(timestamp) {
+                            if (!start) start = timestamp;
+                            const progress = timestamp - start;
+                            const t = Math.min(progress / duration, 1);
+                            const ease = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+                            
+                            window.scrollTo(0, startPosition + distance * ease);
+                            
+                            if (progress < duration) {
+                                window.requestAnimationFrame(step);
+                            }
+                        }
                     }
                 }
             });
@@ -864,7 +846,7 @@
                     this.size = Math.random() * 2 + 1;
                     this.speedX = Math.random() * 0.5 - 0.25;
                     this.speedY = Math.random() * 0.5 - 0.25;
-                    this.opacity = Math.random() * 0.5 + 0.2;
+                    this.opacity = Math.random() * 0.4 + 0.1;
                 }
                 
                 update() {
@@ -884,7 +866,7 @@
                 }
                 
                 draw() {
-                    ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                    ctx.fillStyle = `rgba(37, 99, 235, ${this.opacity})`;
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                     ctx.fill();
@@ -910,7 +892,7 @@
                         const distance = Math.sqrt(dx * dx + dy * dy);
                         
                         if (distance < 100) {
-                            ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * (1 - distance / 100)})`;
+                            ctx.strokeStyle = `rgba(37, 99, 235, ${0.15 * (1 - distance / 100)})`;
                             ctx.lineWidth = 0.5;
                             ctx.beginPath();
                             ctx.moveTo(particles[i].x, particles[i].y);
