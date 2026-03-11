@@ -108,25 +108,6 @@
             z-index: 1;
         }
         
-        .custom-cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #2563eb;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 10000;
-            transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
-            transform: translate(-50%, -50%);
-        }
-        .custom-cursor.hover {
-            width: 60px;
-            height: 60px;
-            background: rgba(37, 99, 235, 0.1);
-            border-color: rgba(37, 99, 235, 0.4);
-            backdrop-filter: blur(2px);
-        }
-        
         .glass-pill {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(24px);
@@ -251,8 +232,6 @@
     <div class="noise-overlay"></div>
     
     <canvas id="particle-canvas"></canvas>
-    
-    <div class="custom-cursor hidden md:block"></div>
     
     <nav id="navbar" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 nav-hidden w-[90%] md:w-auto">
         <div class="glass-pill px-6 py-3 rounded-full flex justify-between items-center gap-10">
@@ -703,7 +682,7 @@
                 </div>
                 
                 <div class="flex gap-5">
-                    <a href="#" class="text-slate-400 hover:text-accent transition-colors">
+                    <a href="https://www.linkedin.com/in/siraj-munir-muzammil" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-accent transition-colors">
                         <i class="fab fa-linkedin text-lg"></i>
                     </a>
                     <a href="mailto:sirajmunir.muzammil@gmail.com" class="text-slate-400 hover:text-accent transition-colors">
@@ -721,25 +700,6 @@
             once: true,
             offset: 50,
             easing: 'ease-out-cubic'
-        });
-        
-        document.addEventListener('mousemove', (e) => {
-            const cursor = document.querySelector('.custom-cursor');
-            if(cursor) {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-            }
-        });
-        
-        document.querySelectorAll('a, button, input, textarea, select, .apple-card, .service-item, .faq-trigger').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                const cursor = document.querySelector('.custom-cursor');
-                if(cursor) cursor.classList.add('hover');
-            });
-            el.addEventListener('mouseleave', () => {
-                const cursor = document.querySelector('.custom-cursor');
-                if(cursor) cursor.classList.remove('hover');
-            });
         });
         
         const navbar = document.getElementById('navbar');
