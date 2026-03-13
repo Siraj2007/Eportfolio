@@ -81,14 +81,13 @@
         }
     </script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --accent: #3b82f6;
+            --bg: #f8fafc;
         }
 
         body {
-            background-color: #c4d2dc;
+            background-color: var(--bg);
             color: #0f172a;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
@@ -120,21 +119,57 @@
         }
 
         .glass-pill {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 40px rgba(59, 130, 246, 0.05);
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: none;
+            position: relative;
+            overflow: hidden;
         }
 
-        .nav-hidden {
-            transform: translate(-50%, -150%);
-            opacity: 0;
+        .liquid-glass-btn-pill {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
 
-        .nav-visible {
-            transform: translate(-50%, 0);
-            opacity: 1;
+        .liquid-glass-btn-pill:hover {
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(1.02);
+        }
+
+        .nav-hidden-state {
+            transform: translate(0, -100px) !important;
+            opacity: 0 !important;
+        }
+
+        .nav-visible-state {
+            transform: translate(0, 0) !important;
+            opacity: 1 !important;
+        }
+
+        .nav-fixed-state {
+            transform: translate(0, 0) !important;
+            opacity: 1 !important;
+            top: 1rem !important; /* Pin closer to top when fixed */
+        }
+
+        .nav-indicator {
+            position: absolute;
+            background: rgba(59, 130, 246, 0.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 9999px;
+            z-index: -1;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+
+        .nav-link.active {
+            color: var(--accent) !important;
         }
 
         .hero-title span {
@@ -175,11 +210,39 @@
         }
 
         .apple-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid #e0f2fe;
+            background: rgba(255, 255, 255, 0.65);
+            border-radius: 1.5rem;
+            position: relative;
+            box-shadow: 0 10px 40px -10px rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.8);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.03);
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .apple-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            backdrop-filter: blur(20px) saturate(180%) url("#container-glass");
+            -webkit-backdrop-filter: blur(20px) saturate(180%) url("#container-glass");
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+        }
+
+        .apple-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.6), rgba(255,255,255,0.1) 40%, rgba(37, 99, 235, 0.1) 60%, rgba(255,255,255,0.4));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            z-index: 1;
         }
 
         .apple-card:hover {
@@ -234,22 +297,163 @@
         }
 
         .service-item {
-            border-bottom: 1px solid #e5e5e5;
+            border-bottom: none;
+            position: relative;
             transition: all 0.4s ease;
         }
 
+        .service-item::after, .faq-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.15), transparent);
+            filter: url("#container-glass");
+            pointer-events: none;
+        }
+
+        .liquid-glass-border-t {
+            position: relative;
+            border-top: none !important;
+        }
+
+        .liquid-glass-border-t::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
+            filter: url("#container-glass");
+            pointer-events: none;
+        }
+
         .service-item:hover {
-            border-color: #2563eb;
+            background: rgba(37, 99, 235, 0.04);
+            transform: translateX(4px);
         }
 
         .faq-item {
-            border-bottom: 1px solid #e5e5e5;
+            border-bottom: none;
+            position: relative;
         }
 
         .faq-answer {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Liquid Glass Components */
+        .liquid-glass-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.6rem 1.25rem;
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: #1e293b;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 0.75rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            isolation: isolate;
+            box-shadow: 
+                0 4px 15px rgba(59, 130, 246, 0.1),
+                inset 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .liquid-glass-btn:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 
+                0 10px 25px rgba(59, 130, 246, 0.2),
+                inset 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Glass Subtle for icons/badges */
+        .glass-subtle {
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .glass-subtle::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            backdrop-filter: blur(12px) saturate(160%) url("#container-glass");
+            -webkit-backdrop-filter: blur(12px) saturate(160%) url("#container-glass");
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+        }
+
+        /* Sharp Highlights for text - NO BLUR here */
+        .glass-highlight {
+            background: rgba(59, 130, 246, 0.12) !important;
+            border-bottom: 2px solid rgba(59, 130, 246, 0.2) !important;
+            color: #2563eb !important;
+            padding: 0 4px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .liquid-glass-btn .glass-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: 5;
+            box-shadow: inherit;
+            box-shadow: 
+                0 0 6px rgba(0,0,0,0.03),
+                0 2px 6px rgba(0,0,0,0.08),
+                inset 3px 3px 0.5px -3px rgba(0,0,0,0.9),
+                inset -3px -3px 0.5px -3px rgba(0,0,0,0.85),
+                inset 1px 1px 1px -0.5px rgba(0,0,0,0.6),
+                inset -1px -1px 1px -0.5px rgba(0,0,0,0.6),
+                inset 0 0 6px 6px rgba(0,0,0,0.12),
+                inset 0 0 2px 2px rgba(0,0,0,0.06),
+                0 0 12px rgba(255,255,255,0.15);
+        }
+
+        .liquid-glass-btn .glass-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            z-index: -10;
+            backdrop-filter: url("#container-glass");
+            -webkit-backdrop-filter: url("#container-glass");
+        }
+
+        .liquid-glass-btn .content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .metal-heading {
+            background: linear-gradient(180deg, #1e293b 0%, #3e3e3e 50%, #64748b 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            /* subtle liquid metal glow */
+            filter: drop-shadow(0 1px 1px rgba(255,255,255,0.7));
+            letter-spacing: -0.05em;
+        }
+
+        .dark .metal-heading {
+            background: linear-gradient(180deg, #FAFAFA 0%, #A0A0A0 50%, #E5E5E5 100%);
         }
 
         .faq-item.active .faq-answer {
@@ -268,6 +472,25 @@
             pointer-events: none;
             z-index: 0;
         }
+
+        #modal-content, #testimonial-modal-content {
+            background: rgba(255, 255, 255, 0.8) !important;
+            backdrop-filter: blur(25px) !important;
+            -webkit-backdrop-filter: blur(25px) !important;
+            border: none !important;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #modal-content::before, #testimonial-modal-content::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            backdrop-filter: url("#container-glass");
+            -webkit-backdrop-filter: url("#container-glass");
+        }
     </style>
 </head>
 
@@ -277,17 +500,18 @@
     <canvas id="particle-canvas"></canvas>
 
     <nav id="navbar"
-        class="fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 nav-hidden w-[90%] md:w-auto">
-        <div class="glass-pill px-6 py-3 rounded-full flex justify-between items-center gap-10">
-            <a href="#hero"
-                class="text-xs font-bold tracking-widest text-slate-900 hover:text-accent transition-colors">SIRAJ</a>
-            <div class="hidden md:flex space-x-6 text-[11px] font-semibold tracking-wide text-slate-500">
-                <a href="#impact" class="hover:text-slate-900 transition-colors">Testimonials</a>
-                <a href="#about" class="hover:text-slate-900 transition-colors">About</a>
-                <a href="#experience" class="hover:text-slate-900 transition-colors">Key Events</a>
-                <a href="#leadership" class="hover:text-slate-900 transition-colors">Engagements</a>
-            </div>
-            <button id="mobile-menu-btn" class="md:hidden text-slate-900 ml-auto">
+        class="fixed top-10 inset-x-0 mx-auto z-[5000] transition-all duration-300 transform -translate-y-[150%] opacity-0 w-max px-2 py-2 flex items-center justify-center glass-pill rounded-full border border-transparent dark:border-white/[0.2] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
+        <div id="nav-container" class="flex items-center space-x-1 px-2 relative">
+            <div id="nav-indicator" class="nav-indicator"></div>
+            
+            <a href="#hero" class="nav-link relative items-center flex px-4 py-2 text-slate-900 font-bold text-xs tracking-widest hover:text-accent transition-colors">SIRAJ</a>
+            
+            <a href="#impact" class="nav-link relative items-center flex px-4 py-2 text-slate-500 hover:text-slate-900 transition-colors text-[11px] font-semibold tracking-wide hidden md:flex">Testimonials</a>
+            <a href="#about" class="nav-link relative items-center flex px-4 py-2 text-slate-500 hover:text-slate-900 transition-colors text-[11px] font-semibold tracking-wide hidden md:flex">About</a>
+            <a href="#experience" class="nav-link relative items-center flex px-4 py-2 text-slate-500 hover:text-slate-900 transition-colors text-[11px] font-semibold tracking-wide hidden md:flex">Key Events</a>
+            <a href="#leadership" class="nav-link relative items-center flex px-4 py-2 text-slate-500 hover:text-slate-900 transition-colors text-[11px] font-semibold tracking-wide hidden md:flex">Engagements</a>
+
+            <button id="mobile-menu-btn" class="md:hidden text-slate-900 px-4">
                 <i class="fas fa-bars text-lg"></i>
             </button>
         </div>
@@ -318,18 +542,18 @@
 
             <div class="flex flex-col items-center justify-center mb-6" data-aos="fade-down">
                 <div
-                    class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-white p-1 bg-white shadow-2xl shrink-0 mx-auto mb-6 relative group">
+                    class="w-32 h-32 md:w-40 md:h-40 rounded-full glass-subtle p-1 shrink-0 mx-auto mb-6 relative group">
                     <div
                         class="absolute inset-0 rounded-full bg-accent/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     </div>
-                    <div class="w-full h-full rounded-full overflow-hidden bg-slate-100 relative z-10">
+                    <div class="w-full h-full rounded-full overflow-hidden bg-slate-100/50 relative z-10">
                         <img src="siraj headshot.png" alt="Siraj Munir"
                             class="w-full h-full object-cover object-top scale-105 group-hover:scale-110 transition-transform duration-700">
                     </div>
                 </div>
 
                 <h1
-                    class="text-5xl md:text-7xl lg:text-[8rem] font-bold tracking-tighter mb-4 text-slate-900 leading-none text-center">
+                    class="text-5xl md:text-7xl lg:text-[8rem] font-bold tracking-tighter mb-4 text-slate-900 leading-none text-center metal-heading">
                     SIRAJ MUNIR
                 </h1>
 
@@ -390,10 +614,10 @@
     </section>
 
     <section id="impact"
-        class="min-h-screen flex flex-col justify-center py-12 px-4 relative border-t border-slate-200">
+        class="min-h-screen flex flex-col justify-center py-12 px-4 relative liquid-glass-border-t bg-slate-200/20">
         <div class="max-w-7xl mx-auto w-full relative z-10">
             <div class="mb-8 text-center" data-aos="fade-up">
-                <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2">Testimonials</h2>
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2 metal-heading">Testimonials</h2>
                 <p class="text-slate-500 font-medium text-sm">Guidance that shapes my perspective and approach</p>
             </div>
 
@@ -404,16 +628,16 @@
                         <i class="fas fa-quote-left text-2xl text-accent/20 mb-4 block"></i>
                         <p class="text-slate-700 font-medium text-sm leading-relaxed mb-6">
                             Siraj demonstrates <mark
-                                class="bg-blue-100/50 text-accent font-bold px-1 rounded">exceptional empathy</mark> and
-                            a <mark class="bg-blue-100/50 text-accent font-bold px-1 rounded">genuine willingness to
+                                class="glass-highlight px-1 rounded">exceptional empathy</mark> and
+                            a <mark class="glass-highlight px-1 rounded">genuine willingness to
                                 learn</mark>. His <mark
-                                class="bg-blue-100/50 text-accent font-bold px-1 rounded">remarkable ability</mark> to
+                                class="glass-highlight px-1 rounded">remarkable ability</mark> to
                             listen to residents and coordinate operations sets him apart.
                         </p>
                     </div>
-                    <div class="flex items-center gap-3 pt-5 border-t border-slate-100 mt-auto">
-                        <div class="w-10 h-10 rounded-full overflow-hidden shrink-0">
-                            <img src="maliki pic.jpg" alt="Dr Maliki Osman" class="w-full h-full object-cover">
+                    <div class="flex items-center gap-3 pt-5 border-t border-blue-100/30 mt-auto">
+                        <div class="w-10 h-10 rounded-full glass-subtle overflow-hidden shrink-0 flex items-center justify-center p-0.5">
+                            <img src="maliki pic.jpg" alt="Dr Maliki Osman" class="w-full h-full object-cover rounded-full">
                         </div>
                         <div>
                             <p class="font-bold tracking-tight text-slate-900 text-[13px]">Dr Maliki Osman</p>
@@ -425,6 +649,14 @@
                             </div>
                         </div>
                     </div>
+                    <button onclick="openTestimonial('maliki-osman')" class="liquid-glass-btn mt-4 group">
+                        <div class="glass-overlay"></div>
+                        <div class="glass-effect"></div>
+                        <span class="content flex items-center gap-1">
+                            Full Testimonial 
+                            <i class="fas fa-chevron-right text-[8px] transition-transform group-hover:translate-x-1"></i>
+                        </span>
+                    </button>
                 </div>
 
                 <div class="apple-card p-6 lg:p-8 rounded-[1.5rem] flex flex-col border-none h-full" data-aos="fade-up"
@@ -432,18 +664,18 @@
                     <div>
                         <i class="fas fa-quote-left text-2xl text-accent/30 mb-4 block"></i>
                         <p class="text-slate-700 font-medium text-sm leading-relaxed mb-6">
-                            Siraj brings <mark class="bg-blue-50 text-accent font-bold px-1 rounded">incredible
+                            Siraj brings <mark class="glass-highlight px-1 rounded">incredible
                                 dedication</mark> to grassroots learning His <mark
-                                class="bg-blue-50 text-accent font-bold px-1 rounded">proactive mindset</mark> and
+                                class="glass-highlight px-1 rounded">proactive mindset</mark> and
                             openness to feedback make him an <mark
-                                class="bg-blue-50 text-accent font-bold px-1 rounded">invaluable asset</mark> to any
+                                class="glass-highlight px-1 rounded">invaluable asset</mark> to any
                             team
                         </p>
                     </div>
-                    <div class="flex items-center gap-3 pt-5 border-t border-slate-100 mt-auto">
-                        <div class="w-10 h-10 rounded-full overflow-hidden shrink-0">
+                    <div class="flex items-center gap-3 pt-5 border-t border-blue-100/30 mt-auto">
+                        <div class="w-10 h-10 rounded-full glass-subtle overflow-hidden shrink-0 flex items-center justify-center p-0.5">
                             <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&q=80"
-                                alt="Mr Dinesh Vasu Dash" class="w-full h-full object-cover">
+                                alt="Mr Dinesh Vasu Dash" class="w-full h-full object-cover rounded-full">
                         </div>
                         <div>
                             <p class="font-bold tracking-tight text-slate-900 text-[13px]">Mr Dinesh Vasu Dash</p>
@@ -454,6 +686,14 @@
                             </div>
                         </div>
                     </div>
+                    <button onclick="openTestimonial('dinesh-vasu-dash')" class="liquid-glass-btn mt-4 group">
+                        <div class="glass-overlay"></div>
+                        <div class="glass-effect"></div>
+                        <span class="content flex items-center gap-1">
+                            Full Testimonial 
+                            <i class="fas fa-chevron-right text-[8px] transition-transform group-hover:translate-x-1"></i>
+                        </span>
+                    </button>
                 </div>
 
                 <div class="apple-card p-6 lg:p-8 rounded-[1.5rem] flex flex-col border-none h-full" data-aos="fade-up"
@@ -462,23 +702,23 @@
                         <i class="fas fa-quote-left text-2xl text-accent/30 mb-4 block"></i>
                         <p class="text-slate-700 font-medium text-[12px] leading-relaxed mb-6">
                             Siraj consistently shows a <mark
-                                class="bg-blue-50 text-accent font-bold px-1 rounded">positive attitude</mark> towards
+                                class="glass-highlight px-1 rounded">positive attitude</mark> towards
                             community service He is <mark
-                                class="bg-blue-50 text-accent font-bold px-1 rounded">approachable</mark> <mark
-                                class="bg-blue-50 text-accent font-bold px-1 rounded">respectful</mark> and highly <mark
-                                class="bg-blue-50 text-accent font-bold px-1 rounded">reliable</mark> His <mark
-                                class="bg-blue-50 text-accent font-bold px-1 rounded">maturity</mark> and <mark
-                                class="bg-blue-50 text-accent font-bold px-1 rounded">strong sense of
+                                class="glass-highlight px-1 rounded">approachable</mark> <mark
+                                class="glass-highlight px-1 rounded">respectful</mark> and highly <mark
+                                class="glass-highlight px-1 rounded">reliable</mark> His <mark
+                                class="glass-highlight px-1 rounded">maturity</mark> and <mark
+                                class="glass-highlight px-1 rounded">strong sense of
                                 responsibility</mark> reflect a <mark
-                                class="bg-blue-50 text-accent font-bold px-1 rounded">genuine interest</mark> in serving
+                                class="glass-highlight px-1 rounded">genuine interest</mark> in serving
                             the community
                         </p>
                     </div>
-                    <div class="flex items-center gap-3 pt-5 border-t border-slate-100 mt-auto">
+                    <div class="flex items-center gap-3 pt-5 border-t border-blue-100/30 mt-auto">
                         <div
-                            class="w-10 h-10 rounded-full overflow-hidden shrink-0 flex items-center justify-center border border-slate-100 bg-white">
+                            class="w-10 h-10 rounded-full overflow-hidden shrink-0 flex items-center justify-center glass-subtle p-0.5">
                             <img src="ERRN PIC.JPEG" alt="Mdm Sharifah Zainon"
-                                class="w-full h-full object-cover scale-[1.7]">
+                                class="w-full h-full object-cover rounded-full scale-[1.7]">
                         </div>
                         <div>
                             <p class="font-bold tracking-tight text-slate-900 text-[13px]">Mdm Sharifah Zainon</p>
@@ -487,16 +727,24 @@
                             </div>
                         </div>
                     </div>
+                    <button onclick="openTestimonial('mdm-sharifah')" class="liquid-glass-btn mt-4 group">
+                        <div class="glass-overlay"></div>
+                        <div class="glass-effect"></div>
+                        <span class="content flex items-center gap-1">
+                            Full Testimonial 
+                            <i class="fas fa-chevron-right text-[8px] transition-transform group-hover:translate-x-1"></i>
+                        </span>
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="about" class="min-h-screen flex flex-col justify-center py-12 px-4 relative border-t border-slate-200">
+    <section id="about" class="min-h-screen flex flex-col justify-center py-20 px-4 relative liquid-glass-border-t bg-slate-200/30">
         <div class="max-w-3xl mx-auto w-full space-y-8 relative z-10">
 
             <div class="text-center mb-4" data-aos="fade-up">
-                <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-4">
+                <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-4 metal-heading">
                     Engineering for the Community
                 </h2>
                 <p class="text-accent text-sm md:text-base font-bold tracking-[0.2em] uppercase">
@@ -510,9 +758,11 @@
                     "The best way to find yourself is to lose yourself in the service of others."
                 </blockquote>
                 <div class="flex items-center justify-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Portrait_Gandhi.jpg"
-                        alt="Mahatma Gandhi" class="w-14 h-14 rounded-full object-cover shadow-sm mr-4"
-                        onerror="this.src='https://ui-avatars.com/api/?name=Mahatma+Gandhi&background=random'">
+                    <div class="w-14 h-14 rounded-full glass-subtle p-0.5 mr-4 overflow-hidden shrink-0">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Portrait_Gandhi.jpg"
+                            alt="Mahatma Gandhi" class="w-full h-full rounded-full object-cover"
+                            onerror="this.src='https://ui-avatars.com/api/?name=Mahatma+Gandhi&background=random'">
+                    </div>
                     <div class="text-lg font-semibold text-slate-900">
                         Mahatma Gandhi
                     </div>
@@ -558,7 +808,7 @@
                 </p>
                 <div class="space-y-8">
                     <div class="flex gap-6 items-start">
-                        <div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center shrink-0">
+                        <div class="w-12 h-12 rounded-2xl glass-subtle flex items-center justify-center shrink-0">
                             <i class="fas fa-users text-accent text-xl"></i>
                         </div>
                         <div>
@@ -569,7 +819,7 @@
                         </div>
                     </div>
                     <div class="flex gap-6 items-start">
-                        <div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center shrink-0">
+                        <div class="w-12 h-12 rounded-2xl glass-subtle flex items-center justify-center shrink-0">
                             <i class="fas fa-network-wired text-accent text-xl"></i>
                         </div>
                         <div>
@@ -580,7 +830,7 @@
                         </div>
                     </div>
                     <div class="flex gap-6 items-start">
-                        <div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center shrink-0">
+                        <div class="w-12 h-12 rounded-2xl glass-subtle flex items-center justify-center shrink-0">
                             <i class="fas fa-microphone-alt text-accent text-xl"></i>
                         </div>
                         <div>
@@ -594,7 +844,7 @@
             </div>
 
             <!-- The Goal Card -->
-            <div class="apple-card rounded-[2rem] p-8 sm:p-10 border-none bg-accent text-white" data-aos="fade-up"
+            <div class="apple-card rounded-[2rem] p-8 sm:p-10 border-none bg-accent/90 text-white" data-aos="fade-up"
                 data-aos-delay="500">
                 <h3 class="text-xs font-black text-white/60 uppercase tracking-[0.2em] mb-4">The Ultimate Goal</h3>
                 <p class="leading-relaxed text-xl md:text-2xl font-bold tracking-tight">
@@ -607,11 +857,11 @@
     </section>
 
     <section id="experience"
-        class="min-h-screen flex flex-col justify-center py-12 px-4 relative border-t border-slate-200">
+        class="min-h-screen flex flex-col justify-center py-12 px-4 relative liquid-glass-border-t bg-slate-200/20">
         <div class="max-w-7xl mx-auto w-full">
             <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4" data-aos="fade-up">
                 <div>
-                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2">Key Events</h2>
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2 metal-heading">Key Events</h2>
                     <p class="text-slate-500 text-sm font-medium tracking-tight">Experiences that broaden my
                         understanding of community</p>
                 </div>
@@ -764,15 +1014,15 @@
     </section>
 
     <section id="leadership"
-        class="min-h-screen flex flex-col justify-center py-12 px-4 relative border-t border-slate-200">
+        class="min-h-screen flex flex-col justify-center py-12 px-4 relative liquid-glass-border-t bg-slate-200/30">
         <div class="max-w-6xl mx-auto w-full relative z-10">
             <div class="mb-8" data-aos="fade-up">
-                <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2">Engagements</h2>
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2 metal-heading">Engagements</h2>
                 <p class="text-slate-500 font-medium text-sm tracking-tight">The pillars of my growth and service
                     journey</p>
             </div>
 
-            <div class="space-y-0 border-t border-slate-200">
+            <div class="space-y-0 liquid-glass-border-t">
                 <div class="service-item py-10 group" data-aos="fade-up" data-aos-delay="100">
                     <div class="grid md:grid-cols-12 gap-8 items-start">
                         <div
@@ -784,9 +1034,9 @@
                                 Youth Collaboration</h3>
                             <div class="flex gap-2 mt-3">
                                 <span
-                                    class="px-2 py-1 bg-blue-50 text-[10px] font-bold text-accent rounded uppercase tracking-wider">Leadership</span>
+                                    class="px-2 py-1 glass-subtle text-[10px] font-bold text-accent rounded uppercase tracking-wider">Leadership</span>
                                 <span
-                                    class="px-2 py-1 bg-blue-50 text-[10px] font-bold text-accent rounded uppercase tracking-wider">Strategy</span>
+                                    class="px-2 py-1 glass-subtle text-[10px] font-bold text-accent rounded uppercase tracking-wider">Strategy</span>
                             </div>
                         </div>
                         <div class="md:col-span-6">
@@ -810,9 +1060,9 @@
                                 Grassroots Ops</h3>
                             <div class="flex gap-2 mt-3">
                                 <span
-                                    class="px-2 py-1 bg-blue-50 text-[10px] font-bold text-accent rounded uppercase tracking-wider">Policy</span>
+                                    class="px-2 py-1 glass-subtle text-[10px] font-bold text-accent rounded uppercase tracking-wider">Policy</span>
                                 <span
-                                    class="px-2 py-1 bg-blue-50 text-[10px] font-bold text-accent rounded uppercase tracking-wider">Advocacy</span>
+                                    class="px-2 py-1 glass-subtle text-[10px] font-bold text-accent rounded uppercase tracking-wider">Advocacy</span>
                             </div>
                         </div>
                         <div class="md:col-span-6">
@@ -836,9 +1086,9 @@
                                 Community Welfare</h3>
                             <div class="flex gap-2 mt-3">
                                 <span
-                                    class="px-2 py-1 bg-blue-50 text-[10px] font-bold text-accent rounded uppercase tracking-wider">Empathy</span>
+                                    class="px-2 py-1 glass-subtle text-[10px] font-bold text-accent rounded uppercase tracking-wider">Empathy</span>
                                 <span
-                                    class="px-2 py-1 bg-blue-50 text-[10px] font-bold text-accent rounded uppercase tracking-wider">Action</span>
+                                    class="px-2 py-1 glass-subtle text-[10px] font-bold text-accent rounded uppercase tracking-wider">Action</span>
                             </div>
                         </div>
                         <div class="md:col-span-6">
@@ -862,9 +1112,9 @@
                                 National Service</h3>
                             <div class="flex gap-2 mt-3">
                                 <span
-                                    class="px-2 py-1 bg-blue-50 text-[10px] font-bold text-accent rounded uppercase tracking-wider">Duty</span>
+                                    class="px-2 py-1 glass-subtle text-[10px] font-bold text-accent rounded uppercase tracking-wider">Duty</span>
                                 <span
-                                    class="px-2 py-1 bg-blue-50 text-[10px] font-bold text-accent rounded uppercase tracking-wider">Discipline</span>
+                                    class="px-2 py-1 glass-subtle text-[10px] font-bold text-accent rounded uppercase tracking-wider">Discipline</span>
                             </div>
                         </div>
                         <div class="md:col-span-6">
@@ -880,10 +1130,10 @@
         </div>
     </section>
 
-    <section id="skills" class="py-20 px-4 relative border-t border-slate-200 bg-white/50">
+    <section id="skills" class="py-20 px-4 relative liquid-glass-border-t bg-white/50">
         <div class="max-w-7xl mx-auto w-full relative z-10">
             <div class="mb-12 text-center" data-aos="fade-up">
-                <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2">Capabilities</h2>
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2 metal-heading">Capabilities</h2>
                 <p class="text-slate-500 font-medium text-sm">Transferable skills honed through service and leadership
                 </p>
             </div>
@@ -899,7 +1149,7 @@
                 </div>
                 <div class="apple-card p-6 rounded-3xl text-center group" data-aos="fade-up" data-aos-delay="200">
                     <div
-                        class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-accent group-hover:text-white transition-all duration-500">
+                        class="w-12 h-12 glass-subtle rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-accent group-hover:text-white transition-all duration-500">
                         <i class="fas fa-handshake text-xl"></i>
                     </div>
                     <h4 class="font-bold text-slate-900 mb-1">Crisis Management</h4>
@@ -907,7 +1157,7 @@
                 </div>
                 <div class="apple-card p-6 rounded-3xl text-center group" data-aos="fade-up" data-aos-delay="300">
                     <div
-                        class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-accent group-hover:text-white transition-all duration-500">
+                        class="w-12 h-12 glass-subtle rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-accent group-hover:text-white transition-all duration-500">
                         <i class="fas fa-pencil-alt text-xl"></i>
                     </div>
                     <h4 class="font-bold text-slate-900 mb-1">Liaison</h4>
@@ -915,7 +1165,7 @@
                 </div>
                 <div class="apple-card p-6 rounded-3xl text-center group" data-aos="fade-up" data-aos-delay="400">
                     <div
-                        class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-accent group-hover:text-white transition-all duration-500">
+                        class="w-12 h-12 glass-subtle rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-accent group-hover:text-white transition-all duration-500">
                         <i class="fas fa-heart text-xl"></i>
                     </div>
                     <h4 class="font-bold text-slate-900 mb-1">Social Advocacy</h4>
@@ -940,12 +1190,12 @@
             </button>
 
             <div id="modal-image-container"
-                class="overflow-hidden bg-slate-100 flex-grow flex items-center justify-center relative cursor-zoom-in">
+                class="overflow-hidden bg-white/5 flex-grow flex items-center justify-center relative cursor-zoom-in">
                 <img id="modal-image" src="" alt=""
                     class="w-full h-auto max-h-[75vh] object-contain transition-transform duration-300 ease-out">
             </div>
 
-            <div class="p-6 md:p-8 bg-white shrink-0 border-t border-slate-100 relative z-10">
+            <div class="p-6 md:p-8 shrink-0 liquid-glass-border-t relative z-10">
                 <h3 id="modal-title" class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 mb-2"></h3>
                 <span id="modal-subtitle"
                     class="text-xs md:text-sm text-accent uppercase font-bold tracking-widest block"></span>
@@ -953,7 +1203,34 @@
         </div>
     </div>
 
-    <footer class="py-8 px-4 border-t border-slate-200 relative overflow-hidden">
+    <!-- Testimonial Modal -->
+    <div id="testimonial-modal"
+        class="fixed inset-0 z-[100] hidden items-center justify-center opacity-0 transition-opacity duration-300">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-slate-900/85 backdrop-blur-md cursor-pointer" onclick="closeTestimonialModal()">
+        </div>
+
+        <!-- Modal Content -->
+        <div id="testimonial-modal-content"
+            class="relative bg-white rounded-[2rem] overflow-hidden shadow-2xl z-10 max-w-5xl w-[95%] h-[85vh] flex flex-col scale-95 transition-transform duration-300 ease-out">
+            <button onclick="closeTestimonialModal()"
+                class="absolute top-4 right-4 z-20 bg-slate-900/50 hover:bg-accent text-white rounded-full w-10 h-10 flex items-center justify-center transition-all backdrop-blur-sm">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+
+            <div class="flex-grow p-4 md:p-8 overflow-hidden bg-slate-50/10">
+                <iframe id="testimonial-frame" src="" class="w-full h-full border-none rounded-xl bg-white/20 shadow-inner"
+                    title="Full Testimonial"></iframe>
+                <div id="testimonial-placeholder" class="hidden h-full flex flex-col items-center justify-center text-slate-400">
+                    <i class="fas fa-file-alt text-5xl mb-4"></i>
+                    <p class="font-bold text-lg">Full Testimonial Coming Soon</p>
+                    <p class="text-sm">Check back later for transparency and deeper insights.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-8 px-4 relative overflow-hidden liquid-glass-border-t">
         <div class="max-w-full mx-auto">
             <div class="marquee-wrapper mb-8 opacity-10">
                 <div class="marquee-content">
@@ -1011,20 +1288,94 @@
         });
 
         const navbar = document.getElementById('navbar');
-        let lastScroll = 0;
+        const navIndicator = document.getElementById('nav-indicator');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const heroSection = document.getElementById('hero');
+        let lastScrollY = window.pageYOffset;
 
+        // --- Intersection Observer for Active Section (Bubble) ---
+        const observerOptions = {
+            root: null,
+            rootMargin: '-10% 0px -40% 0px', // More sensitive triggers
+            threshold: 0.1
+        };
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    updateActiveLink(id);
+                }
+            });
+        }, observerOptions);
+
+        // Sections to observe
+        ['hero', 'impact', 'about', 'experience', 'leadership'].forEach(id => {
+            const section = document.getElementById(id);
+            if (section) sectionObserver.observe(section);
+        });
+
+        function updateActiveLink(id) {
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href').substring(1);
+                if (href === id) {
+                    link.classList.add('active');
+                    moveIndicator(link);
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
+        function moveIndicator(element) {
+            if (!element || !navIndicator) return;
+            
+            // Using offsetLeft and offsetWidth for parent-relative positioning
+            navIndicator.style.width = `${element.offsetWidth}px`;
+            navIndicator.style.height = `${element.offsetHeight}px`;
+            navIndicator.style.left = `${element.offsetLeft}px`;
+            navIndicator.style.top = `${element.offsetTop}px`;
+        }
+
+        // --- Scroll Logic (Hide/Show & Pin after Hero) ---
         window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
+            const currentScrollY = window.pageYOffset;
+            const heroHeight = heroSection.offsetHeight;
+            const scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
 
-            if (currentScroll > 100) {
-                navbar.classList.remove('nav-hidden');
-                navbar.classList.add('nav-visible');
+            if (currentScrollY < 50) {
+                // Near top - early state
+                navbar.classList.add('nav-hidden-state');
+                navbar.classList.remove('nav-visible-state', 'nav-fixed-state');
+            } else if (currentScrollY > heroHeight - 100) {
+                // Past Hero - Fixed at top, no hiding
+                navbar.classList.remove('nav-hidden-state', 'nav-visible-state');
+                navbar.classList.add('nav-fixed-state');
             } else {
-                navbar.classList.add('nav-hidden');
-                navbar.classList.remove('nav-visible');
+                // Between Top and Hero Bottom - Intelligent Hide/Show
+                navbar.classList.remove('nav-fixed-state');
+                if (scrollDirection === 'up') {
+                    navbar.classList.remove('nav-hidden-state');
+                    navbar.classList.add('nav-visible-state');
+                } else {
+                    navbar.classList.add('nav-hidden-state');
+                    navbar.classList.remove('nav-visible-state');
+                }
             }
 
-            lastScroll = currentScroll;
+            lastScrollY = currentScrollY;
+        });
+
+        // Initialize indicator position
+        window.addEventListener('load', () => {
+            const activeLink = document.querySelector('.nav-link.active');
+            if (activeLink) moveIndicator(activeLink);
+        });
+        
+        // Update on resize
+        window.addEventListener('resize', () => {
+            const activeLink = document.querySelector('.nav-link.active');
+            if (activeLink) moveIndicator(activeLink);
         });
 
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -1314,13 +1665,70 @@
                 modalImgContainer.classList.add('cursor-zoom-in');
             }, 300);
         };
+    </script>
+
+    <script>
+        const tModal = document.getElementById('testimonial-modal');
+        const tModalContent = document.getElementById('testimonial-modal-content');
+        const tFrame = document.getElementById('testimonial-frame');
+        const tPlaceholder = document.getElementById('testimonial-placeholder');
+
+        window.openTestimonial = function (id) {
+            tFrame.classList.add('hidden');
+            tPlaceholder.classList.add('hidden');
+
+            if (id === 'mdm-sharifah') {
+                tFrame.src = 'Testimonial Mdm Sharifah.pdf#toolbar=0&navpanes=0';
+                tFrame.classList.remove('hidden');
+            } else {
+                tFrame.src = '';
+                tPlaceholder.classList.remove('hidden');
+            }
+
+            tModal.classList.remove('hidden');
+            tModal.classList.add('flex');
+
+            setTimeout(() => {
+                tModal.classList.remove('opacity-0');
+                tModal.classList.add('opacity-100');
+                tModalContent.classList.remove('scale-95');
+                tModalContent.classList.add('scale-100');
+            }, 10);
+
+            document.body.style.overflow = 'hidden';
+        };
+
+        window.closeTestimonialModal = function () {
+            tModal.classList.remove('opacity-100');
+            tModal.classList.add('opacity-0');
+            tModalContent.classList.remove('scale-100');
+            tModalContent.classList.add('scale-95');
+
+            setTimeout(() => {
+                tModal.classList.add('hidden');
+                tModal.classList.remove('flex');
+                document.body.style.overflow = 'auto';
+                tFrame.src = '';
+            }, 300);
+        };
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-                window.closeModal();
+            if (e.key === 'Escape' && !tModal.classList.contains('hidden')) {
+                window.closeTestimonialModal();
             }
         });
     </script>
+    <svg class="hidden">
+        <defs>
+            <filter id="container-glass" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="1" seed="1" result="turbulence" />
+                <feGaussianBlur in="turbulence" stdDeviation="2" result="blurredNoise" />
+                <feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="30" xChannelSelector="R" yChannelSelector="B" result="displaced" />
+                <feGaussianBlur in="displaced" stdDeviation="1" result="finalBlur" />
+                <feComposite in="finalBlur" in2="finalBlur" operator="over" />
+            </filter>
+        </defs>
+    </svg>
 </body>
 
 </html>
