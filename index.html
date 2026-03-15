@@ -355,44 +355,50 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 0.6rem 1.25rem;
+            padding: 0.75rem 1.5rem;
             font-weight: 700;
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             color: #1e293b;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 0.75rem;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 1rem;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             overflow: hidden;
             isolation: isolate;
-            box-shadow:
-                0 4px 15px rgba(59, 130, 246, 0.1),
-                inset 0 0 10px rgba(255, 255, 255, 0.3);
+            box-shadow: 
+                0 4px 20px rgba(0, 0, 0, 0.05),
+                inset 0 0 12px rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.4);
         }
 
         .liquid-glass-btn:hover {
-            transform: scale(1.05) translateY(-2px);
-            box-shadow:
-                0 10px 25px rgba(59, 130, 246, 0.2),
-                inset 0 0 15px rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.35);
+            box-shadow: 
+                0 12px 30px rgba(0, 0, 0, 0.1),
+                inset 0 0 20px rgba(255, 255, 255, 0.5);
         }
 
         /* Glass Subtle for icons/badges */
         .glass-subtle {
-            background: rgba(255, 255, 255, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             position: relative;
             overflow: hidden;
             isolation: isolate;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
-        .glass-subtle::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            z-index: -1;
-            backdrop-filter: blur(12px) saturate(160%) url("#container-glass");
-            -webkit-backdrop-filter: blur(12px) saturate(160%) url("#container-glass");
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+        /* Achievement Badge */
+        .achievement-badge {
+            background: rgba(59, 130, 246, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: var(--accent);
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.1);
         }
 
         /* Sharp Highlights for text - NO BLUR here */
@@ -414,17 +420,7 @@
             border-radius: inherit;
             pointer-events: none;
             z-index: 5;
-            box-shadow: inherit;
-            box-shadow:
-                0 0 6px rgba(0, 0, 0, 0.03),
-                0 2px 6px rgba(0, 0, 0, 0.08),
-                inset 3px 3px 0.5px -3px rgba(0, 0, 0, 0.9),
-                inset -3px -3px 0.5px -3px rgba(0, 0, 0, 0.85),
-                inset 1px 1px 1px -0.5px rgba(0, 0, 0, 0.6),
-                inset -1px -1px 1px -0.5px rgba(0, 0, 0, 0.6),
-                inset 0 0 6px 6px rgba(0, 0, 0, 0.12),
-                inset 0 0 2px 2px rgba(0, 0, 0, 0.06),
-                0 0 12px rgba(255, 255, 255, 0.15);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
         }
 
         .liquid-glass-btn .glass-effect {
@@ -518,6 +514,8 @@
             <a href="#experience"
                 class="nav-link relative items-center flex px-4 py-2 text-slate-500 hover:text-slate-900 transition-colors text-[11px] font-semibold tracking-wide hidden md:flex">Key
                 Events</a>
+            <a href="#certificates"
+                class="nav-link relative items-center flex px-4 py-2 text-slate-500 hover:text-slate-900 transition-colors text-[11px] font-semibold tracking-wide hidden md:flex">Certificates</a>
             <a href="#leadership"
                 class="nav-link relative items-center flex px-4 py-2 text-slate-500 hover:text-slate-900 transition-colors text-[11px] font-semibold tracking-wide hidden md:flex">Engagements</a>
 
@@ -532,6 +530,7 @@
         <a href="#impact" class="text-3xl font-semibold tracking-tight text-slate-900 mobile-link">Testimonials</a>
         <a href="#about" class="text-3xl font-semibold tracking-tight text-slate-900 mobile-link">About</a>
         <a href="#experience" class="text-3xl font-semibold tracking-tight text-slate-900 mobile-link">Key Events</a>
+        <a href="#certificates" class="text-3xl font-semibold tracking-tight text-slate-900 mobile-link">Certificates</a>
         <a href="#leadership" class="text-3xl font-semibold tracking-tight text-slate-900 mobile-link">Engagements</a>
         <button id="close-menu" class="absolute top-10 right-10 text-slate-900 p-4">
             <i class="fas fa-times text-2xl"></i>
@@ -677,30 +676,25 @@
                     <div>
                         <i class="fas fa-quote-left text-2xl text-accent/30 mb-4 block"></i>
                         <p class="text-slate-700 font-medium text-sm leading-relaxed mb-6">
-                            Siraj brings <mark class="glass-highlight px-1 rounded">incredible
-                                dedication</mark> to grassroots learning His <mark
-                                class="glass-highlight px-1 rounded">proactive mindset</mark> and
-                            openness to feedback make him an <mark class="glass-highlight px-1 rounded">invaluable
-                                asset</mark> to any
-                            team
+                            Siraj brings <mark class="glass-highlight px-1 rounded">commitment and teamwork</mark> to grassroots learning. As a dedicated volunteer writer, he handles sensitive information <mark
+                                class="glass-highlight px-1 rounded">professionally</mark> and shows a <mark class="glass-highlight px-1 rounded">high level of empathy, maturity, and precision</mark> in advocating for our residents.
                         </p>
                     </div>
                     <div class="flex items-center gap-3 pt-5 border-t border-blue-100/30 mt-auto">
                         <div
                             class="w-10 h-10 rounded-full glass-subtle overflow-hidden shrink-0 flex items-center justify-center p-0.5">
-                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&q=80"
-                                alt="Mr Dinesh Vasu Dash" class="w-full h-full object-cover rounded-full">
+                            <img src="pap logo.svg"
+                                alt="Linus Ng" class="w-full h-full object-contain p-1">
                         </div>
                         <div>
-                            <p class="font-bold tracking-tight text-slate-900 text-[13px]">Mr Dinesh Vasu Dash</p>
+                            <p class="font-bold tracking-tight text-slate-900 text-[13px]">Linus Ng</p>
                             <div class="text-[9px] text-slate-500 mt-1 font-medium leading-tight space-y-1">
-                                <p>Minister of State Ministry of Culture Community and Youth and Ministry of Manpower
-                                </p>
-                                <p>Mayor of South East District</p>
+                                <p>Branch Secretary</p>
+                                <p>PAP Bedok Branch</p>
                             </div>
                         </div>
                     </div>
-                    <button onclick="openTestimonial('dinesh-vasu-dash')" class="liquid-glass-btn mt-4 group">
+                    <button onclick="openTestimonial('linus-ng')" class="liquid-glass-btn mt-4 group">
                         <div class="glass-overlay"></div>
                         <div class="glass-effect"></div>
                         <span class="content flex items-center gap-1">
@@ -751,6 +745,18 @@
                         </span>
                     </button>
                 </div>
+            </div>
+
+            <div class="mt-12 text-center" data-aos="fade-up" data-aos-delay="400">
+                <button onclick="openTestimonial('all-testimonials')" class="liquid-glass-btn group px-8 py-3 text-sm cursor-pointer">
+                    <div class="glass-overlay"></div>
+                    <div class="glass-effect"></div>
+                    <span class="content flex items-center gap-2">
+                        <i class="fas fa-file-pdf text-accent"></i>
+                        Read all Testimonials
+                        <i class="fas fa-expand text-[10px] opacity-50 transition-transform group-hover:scale-110"></i>
+                    </span>
+                </button>
             </div>
         </div>
     </section>
@@ -992,7 +998,8 @@
                         </div>
                         <div class="absolute bottom-0 left-0 p-6 w-full z-10">
                             <h3 class="text-xl font-bold tracking-tight text-white mb-1">SFYC 2025</h3>
-                            <span class="text-[8px] text-blue-300 uppercase font-bold tracking-widest block">6th Place | LKYSPP NUS</span>
+                            <span class="text-[8px] text-blue-300 uppercase font-bold tracking-widest block">6th Place |
+                                LKYSPP NUS</span>
                         </div>
                     </div>
                 </div>
@@ -1023,10 +1030,134 @@
                             <h3 class="text-xl font-bold tracking-tight text-white mb-1">Wyse Active</h3>
                             <span class="text-[8px] text-blue-300 uppercase font-bold tracking-widest block">Welfare
                                 Programs</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW CERTIFICATES SECTION -->
+    <section id="certificates" class="min-h-screen flex flex-col justify-center py-20 px-4 relative liquid-glass-border-t bg-white">
+        <div class="max-w-7xl mx-auto w-full">
+            <div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4" data-aos="fade-up">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2 metal-heading">Certificates</h2>
+                    <p class="text-slate-500 text-sm font-medium tracking-tight">Academic excellence and specialized certifications</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- FEATURED: Singapore Futures Youth Competition -->
+                <div class="lg:col-span-3 apple-card rounded-[2.5rem] p-8 group relative overflow-hidden bg-slate-50 text-slate-900 border-none" data-aos="fade-up">
+                    <div class="absolute top-0 right-0 p-8">
+                        <i class="fas fa-trophy text-6xl text-accent/10 transition-transform group-hover:scale-110 duration-700"></i>
+                    </div>
+                    <div class="relative z-10 h-full flex flex-col justify-between">
+                        <div class="max-w-3xl">
+                            <h3 class="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-slate-900">Singapore Futures Youth Competition</h3>
+                            <p class="text-slate-500 text-lg mb-4 leading-relaxed">
+                                Organized by the <strong>NUS Lee Kuan Yew School of Public Policy</strong>. 
+                                Recognized for exceptional leadership and strategic problem-solving at a national level, achieving <strong class="text-slate-900">6th place overall</strong>.
+                            </p>
+                            <p class="text-slate-400 text-sm">This remains my most valued achievement to date, demonstrating capability in policy analysis and foresight.</p>
+                        </div>
+                        <div class="mt-12">
+                            <button onclick="openTestimonial('cert-youth')" class="liquid-glass-btn px-8 py-4 text-sm cursor-pointer whitespace-nowrap">
+                                <div class="glass-overlay"></div>
+                                <div class="glass-effect"></div>
+                                <span class="content flex items-center gap-3">
+                                    <i class="fas fa-file-pdf"></i>
+                                    View Certificate
+                                    <i class="fas fa-chevron-right text-[10px] opacity-50"></i>
+                                </span>
+                            </button>
                         </div>
                     </div>
                 </div>
+
+                <!-- Edusave EMA 2023 -->
+                <div class="apple-card rounded-[2.5rem] p-8 group flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl glass-subtle flex items-center justify-center mb-6 text-accent">
+                            <i class="fas fa-medal text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold tracking-tight text-slate-900 mb-2">Edusave (EMA)</h3>
+                        <p class="text-slate-500 text-sm font-medium leading-relaxed">Merit Award 2023. Awarded for being in the top 25% of the cohort academically.</p>
+                    </div>
+                    <button onclick="openTestimonial('cert-ema-23')" class="mt-8 text-accent font-bold text-xs uppercase tracking-widest flex items-center gap-2 hover:gap-3 transition-all cursor-pointer">
+                        View Certificate <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Edusave ECAA (2023 & 2022) -->
+                <div class="apple-card rounded-[2.5rem] p-8 group flex flex-col justify-between" data-aos="fade-up" data-aos-delay="200">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl glass-subtle flex items-center justify-center mb-6 text-accent">
+                            <i class="fas fa-award text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold tracking-tight text-slate-900 mb-2">Edusave (ECAA)</h3>
+                        <p class="text-slate-500 text-sm font-medium leading-relaxed">Certificate of Academic Achievement 2022-2023. Awarded for sustaining a high level of academic excellence over multiple years.</p>
+                    </div>
+                    <button onclick="openTestimonial('cert-ecaa-multi')" class="mt-8 text-accent font-bold text-xs uppercase tracking-widest flex items-center gap-2 hover:gap-3 transition-all cursor-pointer">
+                        View 2023 & 2022 <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Edusave EGPA 2022 -->
+                <div class="apple-card rounded-[2.5rem] p-8 group flex flex-col justify-between" data-aos="fade-up" data-aos-delay="300">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl glass-subtle flex items-center justify-center mb-6 text-accent">
+                            <i class="fas fa-bolt text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold tracking-tight text-slate-900 mb-2">Edusave (EGPA)</h3>
+                        <p class="text-slate-500 text-sm font-medium leading-relaxed">Good Progress Award 2022. Recognition of significant academic improvement and consistency.</p>
+                    </div>
+                    <button onclick="openTestimonial('cert-egpa-22')" class="mt-8 text-accent font-bold text-xs uppercase tracking-widest flex items-center gap-2 hover:gap-3 transition-all cursor-pointer">
+                        View Certificate <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- IDE 2022 -->
+                <div class="apple-card rounded-[2.5rem] p-8 group flex flex-col justify-between" data-aos="fade-up" data-aos-delay="400">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl glass-subtle flex items-center justify-center mb-6 text-accent">
+                            <i class="fas fa-code-branch text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold tracking-tight text-slate-900 mb-2">IDE Certification</h3>
+                        <p class="text-slate-500 text-sm font-medium leading-relaxed">Innovation, Design and Engineering 2022. Completion of advanced technical training.</p>
+                    </div>
+                    <button onclick="openTestimonial('cert-ide')" class="mt-8 text-accent font-bold text-xs uppercase tracking-widest flex items-center gap-2 hover:gap-3 transition-all cursor-pointer">
+                        View Certificate <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- CoderZ 2022 -->
+                <div class="apple-card rounded-[2.5rem] p-8 group flex flex-col justify-between" data-aos="fade-up" data-aos-delay="500">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl glass-subtle flex items-center justify-center mb-6 text-accent">
+                            <i class="fas fa-robot text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold tracking-tight text-slate-900 mb-2">CoderZ 2022</h3>
+                        <p class="text-slate-500 text-sm font-medium leading-relaxed">National level coding and robotics competition, achieving <strong class="text-slate-900">2nd place overall</strong> for technical excellence.</p>
+                    </div>
+                    <button onclick="openTestimonial('cert-coderz')" class="mt-8 text-accent font-bold text-xs uppercase tracking-widest flex items-center gap-2 hover:gap-3 transition-all cursor-pointer">
+                        View Certificate <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- SAIL CAMP -->
+                <div class="apple-card rounded-[2.5rem] p-8 group flex flex-col justify-between lg:opacity-60 hover:opacity-100 transition-opacity" data-aos="fade-up" data-aos-delay="600">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl glass-subtle flex items-center justify-center mb-6 text-accent">
+                            <i class="fas fa-compass text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold tracking-tight text-slate-900 mb-2">SAIL Camp</h3>
+                        <p class="text-slate-500 text-sm font-medium leading-relaxed">Leadership and team-building certification through intensive outdoor and strategic challenges.</p>
+                    </div>
+                    <button onclick="openTestimonial('cert-sail')" class="mt-8 text-accent font-bold text-xs uppercase tracking-widest flex items-center gap-2 hover:gap-3 transition-all cursor-pointer">
+                        View Certificate <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
             </div>
+        </div>
     </section>
 
     <section id="leadership"
@@ -1097,22 +1228,14 @@
                         <div
                             class="md:col-span-1 text-xs font-black text-accent/40 group-hover:text-accent transition-colors tracking-widest">
                             03</div>
-                        <div class="md:col-span-5">
+                        <div class="md:col-span-11">
                             <h3
                                 class="text-2xl font-bold tracking-tight text-slate-900 group-hover:translate-x-2 transition-transform duration-500">
-                                Community Welfare</h3>
-                            <div class="flex gap-2 mt-3">
-                                <span
-                                    class="px-2 py-1 glass-subtle text-[10px] font-bold text-accent rounded uppercase tracking-wider">Empathy</span>
-                                <span
-                                    class="px-2 py-1 glass-subtle text-[10px] font-bold text-accent rounded uppercase tracking-wider">Action</span>
-                            </div>
-                        </div>
-                        <div class="md:col-span-6">
-                            <p class="text-slate-600 text-base font-medium leading-relaxed">
-                                Active involvement in <strong>Wyse Active</strong> (disability care), elderly
-                                initiatives, and the <strong>Eastwood Ria Network (ERRN)</strong>. These experiences
-                                ground me in humility and highlight the importance of human connections.
+                                Leading by Heart</h3>
+                            <p class="text-slate-600 text-base font-medium leading-relaxed mt-4">
+                                From emceeing large-scale community events to facilitating small group discussions, I
+                                focus on creating meaningful connections and fostering a sense of shared purpose within
+                                the community.
                             </p>
                         </div>
                     </div>
@@ -1123,6 +1246,22 @@
                         <div
                             class="md:col-span-1 text-xs font-black text-accent/40 group-hover:text-accent transition-colors tracking-widest">
                             04</div>
+                        <div class="md:col-span-11">
+                            <h3
+                                class="text-2xl font-bold tracking-tight text-slate-900 group-hover:translate-x-2 transition-transform duration-500">
+                                Community Welfare</h3>
+                            <p class="text-slate-600 text-base font-medium leading-relaxed mt-4">
+                                Active involvement in <strong>Wyse Active</strong> (disability care), elderly initiatives, and the <strong>Eastwood Ria Network (ERRN)</strong>. These experiences ground me in humility and highlight the importance of human connections.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-item py-10 group" data-aos="fade-up" data-aos-delay="500">
+                    <div class="grid md:grid-cols-12 gap-8 items-start">
+                        <div
+                            class="md:col-span-1 text-xs font-black text-accent/40 group-hover:text-accent transition-colors tracking-widest">
+                            05</div>
                         <div class="md:col-span-5">
                             <h3
                                 class="text-2xl font-bold tracking-tight text-slate-900 group-hover:translate-x-2 transition-transform duration-500">
@@ -1236,10 +1375,15 @@
                 <i class="fas fa-times text-lg"></i>
             </button>
 
-            <div class="flex-grow p-4 md:p-8 overflow-hidden bg-slate-50/10">
-                <iframe id="testimonial-frame" src=""
-                    class="w-full h-full border-none rounded-xl bg-white/20 shadow-inner"
-                    title="Full Testimonial"></iframe>
+            <div id="testimonial-container" class="flex-grow p-4 md:p-8 overflow-y-auto bg-slate-50/10 custom-scrollbar">
+                <div id="multi-pdf-view" class="flex flex-col gap-8 w-full h-full">
+                    <iframe id="testimonial-iframe" src=""
+                        class="w-full min-h-full border-none rounded-xl bg-white/20 shadow-inner shrink-0"
+                        title="Full Testimonial"></iframe>
+                    <iframe id="testimonial-iframe-2" src=""
+                        class="hidden w-full min-h-full border-none rounded-xl bg-white/20 shadow-inner shrink-0"
+                        title="Additional Document"></iframe>
+                </div>
                 <div id="testimonial-placeholder"
                     class="hidden h-full flex flex-col items-center justify-center text-slate-400">
                     <i class="fas fa-file-alt text-5xl mb-4"></i>
@@ -1316,8 +1460,8 @@
         // --- Intersection Observer for Active Section (Bubble) ---
         const observerOptions = {
             root: null,
-            rootMargin: '-10% 0px -40% 0px', // More sensitive triggers
-            threshold: 0.1
+            rootMargin: '-50% 0px -50% 0px', // Trigger when section passes middle of screen
+            threshold: 0
         };
 
         const sectionObserver = new IntersectionObserver((entries) => {
@@ -1330,7 +1474,7 @@
         }, observerOptions);
 
         // Sections to observe
-        ['hero', 'impact', 'about', 'experience', 'leadership'].forEach(id => {
+        ['hero', 'impact', 'about', 'experience', 'certificates', 'leadership'].forEach(id => {
             const section = document.getElementById(id);
             if (section) sectionObserver.observe(section);
         });
@@ -1690,15 +1834,50 @@
     <script>
         const tModal = document.getElementById('testimonial-modal');
         const tModalContent = document.getElementById('testimonial-modal-content');
-        const tFrame = document.getElementById('testimonial-frame');
+        const tFrame = document.getElementById('testimonial-iframe');
+        const tFrame2 = document.getElementById('testimonial-iframe-2');
         const tPlaceholder = document.getElementById('testimonial-placeholder');
 
         window.openTestimonial = function (id) {
             tFrame.classList.add('hidden');
+            tFrame2.classList.add('hidden');
+            tFrame2.src = '';
             tPlaceholder.classList.add('hidden');
 
+            const container = document.getElementById('testimonial-container');
+            if (container) container.scrollTop = 0;
+
             if (id === 'mdm-sharifah') {
-                tFrame.src = 'Testimonial Mdm Sharifah.pdf#toolbar=0&navpanes=0';
+                tFrame.src = 'testimonials/Testimonial Mdm Sharifah.pdf#view=FitH&navpanes=0&toolbar=0';
+                tFrame.classList.remove('hidden');
+            } else if (id === 'linus-ng') {
+                tFrame.src = 'testimonials/Recommendation_Siraj_PAP.pdf#view=FitH&navpanes=0&toolbar=0';
+                tFrame.classList.remove('hidden');
+            } else if (id === 'all-testimonials') {
+                tFrame.src = 'testimonials/testimonial v7.pdf#view=FitH&navpanes=0&toolbar=0';
+                tFrame.classList.remove('hidden');
+            } else if (id === 'cert-youth') {
+                tFrame.src = 'certs/Singapore Youth Competition 2024 G6 copy.pdf#view=FitH&navpanes=0&toolbar=0';
+                tFrame.classList.remove('hidden');
+            } else if (id === 'cert-ecaa-multi') {
+                tFrame.src = 'certs/ECAA 2023.pdf#view=FitH&navpanes=0&toolbar=0';
+                tFrame2.src = 'certs/ECAA 2022.pdf#view=FitH&navpanes=0&toolbar=0';
+                tFrame.classList.remove('hidden');
+                tFrame2.classList.remove('hidden');
+            } else if (id === 'cert-egpa-22') {
+                tFrame.src = 'certs/EGPA 2022.pdf#view=FitH&navpanes=0&toolbar=0';
+                tFrame.classList.remove('hidden');
+            } else if (id === 'cert-ema-23') {
+                tFrame.src = 'certs/EMA 2023.pdf#view=FitH&navpanes=0&toolbar=0';
+                tFrame.classList.remove('hidden');
+            } else if (id === 'cert-ide') {
+                tFrame.src = 'certs/IDE 2022 CERT.pdf#view=FitH&navpanes=0&toolbar=0';
+                tFrame.classList.remove('hidden');
+            } else if (id === 'cert-coderz') {
+                tFrame.src = 'certs/CoderZ 2022 cert.pdf#view=FitH&navpanes=0&toolbar=0';
+                tFrame.classList.remove('hidden');
+            } else if (id === 'cert-sail') {
+                tFrame.src = 'certs/SAIL CAMP CERT.pdf#view=FitH&navpanes=0&toolbar=0';
                 tFrame.classList.remove('hidden');
             } else {
                 tFrame.src = '';
