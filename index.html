@@ -1410,40 +1410,7 @@
         </div>
     </div>
 
-    <!-- Testimonial Modal -->
-    <div id="testimonial-modal"
-        class="fixed inset-0 z-[100] hidden items-center justify-center opacity-0 transition-opacity duration-300">
-        <!-- Backdrop -->
-        <div class="absolute inset-0 bg-slate-900/85 backdrop-blur-md cursor-pointer" onclick="closeTestimonialModal()">
-        </div>
 
-        <!-- Modal Content -->
-        <div id="testimonial-modal-content"
-            class="relative bg-white rounded-[2rem] overflow-hidden shadow-2xl z-10 max-w-5xl w-[95%] h-[85vh] flex flex-col scale-95 transition-transform duration-300 ease-out">
-            <button onclick="closeTestimonialModal()"
-                class="absolute top-4 right-4 z-20 bg-slate-900/50 hover:bg-accent text-white rounded-full w-10 h-10 flex items-center justify-center transition-all backdrop-blur-sm">
-                <i class="fas fa-times text-lg"></i>
-            </button>
-
-            <div id="testimonial-container"
-                class="flex-grow p-4 md:p-8 overflow-y-auto bg-slate-50/10 custom-scrollbar">
-                <div id="multi-pdf-view" class="flex flex-col gap-8 w-full h-full">
-                    <iframe id="testimonial-iframe" src=""
-                        class="w-full min-h-full border-none rounded-xl bg-white/20 shadow-inner shrink-0"
-                        title="Full Testimonial"></iframe>
-                    <iframe id="testimonial-iframe-2" src=""
-                        class="hidden w-full min-h-full border-none rounded-xl bg-white/20 shadow-inner shrink-0"
-                        title="Additional Document"></iframe>
-                </div>
-                <div id="testimonial-placeholder"
-                    class="hidden h-full flex flex-col items-center justify-center text-slate-400">
-                    <i class="fas fa-file-alt text-5xl mb-4"></i>
-                    <p class="font-bold text-lg">Full Testimonial Coming Soon</p>
-                    <p class="text-sm">Check back later for transparency and deeper insights.</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <footer class="py-8 px-4 relative overflow-hidden liquid-glass-border-t">
         <div class="max-w-full mx-auto">
@@ -1883,93 +1850,33 @@
     </script>
 
     <script>
-        const tModal = document.getElementById('testimonial-modal');
-        const tModalContent = document.getElementById('testimonial-modal-content');
-        const tFrame = document.getElementById('testimonial-iframe');
-        const tFrame2 = document.getElementById('testimonial-iframe-2');
-        const tPlaceholder = document.getElementById('testimonial-placeholder');
-
         window.openTestimonial = function (id) {
-            tFrame.classList.add('hidden');
-            tFrame2.classList.add('hidden');
-            tFrame2.src = '';
-            tPlaceholder.classList.add('hidden');
+            const pdfs = {
+                'maliki-osman': ['testimonial_maliki.pdf'],
+                'mdm-sharifah': ['Testimonial Mdm Sharifah.pdf'],
+                'linus-ng': ['Recommendation_Siraj_PAP.pdf'],
+                'all-testimonials': ['testimonial v8.pdf'],
+                'cert-youth': ['Singapore Youth Competition 2024 G6 copy.pdf'],
+                'cert-ecaa-multi': ['ECAA 2023.pdf', 'ECAA 2022.pdf'],
+                'cert-egpa-22': ['EGPA 2022.pdf'],
+                'cert-ema-23': ['EMA 2023.pdf'],
+                'cert-ide': ['IDE 2022 CERT.pdf'],
+                'cert-coderz': ['CoderZ 2022 cert.pdf'],
+                'cert-sail': ['SAIL CAMP CERT.pdf']
+            };
 
-            const container = document.getElementById('testimonial-container');
-            if (container) container.scrollTop = 0;
-
-            if (id === 'maliki-osman') {
-                tFrame.src = 'testimonial_maliki.pdf#view=FitH&navpanes=0&toolbar=0';
-                tFrame.classList.remove('hidden');
-            } else if (id === 'mdm-sharifah') {
-                tFrame.src = 'Testimonial Mdm Sharifah.pdf#view=FitH&navpanes=0&toolbar=0';
-                tFrame.classList.remove('hidden');
-            } else if (id === 'linus-ng') {
-                tFrame.src = 'Recommendation_Siraj_PAP.pdf#view=FitH&navpanes=0&toolbar=0';
-                tFrame.classList.remove('hidden');
-            } else if (id === 'all-testimonials') {
-                tFrame.src = 'testimonial v8.pdf#view=FitH&navpanes=0&toolbar=0';
-                tFrame.classList.remove('hidden');
-            } else if (id === 'cert-youth') {
-                tFrame.src = 'Singapore Youth Competition 2024 G6 copy.pdf#view=FitH&navpanes=0&toolbar=0';
-                tFrame.classList.remove('hidden');
-            } else if (id === 'cert-ecaa-multi') {
-                tFrame.src = 'ECAA 2023.pdf#view=FitH&navpanes=0&toolbar=0';
-                tFrame2.src = 'ECAA 2022.pdf#view=FitH&navpanes=0&toolbar=0';
-                tFrame.classList.remove('hidden');
-                tFrame2.classList.remove('hidden');
-            } else if (id === 'cert-egpa-22') {
-                tFrame.src = 'EGPA 2022.pdf#view=FitH&navpanes=0&toolbar=0';
-                tFrame.classList.remove('hidden');
-            } else if (id === 'cert-ema-23') {
-                tFrame.src = 'EMA 2023.pdf#view=FitH&navpanes=0&toolbar=0';
-                tFrame.classList.remove('hidden');
-            } else if (id === 'cert-ide') {
-                tFrame.src = 'IDE 2022 CERT.pdf#view=FitH&navpanes=0&toolbar=0';
-                tFrame.classList.remove('hidden');
-            } else if (id === 'cert-coderz') {
-                tFrame.src = 'CoderZ 2022 cert.pdf#view=FitH&navpanes=0&toolbar=0';
-                tFrame.classList.remove('hidden');
-            } else if (id === 'cert-sail') {
-                tFrame.src = 'SAIL CAMP CERT.pdf#view=FitH&navpanes=0&toolbar=0';
-                tFrame.classList.remove('hidden');
-            } else {
-                tFrame.src = '';
-                tPlaceholder.classList.remove('hidden');
+            const files = pdfs[id];
+            if (files) {
+                files.forEach(file => {
+                    const url = file + '#view=FitH&navpanes=0&toolbar=0';
+                    window.open(url, '_blank');
+                });
             }
-
-            tModal.classList.remove('hidden');
-            tModal.classList.add('flex');
-
-            setTimeout(() => {
-                tModal.classList.remove('opacity-0');
-                tModal.classList.add('opacity-100');
-                tModalContent.classList.remove('scale-95');
-                tModalContent.classList.add('scale-100');
-            }, 10);
-
-            document.body.style.overflow = 'hidden';
         };
 
         window.closeTestimonialModal = function () {
-            tModal.classList.remove('opacity-100');
-            tModal.classList.add('opacity-0');
-            tModalContent.classList.remove('scale-100');
-            tModalContent.classList.add('scale-95');
-
-            setTimeout(() => {
-                tModal.classList.add('hidden');
-                tModal.classList.remove('flex');
-                document.body.style.overflow = 'auto';
-                tFrame.src = '';
-            }, 300);
+            // No longer needed but kept for potential legacy calls
         };
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !tModal.classList.contains('hidden')) {
-                window.closeTestimonialModal();
-            }
-        });
     </script>
     <svg class="hidden">
         <defs>
