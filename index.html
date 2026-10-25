@@ -892,7 +892,7 @@
         /* ---------- Key events ---------- */
         .events {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 28px 20px;
         }
 
@@ -903,6 +903,7 @@
         }
 
         .event-img {
+            display: block;
             border-radius: var(--radius-lg);
             overflow: hidden;
             background: var(--parchment);
@@ -913,6 +914,14 @@
             aspect-ratio: 4 / 3;
             object-fit: cover;
             transition: transform 0.7s var(--ease);
+        }
+
+        .event-featured {
+            grid-column: span 2;
+        }
+
+        .event-featured img {
+            aspect-ratio: 16 / 9;
         }
 
         .event:hover img {
@@ -1272,6 +1281,14 @@
 
             .cert.featured {
                 grid-column: auto;
+            }
+
+            .event-featured {
+                grid-column: auto;
+            }
+
+            .event-featured img {
+                aspect-ratio: 4 / 3;
             }
 
             .quote {
@@ -1835,10 +1852,19 @@
             stripFigs.replace(/<figure>/g, '<figure aria-hidden="true">');
 
         const list = document.getElementById('events-list');
-        list.innerHTML = events.map(([f, t, n, p], i) =>
-            `<li class="grow" style="--i:${i % 3}"><button class="event" type="button" data-i="${i}">` +
-            `<span class="event-img"><img src="img/${f}.jpg" alt="${t}" width="400" height="300" loading="lazy" style="object-position:${p}"></span>` +
-            `<strong>${t}</strong><span>${n}</span></button></li>`).join('');
+        // featured events lead the grid (2 big + 4 + 4); data-i stays the original index
+        const featuredTitles = ['SFYC 2024', 'Pre-U Seminar 2025'];
+        const order = [
+            ...featuredTitles.map(t => events.findIndex(e => e[1] === t)),
+            ...events.map((_, i) => i).filter(i => !featuredTitles.includes(events[i][1])),
+        ];
+        list.innerHTML = order.map((idx, pos) => {
+            const [f, t, n, p] = events[idx];
+            const featured = featuredTitles.includes(t) ? ' event-featured' : '';
+            return `<li class="grow${featured}" style="--i:${pos % 4}"><button class="event" type="button" data-i="${idx}">` +
+                `<span class="event-img"><img src="img/${f}.jpg" alt="${t}" width="400" height="300" loading="lazy" style="object-position:${p}"></span>` +
+                `<strong>${t}</strong><span>${n}</span></button></li>`;
+        }).join('');
 
         // --- Lightbox ---
         const lb = document.getElementById('lightbox');
