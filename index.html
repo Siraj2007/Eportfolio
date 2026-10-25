@@ -12,6 +12,7 @@
         content="Siraj Munir, Siraj Munir Singapore, Siglap Youth Network, Eastwood Ria Network, Professional Emcee Singapore, Community Leader, Singapore Engineering">
     <meta name="author" content="Siraj Munir">
     <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#0a0d12">
     <link rel="canonical" href="https://sirajmunir.sg">
 
     <meta property="og:title" content="Siraj Munir | Portfolio">
@@ -19,7 +20,7 @@
         content="Official portfolio of Siraj Munir. Community leader and professional emcee dedicated to building a more inclusive world.">
     <meta property="og:type" content="profile">
     <meta property="og:url" content="https://sirajmunir.sg">
-    <meta property="og:image" content="siraj headshot.png">
+    <meta property="og:image" content="https://sirajmunir.sg/img/siraj-headshot.jpg">
 
     <script type="application/ld+json">
     {
@@ -27,1878 +28,1517 @@
       "@type": "Person",
       "name": "Siraj Munir",
       "url": "https://sirajmunir.sg",
-      "image": "siraj headshot.png",
+      "image": "https://sirajmunir.sg/img/siraj-headshot.jpg",
       "description": "Community Leader, Siglap Youth Network Executive Member, and Professional Emcee based in Singapore. Aspiring Engineer dedicated to human-centric solutions.",
       "jobTitle": "Executive Member",
       "knowsAbout": ["Community Leadership", "Emceeing", "Engineering Aspirations", "Public Speaking", "Social Advocacy"],
       "affiliation": [
-        {
-          "@type": "Organization",
-          "name": "Siglap Youth Network"
-        },
-        {
-          "@type": "Organization",
-          "name": "Eastwood Ria Residents Network"
-        }
+        { "@type": "Organization", "name": "Siglap Youth Network" },
+        { "@type": "Organization", "name": "Eastwood Ria Residents Network" }
       ],
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Singapore",
-        "addressCountry": "SG"
-      }
+      "sameAs": ["https://www.linkedin.com/in/siraj-munir-muzammil"],
+      "address": { "@type": "PostalAddress", "addressLocality": "Singapore", "addressCountry": "SG" }
     }
     </script>
 
     <link rel="icon" type="image/png" href="siraj headshot square.png">
     <link rel="apple-touch-icon" href="siraj headshot square.png">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://api.fontshare.com">
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=gambarino@400&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="img/siraj-headshot.jpg">
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif']
-                    },
-                    colors: {
-                        bg: '#f0f9ff',
-                        card: '#ffffff',
-                        border: '#e0f2fe',
-                        accent: '#3b82f6',
-                        gold: '#f59e0b',
-                        vote: '#f43f5e',
-                        ns: '#22c55e',
-                    }
-                }
-            }
-        }
-    </script>
     <style>
         :root {
+            --bg: #0a0d12;
+            --surface: #141a23;
+            --ink: #ffffff;
+            --muted: #9ba4b0;
             --accent: #3b82f6;
-            --bg: #f8fafc;
+            --accent-ink: #0a0d12;
+            --paper: #e8ebef;
+            --paper-ink: #0a0d12;
+            --paper-muted: #525c69;
+
+            --display: 'Gambarino', 'Times New Roman', serif;
+            --text: 'General Sans', system-ui, sans-serif;
+
+            --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+            --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+            --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+            --step-head: clamp(2rem, 1.3rem + 3.2vw, 4rem);
+            --step-name: clamp(3.5rem, 11vw, 12.5rem);
+
+            --margin: clamp(20px, 2.4vw, 32px);
+            --stage-w: 47vw;
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
-            background-color: var(--bg);
-            color: #0f172a;
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--text);
+            font-size: var(--step-body);
+            line-height: 1.5;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
         }
 
-        .noise-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.03;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-            mix-blend-mode: multiply;
+        img {
+            display: block;
+            max-width: 100%;
         }
 
-        #particle-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
+        h1,
+        h2,
+        h3,
+        p,
+        blockquote,
+        ul,
+        ol,
+        figure {
+            margin: 0;
         }
 
-        .glass-pill {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: none;
-            position: relative;
-            overflow: hidden;
+        ul,
+        ol {
+            padding: 0;
+            list-style: none;
         }
 
-        .liquid-glass-btn-pill {
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+        a {
+            color: inherit;
         }
 
-        .liquid-glass-btn-pill:hover {
-            background: rgba(255, 255, 255, 0.6);
-            transform: scale(1.02);
+        button {
+            font: inherit;
+            color: inherit;
+            background: none;
+            border: 0;
+            padding: 0;
+            cursor: pointer;
+            text-align: left;
         }
 
-        .nav-hidden-state {
-            transform: translate(0, -100px) !important;
-            opacity: 0 !important;
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 4px;
         }
 
-        .nav-visible-state {
-            transform: translate(0, 0) !important;
-            opacity: 1 !important;
+        ::selection {
+            background: var(--accent);
+            color: var(--accent-ink);
         }
 
-        .nav-fixed-state {
-            transform: translate(0, 0) !important;
-            opacity: 1 !important;
-            top: 1rem !important;
-            /* Pin closer to top when fixed */
+        .display {
+            font-family: var(--display);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 0.92;
         }
 
-        .nav-indicator {
-            position: absolute;
-            background: rgba(59, 130, 246, 0.15);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            border-radius: 9999px;
-            z-index: -1;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        h2.display {
+            font-size: var(--step-head);
+            margin-bottom: 0.5em;
         }
 
-        .nav-link {
-            transition: color 0.3s ease;
+        .link {
+            text-decoration: underline;
+            text-decoration-color: var(--accent);
+            text-decoration-thickness: 2px;
+            text-underline-offset: 0.3em;
+            transition: color 0.25s var(--ease), text-underline-offset 0.25s var(--ease);
         }
 
-        .nav-link.active {
-            color: var(--accent) !important;
+        .link:hover {
+            color: var(--accent);
+            text-underline-offset: 0.45em;
         }
 
-        .hero-title span {
+        .button {
             display: inline-block;
-            opacity: 0;
-            transform: translateY(40px);
-            animation: letterReveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            background: var(--accent);
+            color: var(--accent-ink);
+            padding: 0.85em 1.6em;
+            text-decoration: none;
+            font-weight: 500;
+            transition: transform 0.25s var(--ease), background-color 0.25s var(--ease);
         }
 
-        @keyframes letterReveal {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .button:hover {
+            background: var(--ink);
+            transform: translateY(-2px);
         }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        .button:active {
+            transform: translateY(0) scale(0.98);
         }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        /* ---------- Split: fixed stage + reading column ---------- */
 
-        .img-hover-zoom {
-            overflow: hidden;
-        }
-
-        .img-hover-zoom img {
-            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .apple-card:hover .img-hover-zoom img {
-            transform: scale(1.05);
-        }
-
-        .apple-card {
-            background: rgba(255, 255, 255, 0.65);
-            border-radius: 1.5rem;
-            position: relative;
-            box-shadow: 0 10px 40px -10px rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            overflow: hidden;
-            isolation: isolate;
-        }
-
-        .apple-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            z-index: -1;
-            backdrop-filter: blur(20px) saturate(180%) url("#container-glass");
-            -webkit-backdrop-filter: blur(20px) saturate(180%) url("#container-glass");
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
-        }
-
-        .apple-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            padding: 1px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.1) 40%, rgba(37, 99, 235, 0.1) 60%, rgba(255, 255, 255, 0.4));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .apple-card:hover {
-            border-color: #3b82f6;
-            transform: translateY(-6px) scale(1.01);
-            box-shadow: 0 30px 60px rgba(59, 130, 246, 0.1);
-        }
-
-        .marquee-wrapper {
-            display: flex;
-            width: 100%;
-            overflow: hidden;
-            white-space: nowrap;
+        .split {
+            display: grid;
+            grid-template-columns: var(--stage-w) 1fr;
             position: relative;
         }
 
-        .marquee-content {
-            display: flex;
-            flex-shrink: 0;
-            animation: marquee 25s linear infinite;
-        }
-
-        @keyframes marquee {
-            from {
-                transform: translateX(0);
-            }
-
-            to {
-                transform: translateX(-100%);
-            }
-        }
-
-        .counter {
-            font-variant-numeric: tabular-nums;
-        }
-
-        section {
-            position: relative;
-            z-index: 2;
-        }
-
-        .btn-primary {
-            background: #0f172a;
-            color: #ffffff;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .btn-primary:hover {
-            background: #2563eb;
-            transform: scale(1.02);
-            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
-        }
-
-        .service-item {
-            border-bottom: none;
-            position: relative;
-            transition: all 0.4s ease;
-        }
-
-        .service-item::after,
-        .faq-item::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.15), transparent);
-            filter: url("#container-glass");
-            pointer-events: none;
-        }
-
-        .liquid-glass-border-t {
-            position: relative;
-            border-top: none !important;
-        }
-
-        .liquid-glass-border-t::before {
-            content: '';
-            position: absolute;
+        .stage {
+            position: sticky;
             top: 0;
-            left: 0;
+            height: 100svh;
+            padding: 20px 0 20px 20px;
+        }
+
+        .stage-frame {
+            position: relative;
             width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
-            filter: url("#container-glass");
-            pointer-events: none;
+            height: 100%;
+            overflow: hidden;
+            background: var(--surface);
         }
 
-        .rotate-90-pdf {
-            transform: rotate(90deg);
-            transform-origin: center;
-            width: 70vh !important;
-            height: 90vw !important;
-            max-width: none !important;
-            margin: auto;
+        .stage-frame img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transform: scale(1.06);
+            transition: opacity 0.7s var(--ease), transform 6s linear;
         }
 
-        .service-item:hover {
-            background: rgba(37, 99, 235, 0.04);
+        .stage-frame img.is-on {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .stage-caption {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 48px 24px 20px;
+            font-size: var(--step-small);
+            background: rgba(10, 13, 18, 0.72);
+            transition: opacity 0.4s var(--ease);
+        }
+
+        .stage-caption:empty {
+            opacity: 0;
+        }
+
+        .column {
+            padding: 0 clamp(28px, 5vw, 72px);
+            min-width: 0;
+        }
+
+        .measure {
+            max-width: 34rem;
+        }
+
+        .chapter {
+            padding: clamp(96px, 14vh, 160px) 0;
+        }
+
+        /* ---------- Hero ---------- */
+
+        .hero {
+            position: relative;
+            min-height: 100svh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 120px 0 calc(var(--step-name) + 80px);
+        }
+
+        .nav {
+            position: absolute;
+            top: var(--margin);
+            right: calc(var(--margin) - clamp(28px, 5vw, 72px));
+            display: flex;
+            gap: clamp(16px, 2vw, 28px);
+            font-size: var(--step-body);
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--ink);
+            padding: 6px 0;
+            transition: color 0.25s var(--ease);
+        }
+
+        .nav a:hover {
+            color: var(--accent);
+        }
+
+        .nav a.nav-action {
+            color: var(--accent);
+        }
+
+        .nav a.nav-action:hover {
+            color: var(--ink);
+        }
+
+        .menu-toggle {
+            display: none;
+        }
+
+        .hero-lead {
+            font-size: var(--step-lead);
+            line-height: 1.3;
+            max-width: 26ch;
+            margin-bottom: 1.4em;
+        }
+
+        .hero-roles {
+            color: var(--muted);
+            max-width: 32rem;
+            margin-bottom: 2.6em;
+        }
+
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px 48px;
+        }
+
+        .stats dt {
+            color: var(--muted);
+            font-size: var(--step-small);
+            order: 2;
+        }
+
+        .stats dd {
+            margin: 0;
+            font-family: var(--display);
+            font-size: var(--step-head);
+            line-height: 1;
+            letter-spacing: -0.02em;
+            font-variant-numeric: tabular-nums;
+            order: 1;
+            margin-bottom: 6px;
+        }
+
+        .stats div {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wordmark {
+            position: absolute;
+            bottom: 40px;
+            right: calc(var(--margin) - clamp(28px, 5vw, 72px));
+            margin: 0;
+            font-size: var(--step-name);
+            letter-spacing: -0.04em;
+            line-height: 0.8;
+            white-space: nowrap;
+            z-index: 3;
+            transform-origin: right bottom;
+            will-change: transform;
+        }
+
+        /* ---------- Testimonials: letters ---------- */
+
+        .letter+.letter {
+            margin-top: clamp(96px, 12vh, 140px);
+        }
+
+        .letter-writer {
+            width: 96px;
+            height: 96px;
+            object-fit: cover;
+            margin-bottom: 28px;
+        }
+
+        .letter-writer.is-logo {
+            object-fit: contain;
+            background: var(--paper);
+            padding: 16px;
+        }
+
+        .letter-open {
+            font-size: var(--step-lead);
+            font-weight: 500;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .letter p+p {
+            margin-top: 20px;
+        }
+
+        .letter-sign {
+            margin-top: 40px;
+        }
+
+        .letter-sign strong {
+            display: block;
+            font-weight: 500;
+        }
+
+        .letter-sign span {
+            display: block;
+            color: var(--muted);
+            font-size: var(--step-small);
+            max-width: 30rem;
+        }
+
+        .letter-more {
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .all-letters {
+            margin-top: clamp(64px, 9vh, 96px);
+            padding: 32px;
+            background: var(--surface);
+        }
+
+        .all-letters p {
+            margin-bottom: 20px;
+        }
+
+        /* ---------- About: a letter of my own ---------- */
+
+        .about-portrait {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: top;
+            margin-bottom: 28px;
+            background: var(--paper);
+        }
+
+        .about p+p {
+            margin-top: 1.1em;
+        }
+
+        .about mark {
+            background: var(--accent);
+            color: var(--accent-ink);
+            padding: 0 0.2em;
+        }
+
+        .about-quote {
+            margin: 2.4em 0;
+            padding: 28px 32px;
+            background: var(--surface);
+            font-size: var(--step-lead);
+            line-height: 1.35;
+        }
+
+        .about-quote footer {
+            margin-top: 14px;
+            font-size: var(--step-small);
+            color: var(--muted);
+        }
+
+        .about-points {
+            margin: 2em 0;
+            display: grid;
+            gap: 1.4em;
+        }
+
+        .about-points strong {
+            display: block;
+            font-weight: 500;
+        }
+
+        .about-goal {
+            margin-top: 2.4em;
+            padding: 32px;
+            background: var(--accent);
+            color: var(--accent-ink);
+            font-size: var(--step-lead);
+            line-height: 1.35;
+        }
+
+        .about-sign {
+            margin-top: 40px;
+        }
+
+        .about-sign strong {
+            display: block;
+            font-family: var(--display);
+            font-size: var(--step-lead);
+            font-weight: 400;
+        }
+
+        .about-sign span {
+            color: var(--muted);
+            font-size: var(--step-small);
+        }
+
+        /* ---------- Key events: the stage changes ---------- */
+
+        .events-intro {
+            margin-bottom: 48px;
+        }
+
+        .event img {
+            display: none;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            margin-bottom: 14px;
+        }
+
+        .event-list li+li {
+            margin-top: 4px;
+        }
+
+        .event {
+            display: block;
+            width: 100%;
+            padding: 18px 0 18px 20px;
+            position: relative;
+            color: var(--muted);
+            transition: color 0.3s var(--ease), padding-left 0.3s var(--ease);
+        }
+
+        .event::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 22px;
+            bottom: 22px;
+            width: 4px;
+            background: var(--accent);
+            transform: scaleY(0);
+            transition: transform 0.35s var(--ease);
+        }
+
+        .event:hover {
+            color: var(--ink);
+        }
+
+        .event.is-on {
+            color: var(--ink);
+            padding-left: 32px;
+        }
+
+        .event.is-on::before {
+            transform: scaleY(1);
+        }
+
+        .event-title {
+            display: block;
+            font-family: var(--display);
+            font-size: var(--step-lead);
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        .event-note {
+            display: block;
+            margin-top: 6px;
+            font-size: var(--step-small);
+        }
+
+        /* ---------- Engagements ---------- */
+
+        .pillars li+li {
+            margin-top: 56px;
+        }
+
+        .pillars h3 {
+            font-size: var(--step-lead);
+            font-weight: 500;
+            line-height: 1.25;
+            margin-bottom: 10px;
+        }
+
+        .pillars .tags {
+            color: var(--accent);
+            font-size: var(--step-small);
+            margin-top: 10px;
+        }
+
+        /* ---------- Certificates: one printed sheet ---------- */
+
+        .certs {
+            position: relative;
+            padding: clamp(96px, 16vh, 180px) var(--margin);
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 0 24px;
+            overflow: hidden;
+        }
+
+        .certs-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.3) saturate(0.8);
+        }
+
+        .certs-side {
+            position: relative;
+            grid-column: 1 / span 5;
+            align-self: center;
+            max-width: 28rem;
+        }
+
+        .certs-side p {
+            font-size: var(--step-lead);
+            line-height: 1.35;
+        }
+
+        .sheet {
+            position: relative;
+            grid-column: 7 / span 6;
+            background: var(--paper);
+            color: var(--paper-ink);
+            padding: 72px clamp(28px, 4vw, 64px);
+            text-align: center;
+            -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14'%3E%3Cpath d='M0 0h4a10 10 0 0 0 20 0h4v14H0z'/%3E%3C/svg%3E") top left / 28px 14px repeat-x,
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14'%3E%3Cpath d='M0 14h4a10 10 0 0 1 20 0h4V0H0z'/%3E%3C/svg%3E") bottom left / 28px 14px repeat-x,
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1'/%3E%3C/svg%3E") center / 100% calc(100% - 26px) no-repeat;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14'%3E%3Cpath d='M0 0h4a10 10 0 0 0 20 0h4v14H0z'/%3E%3C/svg%3E") top left / 28px 14px repeat-x,
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14'%3E%3Cpath d='M0 14h4a10 10 0 0 1 20 0h4V0H0z'/%3E%3C/svg%3E") bottom left / 28px 14px repeat-x,
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1'/%3E%3C/svg%3E") center / 100% calc(100% - 26px) no-repeat;
+        }
+
+        .sheet h2 {
+            font-size: var(--step-head);
+            margin-bottom: 10px;
+        }
+
+        .sheet-note {
+            font-size: var(--step-small);
+            color: var(--paper-muted);
+        }
+
+        .sheet-group {
+            margin-top: 56px;
+        }
+
+        .sheet-group h3 {
+            font-size: var(--step-body);
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .sheet-group ul {
+            max-width: 440px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .sheet-group li+li {
+            margin-top: 16px;
+        }
+
+        .cert {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 0 20px;
+            text-decoration: none;
+            padding: 6px 0;
+            transition: transform 0.25s var(--ease);
+        }
+
+        .cert:hover {
             transform: translateX(4px);
         }
 
-        .faq-item {
-            border-bottom: none;
+        .cert-name {
+            font-weight: 500;
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            text-underline-offset: 0.25em;
+            transition: text-decoration-color 0.25s var(--ease);
+        }
+
+        .cert:hover .cert-name,
+        .cert:focus-visible .cert-name {
+            text-decoration-color: currentColor;
+        }
+
+        .cert-year {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .cert-desc {
+            grid-column: 1 / -1;
+            font-size: var(--step-small);
+            color: var(--paper-muted);
+            margin-top: 2px;
+        }
+
+        .cert.is-featured .cert-name {
+            font-family: var(--display);
+            font-weight: 400;
+            font-size: var(--step-lead);
+            line-height: 1.05;
+        }
+
+        .sheet-close {
+            margin-top: 56px;
+            font-size: var(--step-small);
+            color: var(--paper-muted);
+        }
+
+        /* ---------- Where I serve: names in columns ---------- */
+
+        .serve {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 0 24px;
+            padding: clamp(96px, 14vh, 140px) var(--margin);
+            background: var(--surface);
+        }
+
+        .serve h2 {
+            grid-column: 1 / span 3;
+            font-size: var(--step-head);
+            line-height: 0.95;
+        }
+
+        .serve-cols {
+            grid-column: 4 / span 9;
+            columns: 3;
+            column-gap: 32px;
+            font-size: var(--step-lead);
+            line-height: 1.5;
+        }
+
+        .serve-cols ul {
+            break-inside: avoid;
+            margin-bottom: 1.5em;
+        }
+
+        .serve-cols li:first-child {
+            color: var(--muted);
+        }
+
+        /* ---------- Footer: name across the last photograph ---------- */
+
+        .footer {
             position: relative;
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        /* Liquid Glass Components */
-        .liquid-glass-btn {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.75rem 1.5rem;
-            font-weight: 700;
-            font-size: 0.85rem;
-            color: #1e293b;
-            background: rgba(255, 255, 255, 0.25);
-            border-radius: 1rem;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            overflow: hidden;
-            isolation: isolate;
-            box-shadow:
-                0 4px 20px rgba(0, 0, 0, 0.05),
-                inset 0 0 12px rgba(255, 255, 255, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-        }
-
-        .liquid-glass-btn:hover {
-            transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.35);
-            box-shadow:
-                0 12px 30px rgba(0, 0, 0, 0.1),
-                inset 0 0 20px rgba(255, 255, 255, 0.5);
-        }
-
-        /* Glass Subtle for icons/badges */
-        .glass-subtle {
-            background: rgba(255, 255, 255, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
-        /* Achievement Badge */
-        .achievement-badge {
-            background: rgba(59, 130, 246, 0.15);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            color: var(--accent);
-            font-weight: 800;
-            letter-spacing: 0.05em;
-            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.1);
-        }
-
-        /* Sharp Highlights for text - NO BLUR here */
-        .glass-highlight {
-            background: rgba(59, 130, 246, 0.12) !important;
-            border-bottom: 2px solid rgba(59, 130, 246, 0.2) !important;
-            color: #2563eb !important;
-            padding: 0 4px;
-            border-radius: 4px;
-            font-weight: 700;
-        }
-
-        .liquid-glass-btn .glass-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: inherit;
-            pointer-events: none;
-            z-index: 5;
-            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5), inset 0 -1px 1px rgba(0, 0, 0, 0.1);
-        }
-
-        .liquid-glass-btn .glass-effect {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: inherit;
-            z-index: -10;
-            backdrop-filter: url("#container-glass");
-            -webkit-backdrop-filter: url("#container-glass");
-        }
-
-        .liquid-glass-btn .content {
-            position: relative;
-            z-index: 10;
-        }
-
-        .metal-heading {
-            background: linear-gradient(180deg, #1e293b 0%, #3e3e3e 50%, #64748b 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            /* subtle liquid metal glow */
-            filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.7));
-            letter-spacing: -0.05em;
-        }
-
-        .dark .metal-heading {
-            background: linear-gradient(180deg, #FAFAFA 0%, #A0A0A0 50%, #E5E5E5 100%);
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 800px;
-        }
-
-        .faq-item.active .faq-icon {
-            transform: rotate(45deg);
-        }
-
-        .ambient-glow {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(140px);
-            opacity: 0.4;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        #modal-content,
-        #testimonial-modal-content {
-            background: rgba(255, 255, 255, 0.8) !important;
-            backdrop-filter: blur(25px) !important;
-            -webkit-backdrop-filter: blur(25px) !important;
-            border: none !important;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
-            position: relative;
+            min-height: 100svh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: var(--margin);
             overflow: hidden;
         }
 
-        #modal-content::before,
-        #testimonial-modal-content::before {
-            content: '';
+        .footer-bg {
             position: absolute;
             inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.5);
             z-index: -1;
-            backdrop-filter: url("#container-glass");
-            -webkit-backdrop-filter: url("#container-glass");
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 32px;
+            flex-wrap: wrap;
+            font-size: var(--step-body);
+        }
+
+        .footer-top ul li+li {
+            margin-top: 6px;
+        }
+
+        .footer-top a {
+            text-decoration: none;
+            transition: color 0.25s var(--ease);
+        }
+
+        .footer-top a:hover {
+            color: var(--accent);
+        }
+
+        .footer-contact {
+            text-align: right;
+        }
+
+        .footer-contact p {
+            max-width: 22rem;
+            margin-bottom: 14px;
+        }
+
+        .footer-contact .link {
+            text-decoration-color: var(--accent);
+        }
+
+        .footer-bottom .display {
+            font-size: 16.5vw;
+            letter-spacing: -0.04em;
+            line-height: 0.8;
+            white-space: nowrap;
+            transform-origin: left bottom;
+        }
+
+        .acrostic {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 20px;
+            margin-top: 28px;
+            font-size: var(--step-small);
+        }
+
+        .acrostic b {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .legal {
+            margin-top: 12px;
+            font-size: var(--step-small);
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        /* ---------- Entrance motion ---------- */
+
+        .js .rise {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+            transition-delay: calc(var(--i, 0) * 80ms);
+        }
+
+        .js .rise.is-in {
+            opacity: 1;
+            transform: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+            }
+
+            .js .rise {
+                opacity: 1;
+                transform: none;
+            }
+
+            .stage-frame img {
+                transform: none !important;
+            }
+        }
+
+        /* ---------- Tablet ---------- */
+
+        @media (max-width: 1100px) {
+            .certs-side {
+                grid-column: 1 / -1;
+                margin-bottom: 48px;
+            }
+
+            .sheet {
+                grid-column: 1 / -1;
+                max-width: 640px;
+                width: 100%;
+                justify-self: center;
+            }
+
+            .serve h2 {
+                grid-column: 1 / -1;
+                margin-bottom: 32px;
+            }
+
+            .serve-cols {
+                grid-column: 1 / -1;
+            }
+        }
+
+        /* ---------- Phone ---------- */
+
+        @media (max-width: 800px) {
+            .split {
+                display: block;
+            }
+
+            .stage {
+                position: relative;
+                height: 58svh;
+                padding: 12px 12px 0;
+            }
+
+            .stage-caption {
+                display: none;
+            }
+
+            .column {
+                padding: 0 20px;
+            }
+
+            .hero {
+                min-height: 0;
+                padding: calc(13.5vw + 24px) 0 72px;
+                justify-content: flex-start;
+            }
+
+            .wordmark {
+                position: absolute;
+                top: -3vw;
+                bottom: auto;
+                left: 20px;
+                right: auto;
+                font-size: 15.5vw;
+            }
+
+            .nav {
+                position: fixed;
+                inset: 0;
+                z-index: 50;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                gap: 8px;
+                padding: 0 28px;
+                background: var(--bg);
+                font-family: var(--display);
+                font-size: var(--step-head);
+                visibility: hidden;
+                opacity: 0;
+                transition: opacity 0.3s var(--ease), visibility 0.3s;
+            }
+
+            .nav.is-open {
+                visibility: visible;
+                opacity: 1;
+            }
+
+            .menu-toggle {
+                display: block;
+                position: fixed;
+                top: 24px;
+                right: 24px;
+                z-index: 60;
+                background: var(--bg);
+                color: var(--ink);
+                padding: 10px 16px;
+                font-size: var(--step-body);
+            }
+
+
+            .chapter {
+                padding: 88px 0;
+            }
+
+            .certs {
+                padding: 88px 10px;
+            }
+
+            .certs-side {
+                padding: 0 10px;
+            }
+
+            .sheet {
+                padding: 64px 24px;
+            }
+
+
+            .serve {
+                padding: 88px 20px;
+            }
+
+            .serve-cols {
+                columns: 2;
+                column-gap: 20px;
+                font-size: var(--step-body);
+            }
+
+            .footer {
+                min-height: 88svh;
+                padding: 24px 20px;
+            }
+
+            .footer-top {
+                flex-direction: column;
+            }
+
+            .footer-contact {
+                text-align: left;
+            }
+
+            .footer-bottom .display {
+                font-size: 17.5vw;
+            }
+
+            .event img {
+                display: block;
+            }
+
+            .event,
+            .event.is-on {
+                color: var(--ink);
+                padding-left: 0;
+            }
+
+            .event::before {
+                display: none;
+            }
         }
     </style>
 </head>
 
-<body class="bg-bg">
-    <div class="noise-overlay"></div>
+<body>
+    <script>document.documentElement.classList.add('js');</script>
 
-    <canvas id="particle-canvas"></canvas>
-
-    <nav id="navbar"
-        class="fixed top-10 inset-x-0 mx-auto z-[5000] transition-all duration-300 transform -translate-y-[150%] opacity-0 w-max px-2 py-2 flex items-center justify-center glass-pill rounded-full border border-transparent dark:border-white/[0.2] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
-        <div id="nav-container" class="flex items-center space-x-1 px-2 relative">
-            <div id="nav-indicator" class="nav-indicator"></div>
-
-            <a href="#hero"
-                class="nav-link relative items-center flex px-4 py-2 text-slate-900 font-bold text-xs tracking-widest hover:text-accent transition-colors">SIRAJ</a>
-
-            <a href="#impact"
-                class="nav-link relative items-center flex px-4 py-2 text-slate-500 hover:text-slate-900 transition-colors text-[11px] font-semibold tracking-wide hidden md:flex">Testimonials</a>
-            <a href="#about"
-                class="nav-link relative items-center flex px-4 py-2 text-slate-500 hover:text-slate-900 transition-colors text-[11px] font-semibold tracking-wide hidden md:flex">About</a>
-            <a href="#experience"
-                class="nav-link relative items-center flex px-4 py-2 text-slate-500 hover:text-slate-900 transition-colors text-[11px] font-semibold tracking-wide hidden md:flex">Key
-                Events</a>
-            <a href="#certificates"
-                class="nav-link relative items-center flex px-4 py-2 text-slate-500 hover:text-slate-900 transition-colors text-[11px] font-semibold tracking-wide hidden md:flex">Certificates</a>
-            <a href="#leadership"
-                class="nav-link relative items-center flex px-4 py-2 text-slate-500 hover:text-slate-900 transition-colors text-[11px] font-semibold tracking-wide hidden md:flex">Engagements</a>
-
-            <button id="mobile-menu-btn" class="md:hidden text-slate-900 px-4">
-                <i class="fas fa-bars text-lg"></i>
-            </button>
-        </div>
-    </nav>
-
-    <div id="mobile-menu"
-        class="fixed inset-0 bg-white/95 backdrop-blur-3xl z-50 hidden flex-col items-center justify-center space-y-8">
-        <a href="#impact" class="text-3xl font-semibold tracking-tight text-slate-900 mobile-link">Testimonials</a>
-        <a href="#about" class="text-3xl font-semibold tracking-tight text-slate-900 mobile-link">About</a>
-        <a href="#experience" class="text-3xl font-semibold tracking-tight text-slate-900 mobile-link">Key Events</a>
-        <a href="#certificates"
-            class="text-3xl font-semibold tracking-tight text-slate-900 mobile-link">Certificates</a>
-        <a href="#leadership" class="text-3xl font-semibold tracking-tight text-slate-900 mobile-link">Engagements</a>
-        <button id="close-menu" class="absolute top-10 right-10 text-slate-900 p-4">
-            <i class="fas fa-times text-2xl"></i>
-        </button>
-    </div>
-
-    <section id="hero"
-        class="min-h-screen flex flex-col items-center justify-center relative overflow-hidden pt-16 pb-6">
-        <div class="ambient-glow bg-blue-100/50 w-[800px] h-[800px] top-[-300px] left-[-300px]"></div>
-        <div class="ambient-glow bg-sky-100/30 w-[600px] h-[600px] bottom-[-200px] right-[-200px]"></div>
-
-        <div class="absolute inset-0 z-0">
-            <div class="absolute inset-0 bg-gradient-to-b from-blue-50/50 via-white/80 to-bg"></div>
-        </div>
-
-        <div
-            class="relative z-10 flex-grow flex flex-col items-center justify-center w-full max-w-6xl mx-auto px-4 mt-8">
-
-            <div class="flex flex-col items-center justify-center mb-6" data-aos="fade-down">
-                <div
-                    class="w-32 h-32 md:w-40 md:h-40 rounded-full glass-subtle p-1 shrink-0 mx-auto mb-6 relative group">
-                    <div
-                        class="absolute inset-0 rounded-full bg-accent/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    </div>
-                    <div class="w-full h-full rounded-full overflow-hidden bg-slate-100/50 relative z-10">
-                        <img src="siraj headshot.png" alt="Siraj Munir"
-                            class="w-full h-full object-cover object-top scale-105 group-hover:scale-110 transition-transform duration-700">
-                    </div>
-                </div>
-
-                <h1
-                    class="text-5xl md:text-7xl lg:text-[8rem] font-bold tracking-tighter mb-4 text-slate-900 leading-none text-center metal-heading">
-                    SIRAJ MUNIR
-                </h1>
-
-                <p
-                    class="text-[10px] md:text-xs text-accent tracking-widest uppercase font-bold text-center max-w-4xl leading-relaxed flex flex-col md:flex-row md:items-center md:justify-center">
-                    <span>Siglap Youth Network Executive Member</span>
-                    <span class="hidden md:inline mx-2">·</span>
-                    <span>Eastwood Ria Network Executive Member</span>
-                    <span class="hidden md:inline mx-2">·</span>
-                    <span>Professional Emcee</span>
-                </p>
+    <div class="split">
+        <!-- The stage: one photograph that stays while the column scrolls -->
+        <aside class="stage" aria-label="Photographs">
+            <div class="stage-frame" id="stage">
+                <img class="is-on" data-key="hero" src="img/siraj-headshot.jpg" alt="Portrait of Siraj Munir"
+                    width="843" height="1124" style="object-position: 50% 20%;">
+                <img data-key="testimonials" src="img/mps-ops.jpg" alt="Volunteers at a Meet-the-People Session"
+                    width="1600" height="1200" loading="lazy">
+                <img data-key="about" src="img/preusem-pic.jpg" alt="Siraj emceeing the Pre-University Seminar"
+                    width="1600" height="1067" loading="lazy" style="object-position: 25% 50%;">
+                <img data-key="engagements" src="img/yn-pic-1.jpg" alt="Siglap Youth Network members"
+                    width="1600" height="1200" loading="lazy">
+                <p class="stage-caption" id="stage-caption" aria-live="polite"></p>
             </div>
+        </aside>
 
-            <p class="text-lg md:text-2xl text-slate-900 mb-10 font-medium max-w-4xl mx-auto leading-relaxed text-center tracking-tight"
-                data-aos="fade-up" data-aos-delay="200">
-                <span class="inline-block">
-                    Driven to <span class="text-accent font-bold">learn</span>
-                    <span class="text-slate-900 font-black text-3xl align-middle mx-2 md:mx-3">&middot;</span>
-                    Committed to <span class="text-accent font-bold">serve</span>
-                </span>
-                <span
-                    class="hidden md:inline-block text-slate-900 font-black text-3xl align-middle mx-2 md:mx-3">&middot;</span>
-                <span class="block md:inline-block mt-2 md:mt-0">
-                    Growing to make a greater <span class="text-accent font-bold">impact</span>
-                </span>
-            </p>
+        <main class="column">
+            <!-- Hero -->
+            <header class="hero" id="hero" data-stage="hero">
+                <button class="menu-toggle" id="menu-toggle" aria-expanded="false"
+                    aria-controls="nav">Menu</button>
+                <nav class="nav" id="nav" aria-label="Main">
+                    <a href="#testimonials">Testimonials</a>
+                    <a href="#about">About</a>
+                    <a href="#events">Key events</a>
+                    <a href="#certificates">Certificates</a>
+                    <a href="#contact" class="nav-action">Contact</a>
+                </nav>
 
-            <div class="flex flex-wrap justify-center gap-6 md:gap-24 w-full" data-aos="fade-up" data-aos-delay="400">
-                <div class="text-center group">
-                    <div
-                        class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2 transition-transform duration-500 group-hover:scale-110 group-hover:text-accent">
-                        <span class="counter" data-target="10000">0</span>+
-                    </div>
-                    <div class="text-[9px] text-slate-500 font-bold uppercase tracking-widest">People Reached</div>
-                </div>
-                <div class="text-center group">
-                    <div
-                        class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2 transition-transform duration-500 group-hover:scale-110 group-hover:text-accent">
-                        <span class="counter" data-target="1000">0</span>+
-                    </div>
-                    <div class="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Volunteer Hours</div>
-                </div>
-                <div class="text-center group">
-                    <div
-                        class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2 transition-transform duration-500 group-hover:scale-110 group-hover:text-accent">
-                        <span class="counter" data-target="1500">0</span>+
-                    </div>
-                    <div class="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Residents Engaged</div>
-                </div>
-            </div>
-        </div>
+                <p class="hero-lead rise">Driven to learn, committed to serve, and growing to make a greater impact.</p>
+                <p class="hero-roles rise" style="--i:1">Executive Member of the Siglap Youth Network and the Eastwood
+                    Ria Network. Professional emcee. Aspiring engineer, based in Singapore.</p>
 
-        <a href="#impact"
-            class="relative z-10 mt-8 flex flex-col items-center gap-3 opacity-50 hover:opacity-100 transition-opacity duration-300 cursor-pointer">
-            <span class="text-[9px] uppercase tracking-widest font-bold text-slate-500">Testimonials</span>
-            <div class="w-px h-8 bg-gradient-to-b from-slate-400 to-transparent"></div>
-        </a>
-    </section>
-
-    <section id="impact"
-        class="min-h-screen flex flex-col justify-center py-12 px-4 relative liquid-glass-border-t bg-slate-200/20">
-        <div class="max-w-7xl mx-auto w-full relative z-10">
-            <div class="mb-8 text-center" data-aos="fade-up">
-                <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2 metal-heading">
-                    Testimonials</h2>
-                <p class="text-slate-500 font-medium text-sm">Guidance that shapes my perspective and approach</p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-4 lg:gap-6 items-stretch">
-                <div class="apple-card p-6 lg:p-8 rounded-[1.5rem] flex flex-col border-none h-full" data-aos="fade-up"
-                    data-aos-delay="100">
+                <dl class="stats rise" style="--i:2">
                     <div>
-                        <i class="fas fa-quote-left text-2xl text-accent/20 mb-4 block"></i>
-                        <p class="text-slate-700 font-medium text-sm leading-relaxed mb-6">
-                            Siraj demonstrates <mark class="glass-highlight px-1 rounded">exceptional empathy</mark> and
-                            a <mark class="glass-highlight px-1 rounded">genuine willingness to
-                                learn</mark>. His <mark class="glass-highlight px-1 rounded">remarkable ability</mark>
-                            to
-                            listen to residents and coordinate operations sets him apart.
+                        <dt>People reached</dt>
+                        <dd><span class="counter" data-target="10000">10,000</span>+</dd>
+                    </div>
+                    <div>
+                        <dt>Volunteer hours</dt>
+                        <dd><span class="counter" data-target="1000">1,000</span>+</dd>
+                    </div>
+                    <div>
+                        <dt>Residents engaged</dt>
+                        <dd><span class="counter" data-target="1500">1,500</span>+</dd>
+                    </div>
+                </dl>
+
+                <p class="rise" style="--i:3; margin-top: 48px;"><a class="button" href="#contact">Get in touch</a></p>
+
+                <h1 class="wordmark display" id="wordmark">siraj munir</h1>
+            </header>
+
+            <!-- Testimonials -->
+            <section class="chapter" id="testimonials" data-stage="testimonials" aria-labelledby="t-head">
+                <div class="measure">
+                    <h2 class="display rise" id="t-head">Testimonials</h2>
+                    <p class="rise" style="--i:1; color: var(--muted); margin-bottom: 64px;">Guidance that shapes my
+                        perspective and approach.</p>
+
+                    <article class="letter rise">
+                        <img class="letter-writer" src="img/maliki-pic.jpg" alt="Dr Maliki Osman" width="96"
+                            height="96" loading="lazy" style="object-position: 30% 30%;">
+                        <p class="letter-open">Siraj demonstrates exceptional empathy and a genuine willingness to
+                            learn.</p>
+                        <p>His remarkable ability to listen to residents and coordinate operations sets him apart.</p>
+                        <div class="letter-sign">
+                            <strong>Dr Maliki Osman</strong>
+                            <span>Senior Advisor, Nanyang Technological University (NTU) &amp; Distinguished
+                                Fellow</span>
+                            <span>Former Minister in the Prime Minister's Office, Second Minister for Education and
+                                Second Minister for Foreign Affairs</span>
+                            <span>Former Mayor of South East District</span>
+                        </div>
+                        <a class="link letter-more" href="testimonial_maliki.pdf#view=FitH" target="_blank"
+                            rel="noopener">Read the full testimonial (PDF)</a>
+                    </article>
+
+                    <article class="letter rise">
+                        <img class="letter-writer is-logo" src="pap logo.svg" alt="PAP Bedok Branch" width="96"
+                            height="96" loading="lazy">
+                        <p class="letter-open">Siraj brings commitment and teamwork to grassroots learning.</p>
+                        <p>As a dedicated volunteer writer, he handles sensitive information professionally and shows a
+                            high level of empathy, maturity, and precision in advocating for our residents.</p>
+                        <div class="letter-sign">
+                            <strong>Linus Ng</strong>
+                            <span>Branch Secretary, PAP Bedok Branch</span>
+                        </div>
+                        <a class="link letter-more" href="Recommendation_Siraj_PAP.pdf#view=FitH" target="_blank"
+                            rel="noopener">Read the full testimonial (PDF)</a>
+                    </article>
+
+                    <article class="letter rise">
+                        <img class="letter-writer" src="img/errn-pic.jpg" alt="Eastwood Ria Neighbourhood Committee"
+                            width="96" height="96" loading="lazy">
+                        <p class="letter-open">Siraj consistently shows a positive attitude towards community service.
                         </p>
-                    </div>
-                    <div class="flex items-center gap-3 pt-5 border-t border-blue-100/30 mt-auto">
-                        <div
-                            class="w-10 h-10 rounded-full glass-subtle overflow-hidden shrink-0 flex items-center justify-center p-0.5">
-                            <img src="maliki pic.jpg" alt="Dr Maliki Osman"
-                                class="w-full h-full object-cover rounded-full">
+                        <p>He is approachable, respectful and highly reliable. His maturity and strong sense of
+                            responsibility reflect a genuine interest in serving the community.</p>
+                        <div class="letter-sign">
+                            <strong>Mdm Sharifah Zainon</strong>
+                            <span>Chairman, Eastwood Ria Residents Network (ERRN)</span>
                         </div>
-                        <div>
-                            <p class="font-bold tracking-tight text-slate-900 text-[13px]">Dr Maliki Osman</p>
-                            <div class="text-[9px] text-slate-500 mt-1 font-medium leading-tight space-y-1">
-                                <p>Senior Advisor Nanyang Technological University NTU & Distinguished Fellow</p>
-                                <p>Former Minister in the Prime Ministers Office Second Minister for Education and
-                                    Second Minister for Foreign Affairs</p>
-                                <p>Former Mayor of South East District</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button onclick="openTestimonial('maliki-osman')" class="liquid-glass-btn mt-4 group">
-                        <div class="glass-overlay"></div>
-                        <div class="glass-effect"></div>
-                        <span class="content flex items-center gap-1">
-                            Full Testimonial
-                            <i
-                                class="fas fa-chevron-right text-[8px] transition-transform group-hover:translate-x-1"></i>
-                        </span>
-                    </button>
-                </div>
+                        <a class="link letter-more" href="Testimonial%20Mdm%20Sharifah.pdf#view=FitH" target="_blank"
+                            rel="noopener">Read the full testimonial (PDF)</a>
+                    </article>
 
-                <div class="apple-card p-6 lg:p-8 rounded-[1.5rem] flex flex-col border-none h-full" data-aos="fade-up"
-                    data-aos-delay="200">
-                    <div>
-                        <i class="fas fa-quote-left text-2xl text-accent/30 mb-4 block"></i>
-                        <p class="text-slate-700 font-medium text-sm leading-relaxed mb-6">
-                            Siraj brings <mark class="glass-highlight px-1 rounded">commitment and teamwork</mark> to
-                            grassroots learning. As a dedicated volunteer writer, he handles sensitive information <mark
-                                class="glass-highlight px-1 rounded">professionally</mark> and shows a <mark
-                                class="glass-highlight px-1 rounded">high level of empathy, maturity, and
-                                precision</mark> in advocating for our residents.
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-3 pt-5 border-t border-blue-100/30 mt-auto">
-                        <div
-                            class="w-10 h-10 rounded-full glass-subtle overflow-hidden shrink-0 flex items-center justify-center p-0.5">
-                            <img src="pap logo.svg" alt="Linus Ng" class="w-full h-full object-contain p-1">
-                        </div>
-                        <div>
-                            <p class="font-bold tracking-tight text-slate-900 text-[13px]">Linus Ng</p>
-                            <div class="text-[9px] text-slate-500 mt-1 font-medium leading-tight space-y-1">
-                                <p>Branch Secretary</p>
-                                <p>PAP Bedok Branch</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button onclick="openTestimonial('linus-ng')" class="liquid-glass-btn mt-4 group">
-                        <div class="glass-overlay"></div>
-                        <div class="glass-effect"></div>
-                        <span class="content flex items-center gap-1">
-                            Full Testimonial
-                            <i
-                                class="fas fa-chevron-right text-[8px] transition-transform group-hover:translate-x-1"></i>
-                        </span>
-                    </button>
-                </div>
-
-                <div class="apple-card p-6 lg:p-8 rounded-[1.5rem] flex flex-col border-none h-full" data-aos="fade-up"
-                    data-aos-delay="300">
-                    <div>
-                        <i class="fas fa-quote-left text-2xl text-accent/30 mb-4 block"></i>
-                        <p class="text-slate-700 font-medium text-[12px] leading-relaxed mb-6">
-                            Siraj consistently shows a <mark class="glass-highlight px-1 rounded">positive
-                                attitude</mark> towards
-                            community service He is <mark class="glass-highlight px-1 rounded">approachable</mark> <mark
-                                class="glass-highlight px-1 rounded">respectful</mark> and highly <mark
-                                class="glass-highlight px-1 rounded">reliable</mark> His <mark
-                                class="glass-highlight px-1 rounded">maturity</mark> and <mark
-                                class="glass-highlight px-1 rounded">strong sense of
-                                responsibility</mark> reflect a <mark class="glass-highlight px-1 rounded">genuine
-                                interest</mark> in serving
-                            the community
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-3 pt-5 border-t border-blue-100/30 mt-auto">
-                        <div
-                            class="w-10 h-10 rounded-full overflow-hidden shrink-0 flex items-center justify-center glass-subtle p-0.5">
-                            <img src="ERRN PIC.JPEG" alt="Mdm Sharifah Zainon"
-                                class="w-full h-full object-cover rounded-full scale-[1.7]">
-                        </div>
-                        <div>
-                            <p class="font-bold tracking-tight text-slate-900 text-[13px]">Mdm Sharifah Zainon</p>
-                            <div class="text-[9px] text-slate-500 mt-1 font-medium leading-tight">
-                                <p>Chairman Eastwood Ria Residents Network ERRN</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button onclick="openTestimonial('mdm-sharifah')" class="liquid-glass-btn mt-4 group">
-                        <div class="glass-overlay"></div>
-                        <div class="glass-effect"></div>
-                        <span class="content flex items-center gap-1">
-                            Full Testimonial
-                            <i
-                                class="fas fa-chevron-right text-[8px] transition-transform group-hover:translate-x-1"></i>
-                        </span>
-                    </button>
-                </div>
-            </div>
-
-            <div class="mt-12 text-center" data-aos="fade-up" data-aos-delay="400">
-                <button onclick="openTestimonial('all-testimonials')"
-                    class="liquid-glass-btn group px-8 py-3 text-sm cursor-pointer">
-                    <div class="glass-overlay"></div>
-                    <div class="glass-effect"></div>
-                    <span class="content flex items-center gap-2">
-                        <i class="fas fa-file-pdf text-accent"></i>
-                        Read all Testimonials
-                        <i class="fas fa-expand text-[10px] opacity-50 transition-transform group-hover:scale-110"></i>
-                    </span>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <section id="about"
-        class="min-h-screen flex flex-col justify-center py-20 px-4 relative liquid-glass-border-t bg-slate-200/30">
-        <div class="max-w-3xl mx-auto w-full space-y-8 relative z-10">
-
-            <div class="text-center mb-4" data-aos="fade-up">
-                <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-4 metal-heading">
-                    Engineering for the Community
-                </h2>
-                <p class="text-accent text-sm md:text-base font-bold tracking-[0.2em] uppercase">
-                    A Vision of Service
-                </p>
-            </div>
-
-            <!-- Quote -->
-            <div class="text-center mb-12" data-aos="fade-up" data-aos-delay="100">
-                <blockquote class="text-2xl sm:text-3xl font-medium text-accent italic mb-6">
-                    "The best way to find yourself is to lose yourself in the service of others."
-                </blockquote>
-                <div class="flex items-center justify-center">
-                    <div class="w-14 h-14 rounded-full glass-subtle p-0.5 mr-4 overflow-hidden shrink-0">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Portrait_Gandhi.jpg"
-                            alt="Mahatma Gandhi" class="w-full h-full rounded-full object-cover"
-                            onerror="this.src='https://ui-avatars.com/api/?name=Mahatma+Gandhi&background=random'">
-                    </div>
-                    <div class="text-lg font-semibold text-slate-900">
-                        Mahatma Gandhi
+                    <div class="all-letters rise">
+                        <p>Every testimonial, collected in one document.</p>
+                        <a class="button" href="testimonial%20v8.pdf#view=FitH" target="_blank" rel="noopener">Read
+                            all testimonials</a>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- Mission Card -->
-            <div class="apple-card rounded-[2rem] p-8 sm:p-10 border-none relative overflow-hidden group"
-                data-aos="fade-up" data-aos-delay="200">
-                <h3 class="text-xs font-black text-accent uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
-                    <span class="w-8 h-px bg-accent/30"></span> My Mission
-                </h3>
-                <p class="text-slate-700 leading-relaxed text-xl md:text-2xl font-medium tracking-tight">
-                    To earn my degree in engineering so that I may build a more <span
-                        class="text-accent underline decoration-accent/20 underline-offset-4">inclusive world</span>
-                    where technical solutions are always grounded in human empathy.
-                </p>
-            </div>
+            <!-- About -->
+            <section class="chapter about" id="about" data-stage="about" aria-labelledby="a-head">
+                <div class="measure">
+                    <h2 class="display rise" id="a-head">Engineering for the community</h2>
+                    <img class="about-portrait rise" src="img/siraj-headshot-square.jpg" alt="" width="56"
+                        height="56" loading="lazy">
 
-            <!-- Why Engineering Card -->
-            <div class="apple-card rounded-[2rem] p-8 sm:p-10 border-none relative overflow-hidden" data-aos="fade-up"
-                data-aos-delay="300">
-                <h3 class="text-xs font-black text-accent uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
-                    <span class="w-8 h-px bg-accent/30"></span> Why Engineering?
-                </h3>
-                <p class="text-slate-700 leading-relaxed text-lg">
-                    I believe that the most profound technical skills are those that include the human element. The
-                    world faces deep social and ethical problems that require us to be directly on the ground. This is
-                    why I immerse myself in my community today—I want to understand exactly how the real world works
-                    before I begin to build for it.
-                </p>
-            </div>
+                    <p class="rise">My mission is to earn my degree in engineering so that I may build a more
+                        <mark>inclusive world</mark>, where technical solutions are always grounded in human empathy.
+                    </p>
+                    <p class="rise">I believe that the most profound technical skills are those that include the human
+                        element. The world faces deep social and ethical problems that require us to be directly on the
+                        ground. This is why I immerse myself in my community today: I want to understand exactly how
+                        the real world works before I begin to build for it.</p>
 
-            <!-- Commitment to Service Card -->
-            <div class="apple-card rounded-[2rem] p-8 sm:p-10 border-none relative overflow-hidden" data-aos="fade-up"
-                data-aos-delay="400">
-                <h3 class="text-xs font-black text-accent uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
-                    <span class="w-8 h-px bg-accent/30"></span> Evidence of Commitment
-                </h3>
-                <p class="text-slate-700 leading-relaxed text-lg mb-8">
-                    My experiences have taught me that true problem solving begins with listening. I am dedicated to
-                    bridging the gap between pure logic and the people it is meant to serve.
-                </p>
-                <div class="space-y-8">
-                    <div class="flex gap-6 items-start">
-                        <div class="w-12 h-12 rounded-2xl glass-subtle flex items-center justify-center shrink-0">
-                            <i class="fas fa-users text-accent text-xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-slate-900 mb-1">Advocating for Residents</h4>
-                            <p class="text-slate-600 text-sm leading-relaxed">At weekly <strong>Meet the People
-                                    Sessions</strong>, I translate emotional struggles into actionable government
-                                appeals. This role has taught me real problem solving beyond textbooks.</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-6 items-start">
-                        <div class="w-12 h-12 rounded-2xl glass-subtle flex items-center justify-center shrink-0">
-                            <i class="fas fa-network-wired text-accent text-xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-slate-900 mb-1">Grassroots Coordination</h4>
-                            <p class="text-slate-600 text-sm leading-relaxed">Working with the <strong>Siglap Youth
-                                    Network</strong> and <strong>Eastwood Ria Network</strong>, identifying and
-                                addressing daily community hurdles.</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-6 items-start">
-                        <div class="w-12 h-12 rounded-2xl glass-subtle flex items-center justify-center shrink-0">
-                            <i class="fas fa-microphone-alt text-accent text-xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-slate-900 mb-1">Connecting with People</h4>
-                            <p class="text-slate-600 text-sm leading-relaxed">As an <strong>emcee</strong>, I focus on
-                                understanding human interaction. Managing room energy or small groups, learning to
-                                communicate with heart.</p>
-                        </div>
+                    <blockquote class="about-quote rise">
+                        <p>The best way to find yourself is to lose yourself in the service of others.</p>
+                        <footer>Mahatma Gandhi</footer>
+                    </blockquote>
+
+                    <p class="rise">My experiences have taught me that true problem solving begins with listening. I am
+                        dedicated to bridging the gap between pure logic and the people it is meant to serve.</p>
+
+                    <ul class="about-points">
+                        <li class="rise"><strong>Advocating for residents</strong>At weekly Meet-the-People Sessions, I
+                            translate emotional struggles into actionable government appeals. This role has taught me
+                            real problem solving beyond textbooks.</li>
+                        <li class="rise"><strong>Grassroots coordination</strong>Working with the Siglap Youth Network
+                            and the Eastwood Ria Network, I identify and address daily community hurdles.</li>
+                        <li class="rise"><strong>Connecting with people</strong>As an emcee, I focus on understanding
+                            human interaction. Whether managing the energy of a room or a small group, I am learning to
+                            communicate with heart.</li>
+                    </ul>
+
+                    <p class="about-goal rise">I serve my community today so that I can craft inclusive engineering
+                        solutions tomorrow. My ambition is to become a builder who ensures everyone can prosper
+                        together.</p>
+
+                    <div class="about-sign rise">
+                        <strong>Siraj Munir</strong>
+                        <span>Singapore</span>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- The Goal Card -->
-            <div class="apple-card rounded-[2rem] p-8 sm:p-10 border-none bg-accent/90 text-white" data-aos="fade-up"
-                data-aos-delay="500">
-                <h3 class="text-xs font-black text-white/60 uppercase tracking-[0.2em] mb-4">The Ultimate Goal</h3>
-                <p class="leading-relaxed text-xl md:text-2xl font-bold tracking-tight">
-                    I serve my community today so that I can craft inclusive engineering solutions tomorrow. My ambition
-                    is to become a builder who ensures everyone can prosper together.
-                </p>
-            </div>
+            <!-- Key events: choosing one puts it on the stage -->
+            <section class="chapter" id="events" data-stage="events" aria-labelledby="e-head">
+                <div class="measure">
+                    <h2 class="display rise" id="e-head">Key events</h2>
+                    <p class="events-intro rise" style="--i:1">Experiences that broaden my understanding of community.
+                        Choose one to see it.</p>
 
-        </div>
-    </section>
+                    <ul class="event-list" id="event-list">
+                        <li class="rise"><button class="event" data-src="img/siglap-pets-day.jpg" data-pos="65% 56%"
+                                data-alt="Siglap Pets Day 2025"><span class="event-title">Siglap Pets Day
+                                    2025</span><span class="event-note">Coordinating operations for 1,500+
+                                    attendees</span></button></li>
+                        <li class="rise"><button class="event" data-src="img/edusave-pic2.jpg" data-pos="59% 42%"
+                                data-alt="Siglap Edusave Awards Presentation Ceremony 2025"><span
+                                    class="event-title">Edusave Awards</span><span class="event-note">Official
+                                    emcee</span></button></li>
+                        <li class="rise"><button class="event" data-src="img/preusem-pic.jpg" data-pos="19% 45%"
+                                data-alt="Pre-University Seminar 2025"><span class="event-title">Pre-U Seminar
+                                    2025</span><span class="event-note">Official emcee</span></button></li>
+                        <li class="rise"><button class="event" data-src="img/mps-ops.jpg" data-pos="71% 45%"
+                                data-alt="Weekly Meet-the-People Session operations"><span class="event-title">Weekly
+                                    MPS operations</span><span class="event-note">Resident advocacy</span></button>
+                        </li>
+                        <li class="rise"><button class="event" data-src="img/errn-pic-1.jpg" data-pos="54% 54%"
+                                data-alt="Eastwood Ria Network"><span class="event-title">Eastwood Ria
+                                    Network</span><span class="event-note">Community initiatives</span></button></li>
+                        <li class="rise"><button class="event" data-src="img/yn-pic-1.jpg" data-pos="59% 51%"
+                                data-alt="Siglap Youth Network"><span class="event-title">Youth Network</span><span
+                                    class="event-note">Executive Member</span></button></li>
+                        <li class="rise"><button class="event" data-src="img/sfyc-pic.jpg" data-pos="20% 50%"
+                                data-alt="Singapore Futures Youth Competition 2024"><span class="event-title">SFYC
+                                    2024</span><span class="event-note">6th place, Lee Kuan Yew School of Public
+                                    Policy, NUS</span></button></li>
+                        <li class="rise"><button class="event" data-src="img/pap-ops.jpg" data-pos="49% 26%"
+                                data-alt="GE2025 campaign operations"><span class="event-title">GE2025 campaign
+                                    ops</span><span class="event-note">Logistics and strategy</span></button></li>
+                        <li class="rise"><button class="event" data-src="img/wyse-pic.jpg" data-pos="85% 49%"
+                                data-alt="Wyse Active"><span class="event-title">Wyse Active</span><span
+                                    class="event-note">Welfare programmes</span></button></li>
+                        <li class="rise"><button class="event" data-src="img/sg60-record.jpg" data-pos="50% 40%"
+                                data-alt="SG60 record attempt"><span class="event-title">SG60 record</span><span
+                                    class="event-note">Celebrating Singapore's 60th year</span></button></li>
+                    </ul>
+                </div>
+            </section>
 
-    <section id="experience"
-        class="min-h-screen flex flex-col justify-center py-12 px-4 relative liquid-glass-border-t bg-slate-200/20">
-        <div class="max-w-7xl mx-auto w-full">
-            <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4" data-aos="fade-up">
-                <div>
-                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2 metal-heading">Key
-                        Events</h2>
-                    <p class="text-slate-500 text-sm font-medium tracking-tight">Experiences that broaden my
-                        understanding of community</p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
-                <!-- Card 1 -->
-                <div class="apple-card rounded-3xl p-3 group" data-aos="fade-up" data-aos-delay="100">
-                    <div class="overflow-hidden rounded-2xl aspect-[4/3] relative">
-                        <img src="siglap pets day.JPEG" alt="Siglap Pets Day"
-                            class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[2.5]"
-                            style="transform-origin: 65% 56%;">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-slate-900/90 from-0% via-transparent via-20% to-transparent to-20%">
-                        </div>
-                        <div class="absolute bottom-0 left-0 p-6 w-full z-10">
-                            <h3 class="text-xl font-bold tracking-tight text-white mb-1">Siglap Pets Day 2025</h3>
-                            <p class="text-white/70 text-xs font-medium">Coordinating operations for 1500+ attendees.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="apple-card rounded-3xl p-3 group" data-aos="fade-up" data-aos-delay="200">
-                    <div class="overflow-hidden rounded-2xl aspect-[4/3] relative">
-                        <img src="EDUSAVE PIC2.JPEG" alt="Edusave Awards Ceremony"
-                            class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-150"
-                            style="transform-origin: 59% 42%;">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-slate-900/90 from-0% via-transparent via-20% to-transparent to-20%">
-                        </div>
-                        <div class="absolute bottom-0 left-0 p-6 w-full z-10">
-                            <h3 class="text-xl font-bold tracking-tight text-white mb-1">Edusave Awards</h3>
-                            <span class="text-[8px] text-blue-300 uppercase font-bold tracking-widest block">Official
-                                Emcee</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="apple-card rounded-3xl p-3 group" data-aos="fade-up" data-aos-delay="300">
-                    <div class="overflow-hidden rounded-2xl aspect-[4/3] relative">
-                        <img src="PreUsem pic.JPEG" alt="Pre University Seminar"
-                            class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-150"
-                            style="transform-origin: 19% 45%;">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-slate-900/90 from-0% via-transparent via-20% to-transparent to-20%">
-                        </div>
-                        <div class="absolute bottom-0 left-0 p-6 w-full z-10">
-                            <h3 class="text-xl font-bold tracking-tight text-white mb-1">Pre-U Seminar 2025</h3>
-                            <span class="text-[8px] text-blue-300 uppercase font-bold tracking-widest block">Official
-                                Emcee</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="apple-card rounded-3xl p-3 group" data-aos="fade-up" data-aos-delay="400">
-                    <div class="overflow-hidden rounded-2xl aspect-[4/3] relative">
-                        <img src="MPS OPS.JPEG" alt="MPS Operations"
-                            class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-150"
-                            style="transform-origin: 71% 45%;">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-slate-900/90 from-0% via-transparent via-20% to-transparent to-20%">
-                        </div>
-                        <div class="absolute bottom-0 left-0 p-6 w-full z-10">
-                            <h3 class="text-xl font-bold tracking-tight text-white mb-1">Weekly MPS Operations</h3>
-                            <span class="text-[8px] text-blue-300 uppercase font-bold tracking-widest block">Resident
-                                Advocacy</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="apple-card rounded-3xl p-3 group" data-aos="fade-up" data-aos-delay="500">
-                    <div class="overflow-hidden rounded-2xl aspect-[4/3] relative">
-                        <img src="ERRN pic 1.JPEG" alt="ERRN"
-                            class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[2.5]"
-                            style="transform-origin: 54% 54%;">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-slate-900/90 from-0% via-transparent via-20% to-transparent to-20%">
-                        </div>
-                        <div class="absolute bottom-0 left-0 p-6 w-full z-10">
-                            <h3 class="text-xl font-bold tracking-tight text-white mb-1">Eastwood Ria Network</h3>
-                            <span class="text-[8px] text-blue-300 uppercase font-bold tracking-widest block">Community
-                                Initiatives</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="apple-card rounded-3xl p-3 group" data-aos="fade-up" data-aos-delay="600">
-                    <div class="overflow-hidden rounded-2xl aspect-[4/3] relative">
-                        <img src="YN PIC 1.JPEG" alt="Siglap Youth Network"
-                            class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-150"
-                            style="transform-origin: 59% 51%;">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-slate-900/90 from-0% via-transparent via-20% to-transparent to-20%">
-                        </div>
-                        <div class="absolute bottom-0 left-0 p-6 w-full z-10">
-                            <h3 class="text-xl font-bold tracking-tight text-white mb-1">Youth Network</h3>
-                            <span class="text-[8px] text-blue-300 uppercase font-bold tracking-widest block">Executive
-                                Member</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="apple-card rounded-3xl p-3 group" data-aos="fade-up" data-aos-delay="700">
-                    <div class="overflow-hidden rounded-2xl aspect-[4/3] relative">
-                        <img src="SFYC PIC.JPEG" alt="Singapore Future Youths Competition"
-                            class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-150"
-                            style="transform-origin: 20% 50%;">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-slate-900/90 from-0% via-transparent via-20% to-transparent to-20%">
-                        </div>
-                        <div class="absolute bottom-0 left-0 p-6 w-full z-10">
-                            <h3 class="text-xl font-bold tracking-tight text-white mb-1">SFYC 2025</h3>
-                            <span class="text-[8px] text-blue-300 uppercase font-bold tracking-widest block">6th Place |
-                                LKYSPP NUS</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="apple-card rounded-3xl p-3 group" data-aos="fade-up" data-aos-delay="800">
-                    <div class="overflow-hidden rounded-2xl aspect-[4/3] relative">
-                        <img src="PAP ops.JPEG" alt="Campaign Ops"
-                            class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[2.5]"
-                            style="transform-origin: 49% 26%;">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-slate-900/90 from-0% via-transparent via-20% to-transparent to-20%">
-                        </div>
-                        <div class="absolute bottom-0 left-0 p-6 w-full z-10">
-                            <h3 class="text-xl font-bold tracking-tight text-white mb-1">GE2025 Campaign Ops</h3>
-                            <span class="text-[8px] text-blue-300 uppercase font-bold tracking-widest block">Logistics
-                                &amp; Strategy</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="apple-card rounded-3xl p-3 group" data-aos="fade-up" data-aos-delay="900">
-                    <div class="overflow-hidden rounded-2xl aspect-[4/3] relative">
-                        <img src="WYSE pic.JPEG" alt="Wyse Active"
-                            class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[2.5]"
-                            style="transform-origin: 85% 49%;">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-slate-900/90 from-0% via-transparent via-20% to-transparent to-20%">
-                        </div>
-                        <div class="absolute bottom-0 left-0 p-6 w-full z-10">
-                            <h3 class="text-xl font-bold tracking-tight text-white mb-1">Wyse Active</h3>
-                            <span class="text-[8px] text-blue-300 uppercase font-bold tracking-widest block">Welfare
-                                Programs</span>
-                        </div>
-                    </div>
-    </section>
-
-    <!-- NEW CERTIFICATES SECTION -->
-    <section id="certificates"
-        class="min-h-screen flex flex-col justify-center py-20 px-4 relative liquid-glass-border-t bg-white">
-        <div class="max-w-7xl mx-auto w-full">
-            <div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4" data-aos="fade-up">
-                <div>
-                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2 metal-heading">
-                        Certificates</h2>
-                    <p class="text-slate-500 text-sm font-medium tracking-tight">Academic excellence and specialized
-                        certifications</p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- FEATURED: Singapore Futures Youth Competition -->
-                <div class="lg:col-span-3 apple-card rounded-[2.5rem] p-8 group relative overflow-hidden bg-slate-50 text-slate-900 border-none"
-                    data-aos="fade-up">
-                    <div class="absolute top-0 right-0 p-8">
-                        <i
-                            class="fas fa-trophy text-6xl text-accent/10 transition-transform group-hover:scale-110 duration-700"></i>
-                    </div>
-                    <div class="relative z-10 h-full flex flex-col justify-between">
-                        <div class="max-w-3xl">
-                            <h3 class="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-slate-900">Singapore
-                                Futures Youth Competition</h3>
-                            <p class="text-slate-500 text-lg mb-4 leading-relaxed">
-                                Organized by the <strong>NUS Lee Kuan Yew School of Public Policy</strong>.
-                                Recognized for exceptional leadership and strategic problem-solving at a national level,
-                                achieving <strong class="text-slate-900">6th place overall</strong>.
-                            </p>
-                            <p class="text-slate-400 text-sm">This remains my most valued achievement to date,
-                                demonstrating capability in policy analysis and foresight.</p>
-                        </div>
-                        <div class="mt-12">
-                            <button onclick="openTestimonial('cert-youth')"
-                                class="liquid-glass-btn px-8 py-4 text-sm cursor-pointer whitespace-nowrap">
-                                <div class="glass-overlay"></div>
-                                <div class="glass-effect"></div>
-                                <span class="content flex items-center gap-3">
-                                    <i class="fas fa-file-pdf"></i>
-                                    View Certificate
-                                    <i class="fas fa-chevron-right text-[10px] opacity-50"></i>
-                                </span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Edusave EMA 2023 -->
-                <div class="apple-card rounded-[2.5rem] p-8 group flex flex-col justify-between" data-aos="fade-up"
-                    data-aos-delay="100">
-                    <div>
-                        <div
-                            class="w-14 h-14 rounded-2xl glass-subtle flex items-center justify-center mb-6 text-accent">
-                            <i class="fas fa-medal text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold tracking-tight text-slate-900 mb-2">Edusave (EMA)</h3>
-                        <p class="text-slate-500 text-sm font-medium leading-relaxed">Merit Award 2023. Awarded for
-                            being in the top 25% of the cohort academically.</p>
-                    </div>
-                    <button onclick="openTestimonial('cert-ema-23')"
-                        class="mt-8 text-accent font-bold text-xs uppercase tracking-widest flex items-center gap-2 hover:gap-3 transition-all cursor-pointer">
-                        View Certificate <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-
-                <!-- Edusave ECAA (2023 & 2022) -->
-                <div class="apple-card rounded-[2.5rem] p-8 group flex flex-col justify-between" data-aos="fade-up"
-                    data-aos-delay="200">
-                    <div>
-                        <div
-                            class="w-14 h-14 rounded-2xl glass-subtle flex items-center justify-center mb-6 text-accent">
-                            <i class="fas fa-award text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold tracking-tight text-slate-900 mb-2">Edusave (ECAA)</h3>
-                        <p class="text-slate-500 text-sm font-medium leading-relaxed">Certificate of Academic
-                            Achievement 2022-2023. Awarded for sustaining a high level of academic excellence over
-                            multiple years.</p>
-                    </div>
-                    <div class="mt-8 flex flex-wrap gap-4">
-                        <button onclick="openTestimonial('cert-ecaa-23')"
-                            class="text-accent font-bold text-xs uppercase tracking-widest flex items-center gap-2 hover:gap-3 transition-all cursor-pointer">
-                            View 2023 <i class="fas fa-arrow-right"></i>
-                        </button>
-                        <button onclick="openTestimonial('cert-ecaa-22')"
-                            class="text-accent font-bold text-xs uppercase tracking-widest flex items-center gap-2 hover:gap-3 transition-all cursor-pointer">
-                            View 2022 <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Edusave EGPA 2022 -->
-                <div class="apple-card rounded-[2.5rem] p-8 group flex flex-col justify-between" data-aos="fade-up"
-                    data-aos-delay="300">
-                    <div>
-                        <div
-                            class="w-14 h-14 rounded-2xl glass-subtle flex items-center justify-center mb-6 text-accent">
-                            <i class="fas fa-bolt text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold tracking-tight text-slate-900 mb-2">Edusave (EGPA)</h3>
-                        <p class="text-slate-500 text-sm font-medium leading-relaxed">Good Progress Award 2022.
-                            Recognition of significant academic improvement and consistency.</p>
-                    </div>
-                    <button onclick="openTestimonial('cert-egpa-22')"
-                        class="mt-8 text-accent font-bold text-xs uppercase tracking-widest flex items-center gap-2 hover:gap-3 transition-all cursor-pointer">
-                        View Certificate <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-
-                <!-- IDE 2022 -->
-                <div class="apple-card rounded-[2.5rem] p-8 group flex flex-col justify-between" data-aos="fade-up"
-                    data-aos-delay="400">
-                    <div>
-                        <div
-                            class="w-14 h-14 rounded-2xl glass-subtle flex items-center justify-center mb-6 text-accent">
-                            <i class="fas fa-code-branch text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold tracking-tight text-slate-900 mb-2">IDE Certification</h3>
-                        <p class="text-slate-500 text-sm font-medium leading-relaxed">Innovation, Design and Engineering
-                            2022. Completion of advanced technical training.</p>
-                    </div>
-                    <button onclick="openTestimonial('cert-ide')"
-                        class="mt-8 text-accent font-bold text-xs uppercase tracking-widest flex items-center gap-2 hover:gap-3 transition-all cursor-pointer">
-                        View Certificate <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-
-                <!-- CoderZ 2022 -->
-                <div class="apple-card rounded-[2.5rem] p-8 group flex flex-col justify-between" data-aos="fade-up"
-                    data-aos-delay="500">
-                    <div>
-                        <div
-                            class="w-14 h-14 rounded-2xl glass-subtle flex items-center justify-center mb-6 text-accent">
-                            <i class="fas fa-robot text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold tracking-tight text-slate-900 mb-2">CoderZ 2022</h3>
-                        <p class="text-slate-500 text-sm font-medium leading-relaxed">National level coding and robotics
-                            competition, achieving <strong class="text-slate-900">2nd place overall</strong> for
-                            technical excellence.</p>
-                    </div>
-                    <button onclick="openTestimonial('cert-coderz')"
-                        class="mt-8 text-accent font-bold text-xs uppercase tracking-widest flex items-center gap-2 hover:gap-3 transition-all cursor-pointer">
-                        View Certificate <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-
-                <!-- SAIL CAMP -->
-                <div class="apple-card rounded-[2.5rem] p-8 group flex flex-col justify-between lg:opacity-60 hover:opacity-100 transition-opacity"
-                    data-aos="fade-up" data-aos-delay="600">
-                    <div>
-                        <div
-                            class="w-14 h-14 rounded-2xl glass-subtle flex items-center justify-center mb-6 text-accent">
-                            <i class="fas fa-compass text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold tracking-tight text-slate-900 mb-2">SAIL Camp</h3>
-                        <p class="text-slate-500 text-sm font-medium leading-relaxed">Leadership and team-building
-                            certification through intensive outdoor and strategic challenges.</p>
-                    </div>
-                    <button onclick="openTestimonial('cert-sail')"
-                        class="mt-8 text-accent font-bold text-xs uppercase tracking-widest flex items-center gap-2 hover:gap-3 transition-all cursor-pointer">
-                        View Certificate <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="leadership"
-        class="min-h-screen flex flex-col justify-center py-12 px-4 relative liquid-glass-border-t bg-slate-200/30">
-        <div class="max-w-6xl mx-auto w-full relative z-10">
-            <div class="mb-8" data-aos="fade-up">
-                <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2 metal-heading">
-                    Engagements</h2>
-                <p class="text-slate-500 font-medium text-sm tracking-tight">The pillars of my growth and service
-                    journey</p>
-            </div>
-
-            <div class="space-y-0 liquid-glass-border-t">
-                <div class="service-item py-10 group" data-aos="fade-up" data-aos-delay="100">
-                    <div class="grid md:grid-cols-12 gap-8 items-start">
-                        <div
-                            class="md:col-span-1 text-xs font-black text-accent/40 group-hover:text-accent transition-colors tracking-widest">
-                            01</div>
-                        <div class="md:col-span-5">
-                            <h3
-                                class="text-2xl font-bold tracking-tight text-slate-900 group-hover:translate-x-2 transition-transform duration-500">
-                                Youth Collaboration</h3>
-                            <div class="flex gap-2 mt-3">
-                                <span
-                                    class="px-2 py-1 glass-subtle text-[10px] font-bold text-accent rounded uppercase tracking-wider">Leadership</span>
-                                <span
-                                    class="px-2 py-1 glass-subtle text-[10px] font-bold text-accent rounded uppercase tracking-wider">Strategy</span>
-                            </div>
-                        </div>
-                        <div class="md:col-span-6">
-                            <p class="text-slate-600 text-base font-medium leading-relaxed">
-                                Executive Member of <strong>Siglap Youth Network</strong>. Collaborating with diverse
-                                youths taught me the importance of inclusive strategic planning and collective crisis
-                                management across <strong>1000+ volunteer hours</strong>.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-item py-10 group" data-aos="fade-up" data-aos-delay="200">
-                    <div class="grid md:grid-cols-12 gap-8 items-start">
-                        <div
-                            class="md:col-span-1 text-xs font-black text-accent/40 group-hover:text-accent transition-colors tracking-widest">
-                            02</div>
-                        <div class="md:col-span-5">
-                            <h3
-                                class="text-2xl font-bold tracking-tight text-slate-900 group-hover:translate-x-2 transition-transform duration-500">
-                                Grassroots Ops</h3>
-                            <div class="flex gap-2 mt-3">
-                                <span
-                                    class="px-2 py-1 glass-subtle text-[10px] font-bold text-accent rounded uppercase tracking-wider">Policy</span>
-                                <span
-                                    class="px-2 py-1 glass-subtle text-[10px] font-bold text-accent rounded uppercase tracking-wider">Advocacy</span>
-                            </div>
-                        </div>
-                        <div class="md:col-span-6">
-                            <p class="text-slate-600 text-base font-medium leading-relaxed">
-                                Expanding awareness of community policy under <strong>Dr Maliki Osman</strong> and
-                                <strong>MOS Dinesh Vasu Dash</strong>. Weekly MPS operations allow me to listen directly
-                                to residents and build practical problem-solving skills.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-item py-10 group" data-aos="fade-up" data-aos-delay="300">
-                    <div class="grid md:grid-cols-12 gap-8 items-start">
-                        <div
-                            class="md:col-span-1 text-xs font-black text-accent/40 group-hover:text-accent transition-colors tracking-widest">
-                            03</div>
-                        <div class="md:col-span-11">
-                            <h3
-                                class="text-2xl font-bold tracking-tight text-slate-900 group-hover:translate-x-2 transition-transform duration-500">
-                                Leading by Heart</h3>
-                            <p class="text-slate-600 text-base font-medium leading-relaxed mt-4">
-                                From emceeing large-scale community events to facilitating small group discussions, I
+            <!-- Engagements -->
+            <section class="chapter" id="engagements" data-stage="engagements" aria-labelledby="g-head">
+                <div class="measure">
+                    <h2 class="display rise" id="g-head">Engagements</h2>
+                    <p class="rise" style="--i:1; color: var(--muted); margin-bottom: 56px;">The pillars of my growth and
+                        service journey.</p>
+                    <ol class="pillars">
+                        <li class="rise">
+                            <h3>Youth collaboration</h3>
+                            <p>Executive Member of the Siglap Youth Network. Collaborating with diverse youths taught me
+                                the importance of inclusive strategic planning and collective crisis management across
+                                1,000+ volunteer hours.</p>
+                            <p class="tags">Leadership, strategy</p>
+                        </li>
+                        <li class="rise">
+                            <h3>Grassroots operations</h3>
+                            <p>Expanding awareness of community policy under Dr Maliki Osman and MOS Dinesh Vasu Dash.
+                                Weekly MPS operations allow me to listen directly to residents and build practical
+                                problem-solving skills.</p>
+                            <p class="tags">Policy, advocacy</p>
+                        </li>
+                        <li class="rise">
+                            <h3>Leading by heart</h3>
+                            <p>From emceeing large-scale community events to facilitating small group discussions, I
                                 focus on creating meaningful connections and fostering a sense of shared purpose within
-                                the community.
-                            </p>
-                        </div>
-                    </div>
+                                the community.</p>
+                        </li>
+                        <li class="rise">
+                            <h3>Community welfare</h3>
+                            <p>Active involvement in Wyse Active (disability care), elderly initiatives, and the
+                                Eastwood Ria Network (ERRN). These experiences ground me in humility and highlight the
+                                importance of human connections.</p>
+                        </li>
+                        <li class="rise">
+                            <h3>National Service</h3>
+                            <p>Serving as Company IC for HTA 202 Intake. A profound opportunity to learn empathy, foster
+                                brotherhood, and understand team dynamics while striving for operational excellence.</p>
+                            <p class="tags">Duty, discipline</p>
+                        </li>
+                    </ol>
                 </div>
-
-                <div class="service-item py-10 group" data-aos="fade-up" data-aos-delay="400">
-                    <div class="grid md:grid-cols-12 gap-8 items-start">
-                        <div
-                            class="md:col-span-1 text-xs font-black text-accent/40 group-hover:text-accent transition-colors tracking-widest">
-                            04</div>
-                        <div class="md:col-span-11">
-                            <h3
-                                class="text-2xl font-bold tracking-tight text-slate-900 group-hover:translate-x-2 transition-transform duration-500">
-                                Community Welfare</h3>
-                            <p class="text-slate-600 text-base font-medium leading-relaxed mt-4">
-                                Active involvement in <strong>Wyse Active</strong> (disability care), elderly
-                                initiatives, and the <strong>Eastwood Ria Network (ERRN)</strong>. These experiences
-                                ground me in humility and highlight the importance of human connections.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-item py-10 group" data-aos="fade-up" data-aos-delay="500">
-                    <div class="grid md:grid-cols-12 gap-8 items-start">
-                        <div
-                            class="md:col-span-1 text-xs font-black text-accent/40 group-hover:text-accent transition-colors tracking-widest">
-                            05</div>
-                        <div class="md:col-span-5">
-                            <h3
-                                class="text-2xl font-bold tracking-tight text-slate-900 group-hover:translate-x-2 transition-transform duration-500">
-                                National Service</h3>
-                            <div class="flex gap-2 mt-3">
-                                <span
-                                    class="px-2 py-1 glass-subtle text-[10px] font-bold text-accent rounded uppercase tracking-wider">Duty</span>
-                                <span
-                                    class="px-2 py-1 glass-subtle text-[10px] font-bold text-accent rounded uppercase tracking-wider">Discipline</span>
-                            </div>
-                        </div>
-                        <div class="md:col-span-6">
-                            <p class="text-slate-600 text-base font-medium leading-relaxed">
-                                Serving as <strong>Company IC for HTA 202 Intake</strong>. A profound opportunity to
-                                learn empathy, foster brotherhood, and understand team dynamics while striving for
-                                operational excellence.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills" class="py-20 px-4 relative liquid-glass-border-t bg-white/50">
-        <div class="max-w-7xl mx-auto w-full relative z-10">
-            <div class="mb-12 text-center" data-aos="fade-up">
-                <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-2 metal-heading">
-                    Capabilities</h2>
-                <p class="text-slate-500 font-medium text-sm">Transferable skills honed through service and leadership
-                </p>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-                <div class="apple-card p-6 rounded-3xl text-center group" data-aos="fade-up" data-aos-delay="200">
-                    <div
-                        class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-accent group-hover:text-white transition-all duration-500">
-                        <i class="fas fa-comments text-xl"></i>
-                    </div>
-                    <h4 class="font-bold text-slate-900 mb-1">Public Speaking</h4>
-                    <p class="text-slate-500 text-[10px] uppercase font-bold tracking-widest">Professional Emcee</p>
-                </div>
-                <div class="apple-card p-6 rounded-3xl text-center group" data-aos="fade-up" data-aos-delay="200">
-                    <div
-                        class="w-12 h-12 glass-subtle rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-accent group-hover:text-white transition-all duration-500">
-                        <i class="fas fa-handshake text-xl"></i>
-                    </div>
-                    <h4 class="font-bold text-slate-900 mb-1">Crisis Management</h4>
-                    <p class="text-slate-500 text-[10px] uppercase font-bold tracking-widest">Youth Leadership</p>
-                </div>
-                <div class="apple-card p-6 rounded-3xl text-center group" data-aos="fade-up" data-aos-delay="300">
-                    <div
-                        class="w-12 h-12 glass-subtle rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-accent group-hover:text-white transition-all duration-500">
-                        <i class="fas fa-pencil-alt text-xl"></i>
-                    </div>
-                    <h4 class="font-bold text-slate-900 mb-1">Liaison</h4>
-                    <p class="text-slate-500 text-[10px] uppercase font-bold tracking-widest">Govt Relations</p>
-                </div>
-                <div class="apple-card p-6 rounded-3xl text-center group" data-aos="fade-up" data-aos-delay="400">
-                    <div
-                        class="w-12 h-12 glass-subtle rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-accent group-hover:text-white transition-all duration-500">
-                        <i class="fas fa-heart text-xl"></i>
-                    </div>
-                    <h4 class="font-bold text-slate-900 mb-1">Social Advocacy</h4>
-                    <p class="text-slate-500 text-[10px] uppercase font-bold tracking-widest">Community Impact</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Image Modal -->
-    <div id="image-modal"
-        class="fixed inset-0 z-[100] hidden items-center justify-center opacity-0 transition-opacity duration-300">
-        <!-- Backdrop -->
-        <div class="absolute inset-0 bg-slate-900/85 backdrop-blur-md cursor-pointer" onclick="closeModal()"></div>
-
-        <!-- Modal Content -->
-        <div id="modal-content"
-            class="relative bg-white rounded-[2rem] overflow-hidden shadow-2xl z-10 max-w-5xl w-[95%] max-h-[90vh] flex flex-col scale-95 transition-transform duration-300 ease-out">
-            <button onclick="closeModal()"
-                class="absolute top-4 right-4 z-20 bg-slate-900/50 hover:bg-accent text-white rounded-full w-10 h-10 flex items-center justify-center transition-all backdrop-blur-sm">
-                <i class="fas fa-times text-lg"></i>
-            </button>
-
-            <div id="modal-image-container"
-                class="overflow-hidden bg-white/5 flex-grow flex items-center justify-center relative cursor-zoom-in">
-                <img id="modal-image" src="" alt=""
-                    class="w-full h-auto max-h-[75vh] object-contain transition-transform duration-300 ease-out">
-            </div>
-
-            <div class="p-6 md:p-8 shrink-0 liquid-glass-border-t relative z-10">
-                <h3 id="modal-title" class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 mb-2"></h3>
-                <span id="modal-subtitle"
-                    class="text-xs md:text-sm text-accent uppercase font-bold tracking-widest block"></span>
-            </div>
-        </div>
+            </section>
+        </main>
     </div>
 
+    <!-- Certificates: the split ends, one printed sheet on the competition photograph -->
+    <section class="certs" id="certificates" aria-labelledby="c-head">
+        <img class="certs-bg" src="img/sfyc-pic.jpg" alt="" width="1600" height="1067" loading="lazy">
+        <div class="certs-side rise">
+            <p>Academic excellence and specialised certifications. Each title opens the original certificate.</p>
+        </div>
+        <div class="sheet rise" style="--i:1">
+            <h2 class="display" id="c-head">Certificates</h2>
+            <p class="sheet-note">Awards and competitions, 2022 to 2024</p>
 
-
-    <footer class="py-8 px-4 relative overflow-hidden liquid-glass-border-t">
-        <div class="max-w-full mx-auto">
-            <div class="marquee-wrapper mb-8 opacity-10">
-                <div class="marquee-content">
-                    <span class="text-5xl md:text-7xl font-bold tracking-tighter text-slate-900 mx-6">
-                        <span class="text-accent">S</span>ERVICE
-                        <span class="text-accent">I</span>NTEGRITY
-                        <span class="text-accent">R</span>ESILIENCE
-                        <span class="text-accent">A</span>DAPTABLE
-                        <span class="text-accent">J</span>OURNEY
-                    </span>
-                </div>
-                <div class="marquee-content" aria-hidden="true">
-                    <span class="text-5xl md:text-7xl font-bold tracking-tighter text-slate-900 mx-6">
-                        <span class="text-accent">S</span>ERVICE
-                        <span class="text-accent">I</span>NTEGRITY
-                        <span class="text-accent">R</span>ESILIENCE
-                        <span class="text-accent">A</span>DAPTABLE
-                        <span class="text-accent">J</span>OURNEY
-                    </span>
-                </div>
+            <div class="sheet-group">
+                <h3>Competitions</h3>
+                <ul>
+                    <li><a class="cert is-featured" href="Singapore%20Youth%20Competition%202024%20G6%20copy.pdf#view=FitH"
+                            target="_blank" rel="noopener"><span class="cert-name">Singapore Futures Youth
+                                Competition</span><span class="cert-year">2024</span><span class="cert-desc">Organised
+                                by the NUS Lee Kuan Yew School of Public Policy. Recognised for exceptional leadership
+                                and strategic problem-solving at a national level, achieving 6th place overall. My most
+                                valued achievement to date, demonstrating capability in policy analysis and
+                                foresight.</span></a></li>
+                    <li><a class="cert" href="CoderZ%202022%20cert.pdf#view=FitH" target="_blank"
+                            rel="noopener"><span class="cert-name">CoderZ</span><span
+                                class="cert-year">2022</span><span class="cert-desc">National coding and robotics
+                                competition, 2nd place overall for technical excellence.</span></a></li>
+                </ul>
             </div>
 
-            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
-                <div class="text-[10px] font-bold tracking-widest text-slate-900 uppercase">
-                    SIRAJ MUNIR © 2026
-                </div>
-
-                <div class="flex gap-6 text-[10px] font-bold tracking-widest uppercase text-slate-500">
-                    <a href="#about" class="hover:text-accent transition-colors">About</a>
-                    <a href="#experience" class="hover:text-accent transition-colors">Key Events</a>
-                    <a href="#leadership" class="hover:text-accent transition-colors">Engagements</a>
-                </div>
-
-                <div class="flex gap-5">
-                    <a href="https://www.linkedin.com/in/siraj-munir-muzammil" target="_blank" rel="noopener noreferrer"
-                        class="text-slate-400 hover:text-accent transition-colors">
-                        <i class="fab fa-linkedin text-lg"></i>
-                    </a>
-                    <a href="mailto:sirajmunir.muzammil@gmail.com"
-                        class="text-slate-400 hover:text-accent transition-colors">
-                        <i class="fas fa-envelope text-lg"></i>
-                    </a>
-                </div>
+            <div class="sheet-group">
+                <h3>Academic awards</h3>
+                <ul>
+                    <li><a class="cert" href="EMA%202023.pdf#view=FitH" target="_blank" rel="noopener"><span
+                                class="cert-name">Edusave Merit Award (EMA)</span><span
+                                class="cert-year">2023</span><span class="cert-desc">Awarded for being in the top 25%
+                                of the cohort academically.</span></a></li>
+                    <li><a class="cert" href="ECAA%202023.pdf#view=FitH" target="_blank" rel="noopener"><span
+                                class="cert-name">Edusave Certificate of Academic Achievement (ECAA)</span><span
+                                class="cert-year">2023</span><span class="cert-desc">Sustaining a high level of academic
+                                excellence.</span></a></li>
+                    <li><a class="cert" href="ECAA%202022.pdf#view=FitH" target="_blank" rel="noopener"><span
+                                class="cert-name">Edusave Certificate of Academic Achievement (ECAA)</span><span
+                                class="cert-year">2022</span><span class="cert-desc">Awarded across consecutive years
+                                for academic excellence.</span></a></li>
+                    <li><a class="cert" href="EGPA%202022.pdf#view=FitH" target="_blank" rel="noopener"><span
+                                class="cert-name">Edusave Good Progress Award (EGPA)</span><span
+                                class="cert-year">2022</span><span class="cert-desc">Recognition of significant
+                                academic improvement and consistency.</span></a></li>
+                </ul>
             </div>
+
+            <div class="sheet-group">
+                <h3>Training</h3>
+                <ul>
+                    <li><a class="cert" href="IDE%202022%20CERT.pdf#view=FitH" target="_blank" rel="noopener"><span
+                                class="cert-name">Innovation, Design and Engineering (IDE)</span><span
+                                class="cert-year">2022</span><span class="cert-desc">Completion of advanced technical
+                                training.</span></a></li>
+                    <li><a class="cert" href="SAIL%20CAMP%20CERT.pdf#view=FitH" target="_blank" rel="noopener"><span
+                                class="cert-name">SAIL Camp</span><span class="cert-year"></span><span
+                                class="cert-desc">Leadership and team-building through intensive outdoor and strategic
+                                challenges.</span></a></li>
+                </ul>
+            </div>
+
+            <p class="sheet-close">Certificates open as PDFs in a new tab.<br>Some files are large and may take a
+                moment.</p>
+        </div>
+    </section>
+
+    <!-- Where I serve -->
+    <section class="serve" aria-labelledby="s-head">
+        <h2 class="display rise" id="s-head">Where I serve</h2>
+        <div class="serve-cols rise" style="--i:1">
+            <ul>
+                <li>Networks</li>
+                <li>Siglap Youth Network</li>
+                <li>Eastwood Ria Residents Network</li>
+                <li>PAP Bedok Branch</li>
+                <li>Meet-the-People Sessions</li>
+                <li>Wyse Active</li>
+            </ul>
+            <ul>
+                <li>Roles</li>
+                <li>Executive Member</li>
+                <li>Professional emcee</li>
+                <li>Volunteer writer</li>
+                <li>Company IC, HTA 202 Intake</li>
+            </ul>
+            <ul>
+                <li>Capabilities</li>
+                <li>Public speaking</li>
+                <li>Crisis management</li>
+                <li>Government liaison</li>
+                <li>Social advocacy</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <img class="footer-bg" src="img/yn-pic2.jpg" alt="" width="1600" height="1200" loading="lazy">
+        <div class="footer-top">
+            <ul>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#events">Key events</a></li>
+                <li><a href="#engagements">Engagements</a></li>
+                <li><a href="#certificates">Certificates</a></li>
+            </ul>
+            <div class="footer-contact">
+                <p>For emceeing, community work or a conversation, I'd be glad to hear from you.</p>
+                <p><a class="link" href="mailto:sirajmunir.muzammil@gmail.com">sirajmunir.muzammil@gmail.com</a></p>
+                <p><a class="link" href="https://www.linkedin.com/in/siraj-munir-muzammil" target="_blank"
+                        rel="noopener noreferrer">LinkedIn</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="display" id="footer-name" aria-hidden="true">siraj munir</p>
+            <p class="acrostic">
+                <span><b>S</b>ervice</span>
+                <span><b>I</b>ntegrity</span>
+                <span><b>R</b>esilience</span>
+                <span><b>A</b>daptable</span>
+                <span><b>J</b>ourney</span>
+            </p>
+            <p class="legal">Siraj Munir © 2026</p>
         </div>
     </footer>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({
-            duration: 1000,
-            once: true,
-            offset: 50,
-            easing: 'ease-out-cubic'
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isPhone = () => window.matchMedia('(max-width: 800px)').matches;
+
+        // --- Mobile menu ---
+        const nav = document.getElementById('nav');
+        const menuToggle = document.getElementById('menu-toggle');
+        menuToggle.addEventListener('click', () => {
+            const open = nav.classList.toggle('is-open');
+            menuToggle.setAttribute('aria-expanded', open);
+            menuToggle.textContent = open ? 'Close' : 'Menu';
+            document.body.style.overflow = open ? 'hidden' : '';
         });
+        nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+            nav.classList.remove('is-open');
+            menuToggle.setAttribute('aria-expanded', false);
+            menuToggle.textContent = 'Menu';
+            document.body.style.overflow = '';
+        }));
 
-        const navbar = document.getElementById('navbar');
-        const navIndicator = document.getElementById('nav-indicator');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const heroSection = document.getElementById('hero');
-        let lastScrollY = window.pageYOffset;
-
-        // --- Intersection Observer for Active Section (Bubble) ---
-        const observerOptions = {
-            root: null,
-            rootMargin: '-50% 0px -50% 0px', // Trigger when section passes middle of screen
-            threshold: 0
-        };
-
-        const sectionObserver = new IntersectionObserver((entries) => {
+        // --- Section entrances: heading, then text, then picture ---
+        const riseObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id');
-                    updateActiveLink(id);
+                    entry.target.classList.add('is-in');
+                    riseObserver.unobserve(entry.target);
                 }
             });
-        }, observerOptions);
+        }, { rootMargin: '0px 0px -8% 0px' });
+        document.querySelectorAll('.rise').forEach(el => riseObserver.observe(el));
 
-        // Sections to observe
-        ['hero', 'impact', 'about', 'experience', 'certificates', 'leadership'].forEach(id => {
-            const section = document.getElementById(id);
-            if (section) sectionObserver.observe(section);
-        });
+        // --- Stage: the fixed photograph follows the section being read ---
+        const stage = document.getElementById('stage');
+        const stageCaption = document.getElementById('stage-caption');
 
-        function updateActiveLink(id) {
-            navLinks.forEach(link => {
-                const href = link.getAttribute('href').substring(1);
-                if (href === id) {
-                    link.classList.add('active');
-                    moveIndicator(link);
-                } else {
-                    link.classList.remove('active');
-                }
-            });
-        }
-
-        function moveIndicator(element) {
-            if (!element || !navIndicator) return;
-
-            // Using offsetLeft and offsetWidth for parent-relative positioning
-            navIndicator.style.width = `${element.offsetWidth}px`;
-            navIndicator.style.height = `${element.offsetHeight}px`;
-            navIndicator.style.left = `${element.offsetLeft}px`;
-            navIndicator.style.top = `${element.offsetTop}px`;
-        }
-
-        // --- Scroll Logic (Hide/Show & Pin after Hero) ---
-        window.addEventListener('scroll', () => {
-            const currentScrollY = window.pageYOffset;
-            const heroHeight = heroSection.offsetHeight;
-            const scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
-
-            if (currentScrollY < 50) {
-                // Near top - early state
-                navbar.classList.add('nav-hidden-state');
-                navbar.classList.remove('nav-visible-state', 'nav-fixed-state');
-            } else if (currentScrollY > heroHeight - 100) {
-                // Past Hero - Fixed at top, no hiding
-                navbar.classList.remove('nav-hidden-state', 'nav-visible-state');
-                navbar.classList.add('nav-fixed-state');
-            } else {
-                // Between Top and Hero Bottom - Intelligent Hide/Show
-                navbar.classList.remove('nav-fixed-state');
-                if (scrollDirection === 'up') {
-                    navbar.classList.remove('nav-hidden-state');
-                    navbar.classList.add('nav-visible-state');
-                } else {
-                    navbar.classList.add('nav-hidden-state');
-                    navbar.classList.remove('nav-visible-state');
-                }
+        function showOnStage(frame, key, src, alt, pos) {
+            let img = frame.querySelector(`img[data-key="${key}"]`);
+            if (!img && src) {
+                img = document.createElement('img');
+                img.dataset.key = key;
+                img.src = src;
+                img.alt = alt || '';
+                if (pos) img.style.objectPosition = pos;
+                frame.insertBefore(img, frame.querySelector('.stage-caption'));
+                // let the browser paint it before fading in
+                img.getBoundingClientRect();
             }
-
-            lastScrollY = currentScrollY;
-        });
-
-        // Initialize indicator position
-        window.addEventListener('load', () => {
-            const activeLink = document.querySelector('.nav-link.active');
-            if (activeLink) moveIndicator(activeLink);
-        });
-
-        // Update on resize
-        window.addEventListener('resize', () => {
-            const activeLink = document.querySelector('.nav-link.active');
-            if (activeLink) moveIndicator(activeLink);
-        });
-
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const closeMenu = document.getElementById('close-menu');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
-
-        if (mobileMenuBtn && mobileMenu && closeMenu) {
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.remove('hidden');
-                mobileMenu.classList.add('flex');
-                document.body.style.overflow = 'hidden';
-            });
-
-            closeMenu.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                mobileMenu.classList.remove('flex');
-                document.body.style.overflow = 'auto';
-            });
-
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenu.classList.remove('flex');
-                    document.body.style.overflow = 'auto';
-                });
-            });
+            if (!img) return;
+            frame.querySelectorAll('img').forEach(i => i.classList.toggle('is-on', i === img));
         }
 
-        const revealElements = document.querySelectorAll('.reveal:not([data-aos])');
-        const revealObserver = new IntersectionObserver((entries) => {
+        const sectionObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
+                if (!entry.isIntersecting) return;
+                const key = entry.target.dataset.stage;
+                if (key === 'events') {
+                    const current = document.querySelector('.event.is-on') || document.querySelector('.event');
+                    selectEvent(current);
+                } else {
+                    showOnStage(stage, key);
+                    stageCaption.textContent = '';
                 }
             });
-        }, { threshold: 0.1 });
-        revealElements.forEach(el => revealObserver.observe(el));
+        }, { rootMargin: '-45% 0px -45% 0px' });
+        document.querySelectorAll('[data-stage]').forEach(s => sectionObserver.observe(s));
 
-        const counters = document.querySelectorAll('.counter');
-        const speed = 150;
+        // --- Key events: the live thing. Choosing an event puts its photo on the stage ---
+        const events = [...document.querySelectorAll('.event')];
+        // on a phone there is no stage: each event carries its own photo
+        events.forEach(button => {
+            const img = document.createElement('img');
+            img.src = button.dataset.src;
+            img.alt = button.dataset.alt;
+            img.loading = 'lazy';
+            img.style.objectPosition = button.dataset.pos;
+            button.prepend(img);
+        });
 
+        function selectEvent(button) {
+            if (!button) return;
+            events.forEach(e => e.classList.toggle('is-on', e === button));
+            const { src, alt, pos } = button.dataset;
+            const key = 'event-' + events.indexOf(button);
+            showOnStage(stage, key, src, alt, pos);
+            stageCaption.textContent = alt;
+        }
+
+        events.forEach(button => {
+            button.addEventListener('click', () => selectEvent(button));
+            button.addEventListener('mouseenter', () => { if (!isPhone()) selectEvent(button); });
+            button.addEventListener('focus', () => selectEvent(button));
+        });
+
+        // while scrolling through the list, the event in the middle of the screen takes the stage
+        const eventObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => { if (entry.isIntersecting) selectEvent(entry.target); });
+        }, { rootMargin: '-48% 0px -48% 0px' });
+        events.forEach(e => eventObserver.observe(e));
+
+        // --- Counters ---
         const counterObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const counter = entry.target;
-                    const target = +counter.getAttribute('data-target');
-                    let count = 0;
-                    const inc = target / speed;
-
-                    const updateCount = () => {
-                        count += inc;
-                        if (count < target) {
-                            counter.innerText = Math.ceil(count).toLocaleString();
-                            setTimeout(updateCount, 15);
-                        } else {
-                            counter.innerText = target.toLocaleString();
-                        }
-                    };
-                    updateCount();
-                    observer.unobserve(counter);
-                }
+                if (!entry.isIntersecting) return;
+                const counter = entry.target;
+                const target = +counter.dataset.target;
+                observer.unobserve(counter);
+                if (reduceMotion) return;
+                const start = performance.now();
+                const duration = 1600;
+                const tick = now => {
+                    const t = Math.min((now - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - t, 3);
+                    counter.textContent = Math.round(target * eased).toLocaleString('en-SG');
+                    if (t < 1) requestAnimationFrame(tick);
+                };
+                requestAnimationFrame(tick);
             });
         }, { threshold: 0.5 });
+        document.querySelectorAll('.counter').forEach(c => counterObserver.observe(c));
 
-        counters.forEach(counter => {
-            counterObserver.observe(counter);
-        });
+        // --- Signature move: the name is heavy. It settles as the first screen leaves,
+        // and grows into place as the footer arrives ---
+        const wordmark = document.getElementById('wordmark');
+        const footerName = document.getElementById('footer-name');
+        const footer = document.getElementById('contact');
+        let ticking = false;
 
-        const faqItems = document.querySelectorAll('.faq-item');
-        faqItems.forEach(item => {
-            const trigger = item.querySelector('.faq-trigger');
-            if (trigger) {
-                trigger.addEventListener('click', () => {
-                    item.classList.toggle('active');
-                });
-            }
-        });
+        function onScroll() {
+            ticking = false;
+            const vh = window.innerHeight;
+            const heroProgress = Math.min(window.scrollY / vh, 1);
+            wordmark.style.transform = `scale(${1 - heroProgress * 0.07})`;
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId && targetId !== '#') {
-                    const target = document.querySelector(targetId);
-                    if (target) {
-                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
-                        const startPosition = window.pageYOffset;
-                        const distance = targetPosition - startPosition;
-                        const duration = 1200;
-                        let start = null;
-
-                        window.requestAnimationFrame(step);
-
-                        function step(timestamp) {
-                            if (!start) start = timestamp;
-                            const progress = timestamp - start;
-                            const t = Math.min(progress / duration, 1);
-                            const ease = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-
-                            window.scrollTo(0, startPosition + distance * ease);
-
-                            if (progress < duration) {
-                                window.requestAnimationFrame(step);
-                            }
-                        }
-                    }
-                }
-            });
-        });
-
-        const canvas = document.getElementById('particle-canvas');
-        if (canvas) {
-            const ctx = canvas.getContext('2d');
-            let particles = [];
-            let mouseX = 0;
-            let mouseY = 0;
-
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
-
-            class Particle {
-                constructor() {
-                    this.x = Math.random() * canvas.width;
-                    this.y = Math.random() * canvas.height;
-                    this.size = Math.random() * 2 + 1;
-                    this.speedX = Math.random() * 0.5 - 0.25;
-                    this.speedY = Math.random() * 0.5 - 0.25;
-                    this.opacity = Math.random() * 0.4 + 0.1;
-                }
-
-                update() {
-                    this.x += this.speedX;
-                    this.y += this.speedY;
-
-                    const dx = mouseX - this.x;
-                    const dy = mouseY - this.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < 100) {
-                        this.x -= dx * 0.01;
-                        this.y -= dy * 0.01;
-                    }
-
-                    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-                }
-
-                draw() {
-                    ctx.fillStyle = `rgba(37, 99, 235, ${this.opacity})`;
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            }
-
-            function initParticles() {
-                particles = [];
-                const particleCount = window.innerWidth < 768 ? 25 : 50;
-                for (let i = 0; i < particleCount; i++) {
-                    particles.push(new Particle());
-                }
-            }
-            initParticles();
-
-            function animateParticles() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                for (let i = 0; i < particles.length; i++) {
-                    for (let j = i + 1; j < particles.length; j++) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-
-                        if (distance < 100) {
-                            ctx.strokeStyle = `rgba(37, 99, 235, ${0.15 * (1 - distance / 100)})`;
-                            ctx.lineWidth = 0.5;
-                            ctx.beginPath();
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.stroke();
-                        }
-                    }
-                }
-
-                particles.forEach(particle => {
-                    particle.update();
-                    particle.draw();
-                });
-
-                requestAnimationFrame(animateParticles);
-            }
-            animateParticles();
-
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-            });
+            const fRect = footer.getBoundingClientRect();
+            const fProgress = Math.min(Math.max((vh - fRect.top) / vh, 0), 1);
+            footerName.style.transform = `scale(${0.93 + fProgress * 0.07})`;
         }
 
-        const modal = document.getElementById('image-modal');
-        const modalContent = document.getElementById('modal-content');
-        const modalImg = document.getElementById('modal-image');
-        const modalImgContainer = document.getElementById('modal-image-container');
-        const modalTitle = document.getElementById('modal-title');
-        const modalSubtitle = document.getElementById('modal-subtitle');
+        if (!reduceMotion) {
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(onScroll);
+                    ticking = true;
+                }
+            }, { passive: true });
+            onScroll();
+        }
 
-        let isZoomed = false;
-
-        modalImgContainer.addEventListener('click', function (e) {
-            isZoomed = !isZoomed;
-            if (isZoomed) {
-                const rect = modalImgContainer.getBoundingClientRect();
-                const x = ((e.clientX - rect.left) / rect.width) * 100;
-                const y = ((e.clientY - rect.top) / rect.height) * 100;
-
-                modalImg.style.transformOrigin = `${x}% ${y}%`;
-                modalImg.style.transform = 'scale(2.5)';
-                modalImgContainer.classList.remove('cursor-zoom-in');
-                modalImgContainer.classList.add('cursor-zoom-out');
-            } else {
-                modalImg.style.transform = 'scale(1)';
-                modalImgContainer.classList.remove('cursor-zoom-out');
-                modalImgContainer.classList.add('cursor-zoom-in');
-            }
-        });
-
-        modalImgContainer.addEventListener('mousemove', function (e) {
-            if (!isZoomed) return;
-            const rect = modalImgContainer.getBoundingClientRect();
-            const x = ((e.clientX - rect.left) / rect.width) * 100;
-            const y = ((e.clientY - rect.top) / rect.height) * 100;
-            modalImg.style.transformOrigin = `${x}% ${y}%`;
-        });
-
-        document.querySelectorAll('#experience .apple-card').forEach(card => {
-            card.classList.add('cursor-pointer');
-            card.addEventListener('click', () => {
-                const img = card.querySelector('img');
-                const title = card.querySelector('h3').innerText;
-                const subtitleEl = card.querySelector('span');
-                const subtitle = subtitleEl ? subtitleEl.innerText : '';
-
-                isZoomed = false;
-                modalImg.style.transform = 'scale(1)';
-                modalImg.style.transformOrigin = 'center center';
-                modalImgContainer.classList.remove('cursor-zoom-out');
-                modalImgContainer.classList.add('cursor-zoom-in');
-
-                modalImg.src = img.src;
-                modalImg.alt = img.alt;
-                modalTitle.innerText = title;
-                modalSubtitle.innerText = subtitle;
-
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-
-                setTimeout(() => {
-                    modal.classList.remove('opacity-0');
-                    modal.classList.add('opacity-100');
-                    modalContent.classList.remove('scale-95');
-                    modalContent.classList.add('scale-100');
-                }, 10);
-
-                document.body.style.overflow = 'hidden';
-            });
-        });
-
-        window.closeModal = function () {
-            modal.classList.remove('opacity-100');
-            modal.classList.add('opacity-0');
-            modalContent.classList.remove('scale-100');
-            modalContent.classList.add('scale-95');
-
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-                document.body.style.overflow = 'auto';
-
-                isZoomed = false;
-                modalImg.style.transform = 'scale(1)';
-                modalImg.style.transformOrigin = 'center center';
-                modalImgContainer.classList.remove('cursor-zoom-out');
-                modalImgContainer.classList.add('cursor-zoom-in');
-            }, 300);
-        };
     </script>
-
-    <script>
-        window.openTestimonial = function (id) {
-            const pdfs = {
-                'maliki-osman': ['testimonial_maliki.pdf'],
-                'mdm-sharifah': ['Testimonial Mdm Sharifah.pdf'],
-                'linus-ng': ['Recommendation_Siraj_PAP.pdf'],
-                'all-testimonials': ['testimonial v8.pdf'],
-                'cert-youth': ['Singapore Youth Competition 2024 G6 copy.pdf'],
-                'cert-ecaa-23': ['ECAA 2023.pdf'],
-                'cert-ecaa-22': ['ECAA 2022.pdf'],
-                'cert-egpa-22': ['EGPA 2022.pdf'],
-                'cert-ema-23': ['EMA 2023.pdf'],
-                'cert-ide': ['IDE 2022 CERT.pdf'],
-                'cert-coderz': ['CoderZ 2022 cert.pdf'],
-                'cert-sail': ['SAIL CAMP CERT.pdf']
-            };
-
-            const files = pdfs[id];
-            if (files) {
-                files.forEach(file => {
-                    const url = file + '#view=FitH&navpanes=1&toolbar=1';
-                    window.open(url, '_blank');
-                });
-            }
-        };
-
-        window.closeTestimonialModal = function () {
-            // No longer needed but kept for potential legacy calls
-        };
-    </script>
-    <svg class="hidden">
-        <defs>
-            <filter id="container-glass" x="-20%" y="-20%" width="140%" height="140%"
-                color-interpolation-filters="sRGB">
-                <feTurbulence type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="1" seed="1"
-                    result="turbulence" />
-                <feGaussianBlur in="turbulence" stdDeviation="2" result="blurredNoise" />
-                <feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="30" xChannelSelector="R"
-                    yChannelSelector="B" result="displaced" />
-                <feGaussianBlur in="displaced" stdDeviation="1" result="finalBlur" />
-                <feComposite in="finalBlur" in2="finalBlur" operator="over" />
-            </filter>
-        </defs>
-    </svg>
 </body>
 
 </html>
