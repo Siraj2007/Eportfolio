@@ -12,7 +12,7 @@
         content="Siraj Munir, Siraj Munir Singapore, Siglap Youth Network, Eastwood Ria Network, Professional Emcee Singapore, Community Leader, Singapore Engineering">
     <meta name="author" content="Siraj Munir">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <meta name="theme-color" content="#0a0d12">
+    <meta name="theme-color" content="#ffffff">
     <link rel="canonical" href="https://sirajmunir.sg">
 
     <meta property="og:title" content="Siraj Munir | Portfolio">
@@ -44,35 +44,39 @@
     <link rel="icon" type="image/png" href="siraj headshot square.png">
     <link rel="apple-touch-icon" href="siraj headshot square.png">
 
-    <link rel="preconnect" href="https://api.fontshare.com">
-    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
-    <link href="https://api.fontshare.com/v2/css?f[]=gambarino@400&display=swap" rel="stylesheet">
-    <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="preload" as="image" href="img/siraj-headshot.jpg">
 
     <style>
+        /* Design tokens: Apple design system (awesome-design-md/apple), accent #0071e3.
+           Light surfaces only: white and parchment alternate as section dividers. */
         :root {
-            --bg: #0a0d12;
-            --surface: #141a23;
-            --ink: #ffffff;
-            --muted: #9ba4b0;
-            --accent: #3b82f6;
-            --accent-ink: #0a0d12;
-            --paper: #e8ebef;
-            --paper-ink: #0a0d12;
-            --paper-muted: #525c69;
+            --blue: #0071e3;
+            --blue-hover: #0077ed;
+            --link: #0066cc;
+            --ink: #1d1d1f;
+            --muted: #636366;
+            --faint: #d2d2d7;
+            --canvas: #ffffff;
+            --parchment: #f5f5f7;
+            --hairline: #e0e0e0;
 
-            --display: 'Gambarino', 'Times New Roman', serif;
-            --text: 'General Sans', system-ui, sans-serif;
+            --font: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
 
-            --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
-            --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
-            --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
-            --step-head: clamp(2rem, 1.3rem + 3.2vw, 4rem);
-            --step-name: clamp(3.5rem, 11vw, 12.5rem);
+            --hero: clamp(44px, 6vw, 80px);
+            --display: clamp(34px, 4.4vw, 56px);
+            --lead: clamp(20px, 2vw, 24px);
+            --tagline: 21px;
+            --body: 17px;
+            --caption: 14px;
+            --fine: 12px;
 
-            --margin: clamp(20px, 2.4vw, 32px);
-            --stage-w: 47vw;
+            --radius: 18px;
+            --radius-lg: 28px;
+            --wrap: 1120px;
+            --section: clamp(80px, 11vw, 140px);
             --ease: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -84,16 +88,20 @@
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 64px;
             -webkit-text-size-adjust: 100%;
         }
 
         body {
             margin: 0;
-            background: var(--bg);
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(0, 113, 227, 0.12);
+            font-family: var(--font);
+            font-size: var(--body);
+            line-height: 1.47;
+            letter-spacing: -0.022em;
             color: var(--ink);
-            font-family: var(--text);
-            font-size: var(--step-body);
-            line-height: 1.5;
+            background: var(--canvas);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
@@ -102,16 +110,17 @@
         img {
             display: block;
             max-width: 100%;
+            height: auto;
         }
 
         h1,
         h2,
         h3,
         p,
+        figure,
         blockquote,
         ul,
-        ol,
-        figure {
+        ol {
             margin: 0;
         }
 
@@ -123,6 +132,7 @@
 
         a {
             color: inherit;
+            text-decoration: none;
         }
 
         button {
@@ -132,699 +142,1033 @@
             border: 0;
             padding: 0;
             cursor: pointer;
-            text-align: left;
         }
 
         :focus-visible {
-            outline: 2px solid var(--accent);
-            outline-offset: 4px;
+            outline: 2px solid var(--blue);
+            outline-offset: 3px;
+            border-radius: 6px;
         }
 
-        ::selection {
-            background: var(--accent);
-            color: var(--accent-ink);
+        .skip {
+            position: absolute;
+            left: 16px;
+            top: -60px;
+            z-index: 100;
+            background: var(--blue);
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 999px;
+            transition: top 0.2s var(--ease);
         }
 
-        .display {
-            font-family: var(--display);
-            font-weight: 400;
-            letter-spacing: -0.02em;
-            line-height: 0.92;
+        .skip:focus {
+            top: 12px;
         }
 
-        h2.display {
-            font-size: var(--step-head);
-            margin-bottom: 0.5em;
+        .wrap {
+            max-width: var(--wrap);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section {
+            padding: var(--section) 0;
+        }
+
+        .parchment {
+            background: var(--parchment);
+        }
+
+        .muted {
+            color: var(--muted);
+        }
+
+        .head {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 56px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            text-wrap: balance;
+        }
+
+        .head h2 {
+            font-size: var(--display);
+            font-weight: 600;
+            letter-spacing: -0.035em;
+            line-height: 1.08;
+        }
+
+        .head p {
+            margin-top: 12px;
+            font-size: var(--lead);
+            color: var(--muted);
+            line-height: 1.35;
+        }
+
+        /* ---------- Buttons and links (Apple pill grammar) ---------- */
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: 11px 22px;
+            border-radius: 999px;
+            background: var(--blue);
+            color: #fff;
+            font-size: var(--body);
+            transition: transform 0.2s var(--ease), background-color 0.2s;
+        }
+
+        .pill:hover {
+            background: var(--blue-hover);
+        }
+
+        .pill:active {
+            transform: scale(0.95);
+        }
+
+        .pill.ghost {
+            background: transparent;
+            color: var(--link);
+            box-shadow: inset 0 0 0 1px var(--link);
+        }
+
+        .pill.ghost:hover {
+            background: rgba(0, 113, 227, 0.06);
         }
 
         .link {
-            text-decoration: underline;
-            text-decoration-color: var(--accent);
-            text-decoration-thickness: 2px;
-            text-underline-offset: 0.3em;
-            transition: color 0.25s var(--ease), text-underline-offset 0.25s var(--ease);
+            color: var(--link);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            min-height: 32px;
+        }
+
+        .link::after {
+            content: '›';
+            font-size: 1.2em;
+            line-height: 1;
+            transition: transform 0.2s var(--ease);
         }
 
         .link:hover {
-            color: var(--accent);
-            text-underline-offset: 0.45em;
+            text-decoration: underline;
         }
 
-        .button {
-            display: inline-block;
-            background: var(--accent);
-            color: var(--accent-ink);
-            padding: 0.85em 1.6em;
-            text-decoration: none;
-            font-weight: 500;
-            transition: transform 0.25s var(--ease), background-color 0.25s var(--ease);
+        .link:hover::after {
+            transform: translateX(3px);
         }
 
-        .button:hover {
-            background: var(--ink);
-            transform: translateY(-2px);
+        /* ---------- "Read more": native details, short text first ---------- */
+        details.more summary {
+            list-style: none;
+            cursor: pointer;
+            color: var(--link);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            min-height: 32px;
         }
 
-        .button:active {
-            transform: translateY(0) scale(0.98);
-        }
-
-        /* ---------- Split: fixed stage + reading column ---------- */
-
-        .split {
-            display: grid;
-            grid-template-columns: var(--stage-w) 1fr;
-            position: relative;
-        }
-
-        .stage {
-            position: sticky;
-            top: 0;
-            height: 100svh;
-            padding: 20px 0 20px 20px;
-        }
-
-        .stage-frame {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background: var(--surface);
-        }
-
-        .stage-frame img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transform: scale(1.06);
-            transition: opacity 0.7s var(--ease), transform 6s linear;
-        }
-
-        .stage-frame img.is-on {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .stage-caption {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            padding: 48px 24px 20px;
-            font-size: var(--step-small);
-            background: rgba(10, 13, 18, 0.72);
-            transition: opacity 0.4s var(--ease);
-        }
-
-        .stage-caption:empty {
-            opacity: 0;
-        }
-
-        .column {
-            padding: 0 clamp(28px, 5vw, 72px);
-            min-width: 0;
-        }
-
-        .measure {
-            max-width: 34rem;
-        }
-
-        .chapter {
-            padding: clamp(96px, 14vh, 160px) 0;
-        }
-
-        /* ---------- Hero ---------- */
-
-        .hero {
-            position: relative;
-            min-height: 100svh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 120px 0 calc(var(--step-name) + 80px);
-        }
-
-        .nav {
-            position: absolute;
-            top: var(--margin);
-            right: calc(var(--margin) - clamp(28px, 5vw, 72px));
-            display: flex;
-            gap: clamp(16px, 2vw, 28px);
-            font-size: var(--step-body);
-        }
-
-        .nav a {
-            text-decoration: none;
-            color: var(--ink);
-            padding: 6px 0;
-            transition: color 0.25s var(--ease);
-        }
-
-        .nav a:hover {
-            color: var(--accent);
-        }
-
-        .nav a.nav-action {
-            color: var(--accent);
-        }
-
-        .nav a.nav-action:hover {
-            color: var(--ink);
-        }
-
-        .menu-toggle {
+        details.more summary::-webkit-details-marker {
             display: none;
         }
 
-        .hero-lead {
-            font-size: var(--step-lead);
-            line-height: 1.3;
-            max-width: 26ch;
-            margin-bottom: 1.4em;
+        details.more summary::after {
+            content: '+';
+            font-size: 20px;
+            line-height: 1;
+            transition: transform 0.3s var(--ease);
         }
 
-        .hero-roles {
-            color: var(--muted);
-            max-width: 32rem;
-            margin-bottom: 2.6em;
+        details.more[open] summary::after {
+            transform: rotate(45deg);
+        }
+
+        details.more summary .less {
+            display: none;
+        }
+
+        details.more[open] summary .less {
+            display: inline;
+        }
+
+        details.more[open] summary .more-label {
+            display: none;
+        }
+
+        details.more .more-body {
+            padding-top: 8px;
+            animation: open 0.45s var(--ease);
+        }
+
+        details.more .more-body p+p,
+        details.more .more-body p+blockquote {
+            margin-top: 12px;
+        }
+
+        @keyframes open {
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+        }
+
+        /* ---------- Header: 21st.dev "Header Navbar" (karthikmudunuri), ported to HTML/CSS ---------- */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-row {
+            max-width: var(--wrap);
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-weight: 600;
+            font-size: 19px;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        .nav-links a {
+            padding: 18px 14px;
+            font-size: var(--caption);
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .nav-links a:hover {
+            background: var(--parchment);
+        }
+
+        .nav-links a.is-active,
+        .nav-links a.cta {
+            color: var(--link);
+        }
+
+        .nav-toggle {
+            display: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+
+        .nav-toggle:hover {
+            background: var(--parchment);
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: var(--ink);
+            border-radius: 2px;
+            transition: transform 0.3s var(--ease);
+        }
+
+        .nav-toggle span+span {
+            margin-top: 6px;
+        }
+
+        .nav-toggle[aria-expanded="true"] span:first-child {
+            transform: translateY(4px) rotate(45deg);
+        }
+
+        .nav-toggle[aria-expanded="true"] span:last-child {
+            transform: translateY(-4px) rotate(-45deg);
+        }
+
+        .nav-panel {
+            display: none;
+            padding: 8px 24px 24px;
+            perspective: 600px;
+        }
+
+        .nav-panel a {
+            display: block;
+            padding: 12px 0;
+            font-size: var(--tagline);
+            font-weight: 600;
+            transform-origin: top;
+        }
+
+        .nav-panel.is-open a {
+            animation: flip 0.3s var(--ease) both;
+            animation-delay: calc(var(--i) * 70ms);
+        }
+
+        @keyframes flip {
+            from {
+                opacity: 0;
+                transform: rotateX(-90deg);
+            }
+        }
+
+        /* ---------- Hero (mock-up B) ---------- */
+        .hero {
+            background: var(--parchment);
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 56px;
+            align-items: center;
+            padding-top: 72px;
+            padding-bottom: 56px;
+        }
+
+        .hero h1 {
+            font-size: var(--hero);
+            font-weight: 600;
+            letter-spacing: -0.045em;
+            line-height: 1.02;
+            margin-bottom: 18px;
+        }
+
+        .hero-tag {
+            font-size: var(--lead);
+            font-weight: 400;
+            line-height: 1.4;
+            max-width: 30ch;
+            margin-bottom: 28px;
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 32px;
+        }
+
+        .chips li {
+            background: var(--canvas);
+            border-radius: 999px;
+            padding: 8px 14px;
+            font-size: var(--caption);
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
         }
 
         .stats {
             display: flex;
             flex-wrap: wrap;
-            gap: 28px 48px;
-        }
-
-        .stats dt {
-            color: var(--muted);
-            font-size: var(--step-small);
-            order: 2;
-        }
-
-        .stats dd {
-            margin: 0;
-            font-family: var(--display);
-            font-size: var(--step-head);
-            line-height: 1;
-            letter-spacing: -0.02em;
-            font-variant-numeric: tabular-nums;
-            order: 1;
-            margin-bottom: 6px;
+            gap: 20px 32px;
+            margin: 40px 0 0;
         }
 
         .stats div {
             display: flex;
-            flex-direction: column;
+            flex-direction: column-reverse;
         }
 
-        .wordmark {
-            position: absolute;
-            bottom: 40px;
-            right: calc(var(--margin) - clamp(28px, 5vw, 72px));
+        .stats dt {
+            font-size: var(--caption);
+            color: var(--muted);
+        }
+
+        .stats dd {
             margin: 0;
-            font-size: var(--step-name);
-            letter-spacing: -0.04em;
-            line-height: 0.8;
-            white-space: nowrap;
-            z-index: 3;
-            transform-origin: right bottom;
+            font-size: clamp(30px, 3vw, 42px);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .hero-photo {
+            position: relative;
+        }
+
+        .hero-photo img {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            object-position: 50% 15%;
+            border-radius: var(--radius-lg);
+            background: var(--canvas);
+            box-shadow: 3px 5px 30px rgba(0, 0, 0, 0.22);
             will-change: transform;
         }
 
-        /* ---------- Testimonials: letters ---------- */
-
-        .letter+.letter {
-            margin-top: clamp(96px, 12vh, 140px);
+        .badge {
+            position: absolute;
+            left: -28px;
+            bottom: 36px;
+            background: var(--canvas);
+            border-radius: var(--radius);
+            padding: 14px 18px;
+            font-size: var(--caption);
+            box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.25);
+            animation: float 5s ease-in-out infinite;
         }
 
-        .letter-writer {
-            width: 96px;
-            height: 96px;
+        .badge strong {
+            display: block;
+            font-size: var(--body);
+            font-weight: 600;
+        }
+
+        @keyframes float {
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        /* Action strip: event photos that drift sideways */
+        .strip {
+            overflow: hidden;
+            padding: 8px 0 64px;
+        }
+
+        .strip-track {
+            display: flex;
+            gap: 16px;
+            width: max-content;
+            animation: marquee 60s linear infinite;
+        }
+
+        .strip:hover .strip-track,
+        .strip:focus-within .strip-track,
+        .strip.is-paused .strip-track {
+            animation-play-state: paused;
+        }
+
+        .strip {
+            position: relative;
+        }
+
+        .strip-pause {
+            display: block;
+            margin: 0 auto 16px;
+            min-height: 36px;
+            padding: 6px 16px;
+            border-radius: 999px;
+            background: var(--canvas);
+            font-size: var(--caption);
+            color: var(--ink);
+            transition: transform 0.2s var(--ease);
+        }
+
+        .strip-pause:active {
+            transform: scale(0.95);
+        }
+
+        .strip figure {
+            width: 300px;
+        }
+
+        .strip img {
+            width: 300px;
+            height: 200px;
             object-fit: cover;
-            margin-bottom: 28px;
+            border-radius: var(--radius);
+            transition: transform 0.5s var(--ease);
         }
 
-        .letter-writer.is-logo {
-            object-fit: contain;
-            background: var(--paper);
-            padding: 16px;
+        .strip figure:hover img {
+            transform: scale(1.03);
         }
 
-        .letter-open {
-            font-size: var(--step-lead);
-            font-weight: 500;
-            line-height: 1.3;
-            margin-bottom: 20px;
-        }
-
-        .letter p+p {
-            margin-top: 20px;
-        }
-
-        .letter-sign {
-            margin-top: 40px;
-        }
-
-        .letter-sign strong {
-            display: block;
-            font-weight: 500;
-        }
-
-        .letter-sign span {
-            display: block;
+        .strip figcaption {
+            margin-top: 10px;
+            font-size: var(--caption);
             color: var(--muted);
-            font-size: var(--step-small);
-            max-width: 30rem;
         }
 
-        .letter-more {
-            display: inline-block;
-            margin-top: 20px;
+        .strip figcaption strong {
+            display: block;
+            color: var(--ink);
+            font-weight: 600;
         }
 
-        .all-letters {
-            margin-top: clamp(64px, 9vh, 96px);
+        @keyframes marquee {
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* ---------- Testimonials ---------- */
+        .quotes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            align-items: start;
+        }
+
+        .quote {
+            background: var(--parchment);
+            border-radius: var(--radius-lg);
             padding: 32px;
-            background: var(--surface);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
-        .all-letters p {
-            margin-bottom: 20px;
+        .quote-person {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 24px;
         }
 
-        /* ---------- About: a letter of my own ---------- */
-
-        .about-portrait {
+        .quote-person img {
             width: 56px;
             height: 56px;
             border-radius: 50%;
             object-fit: cover;
-            object-position: top;
-            margin-bottom: 28px;
-            background: var(--paper);
+            background: var(--canvas);
+            flex-shrink: 0;
         }
 
-        .about p+p {
-            margin-top: 1.1em;
+        .quote-person img.logo {
+            object-fit: contain;
+            padding: 8px;
         }
 
-        .about mark {
-            background: var(--accent);
-            color: var(--accent-ink);
-            padding: 0 0.2em;
+        .quote-person strong {
+            display: block;
+            font-weight: 600;
         }
 
-        .about-quote {
-            margin: 2.4em 0;
-            padding: 28px 32px;
-            background: var(--surface);
-            font-size: var(--step-lead);
+        .quote-person span {
+            display: block;
+            font-size: var(--caption);
+            color: var(--muted);
             line-height: 1.35;
         }
 
-        .about-quote footer {
-            margin-top: 14px;
-            font-size: var(--step-small);
+        .quote blockquote {
+            font-size: var(--tagline);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.3;
+        }
+
+        .quote .more-body {
             color: var(--muted);
         }
 
-        .about-points {
-            margin: 2em 0;
-            display: grid;
-            gap: 1.4em;
+        .quote .pdf {
+            margin-top: 8px;
+            font-size: var(--caption);
         }
 
-        .about-points strong {
-            display: block;
-            font-weight: 500;
-        }
-
-        .about-goal {
-            margin-top: 2.4em;
-            padding: 32px;
-            background: var(--accent);
-            color: var(--accent-ink);
-            font-size: var(--step-lead);
-            line-height: 1.35;
-        }
-
-        .about-sign {
+        .center {
+            text-align: center;
             margin-top: 40px;
         }
 
-        .about-sign strong {
-            display: block;
-            font-family: var(--display);
-            font-size: var(--step-lead);
-            font-weight: 400;
-        }
-
-        .about-sign span {
-            color: var(--muted);
-            font-size: var(--step-small);
-        }
-
-        /* ---------- Key events: the stage changes ---------- */
-
-        .events-intro {
-            margin-bottom: 48px;
-        }
-
-        .event img {
-            display: none;
-            width: 100%;
-            aspect-ratio: 4 / 3;
-            object-fit: cover;
-            margin-bottom: 14px;
-        }
-
-        .event-list li+li {
-            margin-top: 4px;
-        }
-
-        .event {
-            display: block;
-            width: 100%;
-            padding: 18px 0 18px 20px;
-            position: relative;
-            color: var(--muted);
-            transition: color 0.3s var(--ease), padding-left 0.3s var(--ease);
-        }
-
-        .event::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 22px;
-            bottom: 22px;
-            width: 4px;
-            background: var(--accent);
-            transform: scaleY(0);
-            transition: transform 0.35s var(--ease);
-        }
-
-        .event:hover {
-            color: var(--ink);
-        }
-
-        .event.is-on {
-            color: var(--ink);
-            padding-left: 32px;
-        }
-
-        .event.is-on::before {
-            transform: scaleY(1);
-        }
-
-        .event-title {
-            display: block;
-            font-family: var(--display);
-            font-size: var(--step-lead);
-            line-height: 1;
-            letter-spacing: -0.02em;
-        }
-
-        .event-note {
-            display: block;
-            margin-top: 6px;
-            font-size: var(--step-small);
-        }
-
-        /* ---------- Engagements ---------- */
-
-        .pillars li+li {
-            margin-top: 56px;
-        }
-
-        .pillars h3 {
-            font-size: var(--step-lead);
-            font-weight: 500;
-            line-height: 1.25;
-            margin-bottom: 10px;
-        }
-
-        .pillars .tags {
-            color: var(--accent);
-            font-size: var(--step-small);
-            margin-top: 10px;
-        }
-
-        /* ---------- Certificates: one printed sheet ---------- */
-
-        .certs {
-            position: relative;
-            padding: clamp(96px, 16vh, 180px) var(--margin);
+        /* ---------- Highlights bento ---------- */
+        .bento {
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 0 24px;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: minmax(200px, auto);
+            gap: 16px;
+        }
+
+        .tile {
+            background: var(--canvas);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            position: relative;
             overflow: hidden;
-        }
-
-        .certs-bg {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.3) saturate(0.8);
-        }
-
-        .certs-side {
-            position: relative;
-            grid-column: 1 / span 5;
-            align-self: center;
-            max-width: 28rem;
-        }
-
-        .certs-side p {
-            font-size: var(--step-lead);
-            line-height: 1.35;
-        }
-
-        .sheet {
-            position: relative;
-            grid-column: 7 / span 6;
-            background: var(--paper);
-            color: var(--paper-ink);
-            padding: 72px clamp(28px, 4vw, 64px);
-            text-align: center;
-            -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14'%3E%3Cpath d='M0 0h4a10 10 0 0 0 20 0h4v14H0z'/%3E%3C/svg%3E") top left / 28px 14px repeat-x,
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14'%3E%3Cpath d='M0 14h4a10 10 0 0 1 20 0h4V0H0z'/%3E%3C/svg%3E") bottom left / 28px 14px repeat-x,
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1'/%3E%3C/svg%3E") center / 100% calc(100% - 26px) no-repeat;
-            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14'%3E%3Cpath d='M0 0h4a10 10 0 0 0 20 0h4v14H0z'/%3E%3C/svg%3E") top left / 28px 14px repeat-x,
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14'%3E%3Cpath d='M0 14h4a10 10 0 0 1 20 0h4V0H0z'/%3E%3C/svg%3E") bottom left / 28px 14px repeat-x,
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1'/%3E%3C/svg%3E") center / 100% calc(100% - 26px) no-repeat;
-        }
-
-        .sheet h2 {
-            font-size: var(--step-head);
-            margin-bottom: 10px;
-        }
-
-        .sheet-note {
-            font-size: var(--step-small);
-            color: var(--paper-muted);
-        }
-
-        .sheet-group {
-            margin-top: 56px;
-        }
-
-        .sheet-group h3 {
-            font-size: var(--step-body);
-            font-weight: 500;
-            margin-bottom: 20px;
-        }
-
-        .sheet-group ul {
-            max-width: 440px;
-            margin: 0 auto;
-            text-align: left;
-        }
-
-        .sheet-group li+li {
-            margin-top: 16px;
-        }
-
-        .cert {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 0 20px;
-            text-decoration: none;
-            padding: 6px 0;
-            transition: transform 0.25s var(--ease);
-        }
-
-        .cert:hover {
-            transform: translateX(4px);
-        }
-
-        .cert-name {
-            font-weight: 500;
-            text-decoration: underline;
-            text-decoration-color: transparent;
-            text-underline-offset: 0.25em;
-            transition: text-decoration-color 0.25s var(--ease);
-        }
-
-        .cert:hover .cert-name,
-        .cert:focus-visible .cert-name {
-            text-decoration-color: currentColor;
-        }
-
-        .cert-year {
-            font-variant-numeric: tabular-nums;
-        }
-
-        .cert-desc {
-            grid-column: 1 / -1;
-            font-size: var(--step-small);
-            color: var(--paper-muted);
-            margin-top: 2px;
-        }
-
-        .cert.is-featured .cert-name {
-            font-family: var(--display);
-            font-weight: 400;
-            font-size: var(--step-lead);
-            line-height: 1.05;
-        }
-
-        .sheet-close {
-            margin-top: 56px;
-            font-size: var(--step-small);
-            color: var(--paper-muted);
-        }
-
-        /* ---------- Where I serve: names in columns ---------- */
-
-        .serve {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 0 24px;
-            padding: clamp(96px, 14vh, 140px) var(--margin);
-            background: var(--surface);
-        }
-
-        .serve h2 {
-            grid-column: 1 / span 3;
-            font-size: var(--step-head);
-            line-height: 0.95;
-        }
-
-        .serve-cols {
-            grid-column: 4 / span 9;
-            columns: 3;
-            column-gap: 32px;
-            font-size: var(--step-lead);
-            line-height: 1.5;
-        }
-
-        .serve-cols ul {
-            break-inside: avoid;
-            margin-bottom: 1.5em;
-        }
-
-        .serve-cols li:first-child {
-            color: var(--muted);
-        }
-
-        /* ---------- Footer: name across the last photograph ---------- */
-
-        .footer {
-            position: relative;
-            min-height: 100svh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: var(--margin);
-            overflow: hidden;
+            gap: 12px;
+            transition: transform 0.4s var(--ease);
         }
 
-        .footer-bg {
+        .tile:hover {
+            transform: scale(1.015);
+        }
+
+        .tile .kicker {
+            font-size: var(--caption);
+            color: var(--muted);
+        }
+
+        .tile .big {
+            font-size: clamp(30px, 3.4vw, 44px);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+        }
+
+        .tile.span-2 {
+            grid-column: span 2;
+        }
+
+        .tile.tall {
+            grid-row: span 2;
+        }
+
+        .tile.blue {
+            background: var(--blue);
+            color: #fff;
+        }
+
+        .tile.blue .kicker {
+            color: #fff;
+        }
+
+        .tile.photo {
+            padding: 0;
+            justify-content: flex-end;
+            min-height: 260px;
+        }
+
+        .tile.photo img {
             position: absolute;
             inset: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0.5);
-            z-index: -1;
+            transition: transform 0.8s var(--ease);
         }
 
-        .footer-top {
+        .tile.photo:hover img {
+            transform: scale(1.05);
+        }
+
+        .tile.photo .label {
+            position: relative;
+            margin: 16px;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: var(--radius);
+            padding: 14px 18px;
+            align-self: flex-start;
+        }
+
+        .tile.photo .label strong {
+            display: block;
+            font-size: var(--tagline);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .tile.photo .label span {
+            font-size: var(--caption);
+            color: var(--muted);
+        }
+
+        /* ---------- Mission: words fill in as you scroll ---------- */
+        .mission {
+            height: 220vh;
+            position: relative;
+        }
+
+        .mission-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .mission-text {
+            font-size: var(--display);
+            font-weight: 600;
+            letter-spacing: -0.035em;
+            line-height: 1.15;
+            max-width: 22ch;
+        }
+
+        .js .mission-text .w {
+            color: var(--faint);
+            transition: color 0.3s;
+        }
+
+        .js .mission-text .w.on {
+            color: var(--ink);
+        }
+
+        .js .mission-text .w.key.on {
+            color: var(--blue);
+        }
+
+        /* ---------- About ---------- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .about-photo {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .about-photo img {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            object-position: 25% 50%;
+            will-change: transform;
+        }
+
+        .about h2 {
+            font-size: var(--display);
+            font-weight: 600;
+            letter-spacing: -0.035em;
+            line-height: 1.08;
+            margin-bottom: 18px;
+        }
+
+        .about .lead {
+            font-size: var(--lead);
+            line-height: 1.4;
+        }
+
+        .pillars-mini {
+            margin-top: 28px;
+            display: grid;
+            gap: 18px;
+        }
+
+        .pillars-mini strong {
+            display: block;
+            font-weight: 600;
+        }
+
+        .about-quote {
+            padding: 20px 24px;
+            background: var(--canvas);
+            border-radius: var(--radius);
+            font-size: var(--tagline);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.3;
+        }
+
+        .about-quote cite {
+            display: block;
+            margin-top: 8px;
+            font-size: var(--caption);
+            font-weight: 400;
+            font-style: normal;
+            color: var(--muted);
+        }
+
+        /* ---------- Key events ---------- */
+        .events {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px 20px;
+        }
+
+        .event {
+            text-align: left;
+            display: block;
+            width: 100%;
+        }
+
+        .event-img {
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--parchment);
+        }
+
+        .event img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            transition: transform 0.7s var(--ease);
+        }
+
+        .event:hover img {
+            transform: scale(1.05);
+        }
+
+        .event strong {
+            display: block;
+            margin-top: 14px;
+            font-weight: 600;
+        }
+
+        .event span {
+            font-size: var(--caption);
+            color: var(--muted);
+        }
+
+        .lightbox {
+            overscroll-behavior: contain;
+            border: 0;
+            padding: 0;
+            border-radius: var(--radius-lg);
+            max-width: min(1000px, 94vw);
+            width: 100%;
+            background: var(--canvas);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+        }
+
+        .lightbox::backdrop {
+            background: rgba(245, 245, 247, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .lightbox[open] {
+            animation: pop 0.4s var(--ease);
+        }
+
+        @keyframes pop {
+            from {
+                opacity: 0;
+                transform: scale(0.96);
+            }
+        }
+
+        .lightbox img {
+            width: 100%;
+            max-height: 72vh;
+            object-fit: contain;
+            background: var(--parchment);
+        }
+
+        .lightbox-caption {
+            padding: 20px 24px;
             display: flex;
             justify-content: space-between;
-            gap: 32px;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .lightbox-caption strong {
+            display: block;
+            font-size: var(--tagline);
+            font-weight: 600;
+        }
+
+        .lightbox-close {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(210, 210, 215, 0.64);
+            font-size: 22px;
+            flex-shrink: 0;
+            transition: transform 0.2s var(--ease);
+        }
+
+        .lightbox-close:active {
+            transform: scale(0.95);
+        }
+
+        /* ---------- Engagements ---------- */
+        .engage {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        .engage li {
+            background: var(--canvas);
+            border-radius: var(--radius);
+            padding: 24px 28px;
+        }
+
+        .engage li+li {
+            margin-top: 12px;
+        }
+
+        .engage h3 {
+            font-size: var(--tagline);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .engage .sum {
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .engage .tags {
+            margin-top: 10px;
+            font-size: var(--caption);
+            color: var(--link);
+        }
+
+        /* ---------- Certificates (Apple store utility cards) ---------- */
+        .certs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .cert {
+            border: 1px solid var(--hairline);
+            border-radius: var(--radius);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s var(--ease), border-color 0.3s;
+        }
+
+        .cert:hover {
+            transform: translateY(-3px);
+            border-color: var(--faint);
+        }
+
+        .cert .kicker {
+            font-size: var(--caption);
+            color: var(--muted);
+        }
+
+        .cert h3 {
+            font-size: var(--tagline);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin: 6px 0 8px;
+        }
+
+        .cert p {
+            color: var(--muted);
+            flex-grow: 1;
+        }
+
+        .cert .links {
+            display: flex;
+            gap: 18px;
+            margin-top: 16px;
             flex-wrap: wrap;
-            font-size: var(--step-body);
         }
 
-        .footer-top ul li+li {
-            margin-top: 6px;
+        .cert.featured {
+            grid-column: span 2;
+            background: var(--parchment);
+            border-color: var(--parchment);
         }
 
-        .footer-top a {
-            text-decoration: none;
-            transition: color 0.25s var(--ease);
+        .cert.featured h3 {
+            font-size: clamp(26px, 2.6vw, 34px);
         }
 
-        .footer-top a:hover {
-            color: var(--accent);
-        }
-
-        .footer-contact {
-            text-align: right;
-        }
-
-        .footer-contact p {
-            max-width: 22rem;
-            margin-bottom: 14px;
-        }
-
-        .footer-contact .link {
-            text-decoration-color: var(--accent);
-        }
-
-        .footer-bottom .display {
-            font-size: 16.5vw;
-            letter-spacing: -0.04em;
-            line-height: 0.8;
-            white-space: nowrap;
-            transform-origin: left bottom;
-        }
-
-        .acrostic {
+        /* ---------- Capabilities ---------- */
+        .caps {
             display: flex;
             flex-wrap: wrap;
-            gap: 4px 20px;
-            margin-top: 28px;
-            font-size: var(--step-small);
+            justify-content: center;
+            gap: 12px;
         }
 
-        .acrostic b {
-            color: var(--accent);
-            font-weight: 500;
+        .caps li {
+            background: var(--canvas);
+            border-radius: 999px;
+            padding: 14px 22px;
+            text-align: center;
         }
 
-        .legal {
-            margin-top: 12px;
-            font-size: var(--step-small);
-            color: rgba(255, 255, 255, 0.75);
+        .caps strong {
+            font-weight: 600;
         }
 
-        /* ---------- Entrance motion ---------- */
+        .caps span {
+            color: var(--muted);
+        }
 
+        /* ---------- Footer: Apple style ---------- */
+        .footer {
+            background: var(--parchment);
+            color: #424245;
+            font-size: var(--fine);
+            padding: 40px 0 24px;
+        }
+
+        .footer-note {
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--faint);
+            color: var(--muted);
+        }
+
+        .footer-cols {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            padding: 24px 0;
+        }
+
+        .footer-cols h3 {
+            font-size: var(--fine);
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+
+        .footer-cols li {
+            line-height: 1.6;
+        }
+
+        .footer-cols a {
+            display: inline-block;
+            padding: 6px 0;
+        }
+
+        .footer-cols a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-legal {
+            border-top: 1px solid var(--faint);
+            padding-top: 16px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            color: var(--muted);
+        }
+
+        /* ---------- Motion: entrances (content stays visible without JS) ---------- */
         .js .rise {
             opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+            transform: translateY(28px);
+            transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
             transition-delay: calc(var(--i, 0) * 80ms);
         }
 
-        .js .rise.is-in {
+        .js .rise.in {
+            opacity: 1;
+            transform: none;
+        }
+
+        .js .grow {
+            opacity: 0;
+            transform: scale(0.92);
+            transition: opacity 1s var(--ease), transform 1s var(--ease);
+            transition-delay: calc(var(--i, 0) * 70ms);
+        }
+
+        .js .grow.in {
             opacity: 1;
             transform: none;
         }
@@ -837,172 +1181,128 @@
             *,
             *::before,
             *::after {
-                transition-duration: 0.01ms !important;
                 animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
 
-            .js .rise {
+            .js .rise,
+            .js .grow {
                 opacity: 1;
                 transform: none;
             }
 
-            .stage-frame img {
-                transform: none !important;
+            .strip-track {
+                animation: none;
+            }
+
+            .strip {
+                overflow-x: auto;
+            }
+
+            .strip-pause {
+                display: none;
+            }
+
+            .mission {
+                height: auto;
+            }
+
+            .mission-sticky {
+                position: static;
+                height: auto;
+                padding: var(--section) 0;
             }
         }
 
         /* ---------- Tablet ---------- */
+        @media (max-width: 1023px) {
 
-        @media (max-width: 1100px) {
-            .certs-side {
-                grid-column: 1 / -1;
-                margin-bottom: 48px;
-            }
-
-            .sheet {
-                grid-column: 1 / -1;
-                max-width: 640px;
-                width: 100%;
-                justify-self: center;
-            }
-
-            .serve h2 {
-                grid-column: 1 / -1;
-                margin-bottom: 32px;
-            }
-
-            .serve-cols {
-                grid-column: 1 / -1;
+            .quotes,
+            .certs,
+            .events,
+            .bento,
+            .footer-cols {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
         /* ---------- Phone ---------- */
-
-        @media (max-width: 800px) {
-            .split {
-                display: block;
-            }
-
-            .stage {
-                position: relative;
-                height: 58svh;
-                padding: 12px 12px 0;
-            }
-
-            .stage-caption {
+        @media (max-width: 833px) {
+            .nav-links {
                 display: none;
             }
 
-            .column {
-                padding: 0 20px;
-            }
-
-            .hero {
-                min-height: 0;
-                padding: calc(13.5vw + 24px) 0 72px;
-                justify-content: flex-start;
-            }
-
-            .wordmark {
-                position: absolute;
-                top: -3vw;
-                bottom: auto;
-                left: 20px;
-                right: auto;
-                font-size: 15.5vw;
-            }
-
-            .nav {
-                position: fixed;
-                inset: 0;
-                z-index: 50;
-                flex-direction: column;
-                justify-content: center;
-                align-items: flex-start;
-                gap: 8px;
-                padding: 0 28px;
-                background: var(--bg);
-                font-family: var(--display);
-                font-size: var(--step-head);
-                visibility: hidden;
-                opacity: 0;
-                transition: opacity 0.3s var(--ease), visibility 0.3s;
-            }
-
-            .nav.is-open {
-                visibility: visible;
-                opacity: 1;
-            }
-
-            .menu-toggle {
-                display: block;
-                position: fixed;
-                top: 24px;
-                right: 24px;
-                z-index: 60;
-                background: var(--bg);
-                color: var(--ink);
-                padding: 10px 16px;
-                font-size: var(--step-body);
-            }
-
-
-            .chapter {
-                padding: 88px 0;
-            }
-
-            .certs {
-                padding: 88px 10px;
-            }
-
-            .certs-side {
-                padding: 0 10px;
-            }
-
-            .sheet {
-                padding: 64px 24px;
-            }
-
-
-            .serve {
-                padding: 88px 20px;
-            }
-
-            .serve-cols {
-                columns: 2;
-                column-gap: 20px;
-                font-size: var(--step-body);
-            }
-
-            .footer {
-                min-height: 88svh;
-                padding: 24px 20px;
-            }
-
-            .footer-top {
+            .nav-toggle {
+                display: inline-flex;
                 flex-direction: column;
             }
 
-            .footer-contact {
-                text-align: left;
-            }
-
-            .footer-bottom .display {
-                font-size: 17.5vw;
-            }
-
-            .event img {
+            .nav-panel.is-open {
                 display: block;
             }
 
-            .event,
-            .event.is-on {
-                color: var(--ink);
-                padding-left: 0;
+            .hero-grid,
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 36px;
             }
 
-            .event::before {
-                display: none;
+            .hero-grid {
+                padding-top: 36px;
+            }
+
+            .badge {
+                left: 12px;
+            }
+
+            .stats {
+                gap: 16px 28px;
+            }
+
+            .quotes,
+            .certs,
+            .events {
+                grid-template-columns: 1fr;
+            }
+
+            .cert.featured {
+                grid-column: auto;
+            }
+
+            .quote {
+                padding: 24px;
+            }
+
+            .strip figure,
+            .strip img {
+                width: 220px;
+            }
+
+            .strip img {
+                height: 150px;
+            }
+
+            .mission {
+                height: 180vh;
+            }
+
+            .head {
+                margin-bottom: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .bento {
+                grid-template-columns: 1fr;
+            }
+
+            .tile.span-2 {
+                grid-column: auto;
+            }
+
+            .tile.tall {
+                grid-row: auto;
             }
         }
     </style>
@@ -1010,534 +1310,619 @@
 
 <body>
     <script>document.documentElement.classList.add('js');</script>
+    <a class="skip" href="#top">Skip to content</a>
 
-    <div class="split">
-        <!-- The stage: one photograph that stays while the column scrolls -->
-        <aside class="stage" aria-label="Photographs">
-            <div class="stage-frame" id="stage">
-                <img class="is-on" data-key="hero" src="img/siraj-headshot.jpg" alt="Portrait of Siraj Munir"
-                    width="843" height="1124" style="object-position: 50% 20%;">
-                <img data-key="testimonials" src="img/mps-ops.jpg" alt="Volunteers at a Meet-the-People Session"
-                    width="1600" height="1200" loading="lazy">
-                <img data-key="about" src="img/preusem-pic.jpg" alt="Siraj emceeing the Pre-University Seminar"
-                    width="1600" height="1067" loading="lazy" style="object-position: 25% 50%;">
-                <img data-key="engagements" src="img/yn-pic-1.jpg" alt="Siglap Youth Network members"
-                    width="1600" height="1200" loading="lazy">
-                <p class="stage-caption" id="stage-caption" aria-live="polite"></p>
-            </div>
-        </aside>
+    <!-- Header: 21st.dev "Header Navbar" layout -->
+    <header class="nav">
+        <div class="nav-row">
+            <a class="nav-logo" href="#top" translate="no">Siraj Munir</a>
+            <nav class="nav-links" aria-label="Main">
+                <a href="#testimonials">Testimonials</a>
+                <a href="#highlights">Highlights</a>
+                <a href="#about">About</a>
+                <a href="#events">Events</a>
+                <a href="#certificates">Certificates</a>
+                <a class="cta" href="#contact">Contact</a>
+            </nav>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Open main menu" aria-expanded="false"
+                aria-controls="nav-panel"><span></span><span></span></button>
+        </div>
+        <nav class="nav-panel" id="nav-panel" aria-label="Mobile">
+            <a href="#testimonials" style="--i:0">Testimonials</a>
+            <a href="#highlights" style="--i:1">Highlights</a>
+            <a href="#about" style="--i:2">About</a>
+            <a href="#events" style="--i:3">Events</a>
+            <a href="#certificates" style="--i:4">Certificates</a>
+            <a href="#contact" style="--i:5">Contact</a>
+        </nav>
+    </header>
 
-        <main class="column">
-            <!-- Hero -->
-            <header class="hero" id="hero" data-stage="hero">
-                <button class="menu-toggle" id="menu-toggle" aria-expanded="false"
-                    aria-controls="nav">Menu</button>
-                <nav class="nav" id="nav" aria-label="Main">
-                    <a href="#testimonials">Testimonials</a>
-                    <a href="#about">About</a>
-                    <a href="#events">Key events</a>
-                    <a href="#certificates">Certificates</a>
-                    <a href="#contact" class="nav-action">Contact</a>
-                </nav>
-
-                <p class="hero-lead rise">Driven to learn, committed to serve, and growing to make a greater impact.</p>
-                <p class="hero-roles rise" style="--i:1">Executive Member of the Siglap Youth Network and the Eastwood
-                    Ria Network. Professional emcee. Aspiring engineer, based in Singapore.</p>
-
-                <dl class="stats rise" style="--i:2">
-                    <div>
-                        <dt>People reached</dt>
-                        <dd><span class="counter" data-target="10000">10,000</span>+</dd>
-                    </div>
-                    <div>
-                        <dt>Volunteer hours</dt>
-                        <dd><span class="counter" data-target="1000">1,000</span>+</dd>
-                    </div>
-                    <div>
-                        <dt>Residents engaged</dt>
-                        <dd><span class="counter" data-target="1500">1,500</span>+</dd>
-                    </div>
-                </dl>
-
-                <p class="rise" style="--i:3; margin-top: 48px;"><a class="button" href="#contact">Get in touch</a></p>
-
-                <h1 class="wordmark display" id="wordmark">siraj munir</h1>
-            </header>
-
-            <!-- Testimonials -->
-            <section class="chapter" id="testimonials" data-stage="testimonials" aria-labelledby="t-head">
-                <div class="measure">
-                    <h2 class="display rise" id="t-head">Testimonials</h2>
-                    <p class="rise" style="--i:1; color: var(--muted); margin-bottom: 64px;">Guidance that shapes my
-                        perspective and approach.</p>
-
-                    <article class="letter rise">
-                        <img class="letter-writer" src="img/maliki-pic.jpg" alt="Dr Maliki Osman" width="96"
-                            height="96" loading="lazy" style="object-position: 30% 30%;">
-                        <p class="letter-open">Siraj demonstrates exceptional empathy and a genuine willingness to
-                            learn.</p>
-                        <p>His remarkable ability to listen to residents and coordinate operations sets him apart.</p>
-                        <div class="letter-sign">
-                            <strong>Dr Maliki Osman</strong>
-                            <span>Senior Advisor, Nanyang Technological University (NTU) &amp; Distinguished
-                                Fellow</span>
-                            <span>Former Minister in the Prime Minister's Office, Second Minister for Education and
-                                Second Minister for Foreign Affairs</span>
-                            <span>Former Mayor of South East District</span>
-                        </div>
-                        <a class="link letter-more" href="testimonial_maliki.pdf#view=FitH" target="_blank"
-                            rel="noopener">Read the full testimonial (PDF)</a>
-                    </article>
-
-                    <article class="letter rise">
-                        <img class="letter-writer is-logo" src="pap logo.svg" alt="PAP Bedok Branch" width="96"
-                            height="96" loading="lazy">
-                        <p class="letter-open">Siraj brings commitment and teamwork to grassroots learning.</p>
-                        <p>As a dedicated volunteer writer, he handles sensitive information professionally and shows a
-                            high level of empathy, maturity, and precision in advocating for our residents.</p>
-                        <div class="letter-sign">
-                            <strong>Linus Ng</strong>
-                            <span>Branch Secretary, PAP Bedok Branch</span>
-                        </div>
-                        <a class="link letter-more" href="Recommendation_Siraj_PAP.pdf#view=FitH" target="_blank"
-                            rel="noopener">Read the full testimonial (PDF)</a>
-                    </article>
-
-                    <article class="letter rise">
-                        <img class="letter-writer" src="img/errn-pic.jpg" alt="Eastwood Ria Neighbourhood Committee"
-                            width="96" height="96" loading="lazy">
-                        <p class="letter-open">Siraj consistently shows a positive attitude towards community service.
-                        </p>
-                        <p>He is approachable, respectful and highly reliable. His maturity and strong sense of
-                            responsibility reflect a genuine interest in serving the community.</p>
-                        <div class="letter-sign">
-                            <strong>Mdm Sharifah Zainon</strong>
-                            <span>Chairman, Eastwood Ria Residents Network (ERRN)</span>
-                        </div>
-                        <a class="link letter-more" href="Testimonial%20Mdm%20Sharifah.pdf#view=FitH" target="_blank"
-                            rel="noopener">Read the full testimonial (PDF)</a>
-                    </article>
-
-                    <div class="all-letters rise">
-                        <p>Every testimonial, collected in one document.</p>
-                        <a class="button" href="testimonial%20v8.pdf#view=FitH" target="_blank" rel="noopener">Read
-                            all testimonials</a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- About -->
-            <section class="chapter about" id="about" data-stage="about" aria-labelledby="a-head">
-                <div class="measure">
-                    <h2 class="display rise" id="a-head">Engineering for the community</h2>
-                    <img class="about-portrait rise" src="img/siraj-headshot-square.jpg" alt="" width="56"
-                        height="56" loading="lazy">
-
-                    <p class="rise">My mission is to earn my degree in engineering so that I may build a more
-                        <mark>inclusive world</mark>, where technical solutions are always grounded in human empathy.
-                    </p>
-                    <p class="rise">I believe that the most profound technical skills are those that include the human
-                        element. The world faces deep social and ethical problems that require us to be directly on the
-                        ground. This is why I immerse myself in my community today: I want to understand exactly how
-                        the real world works before I begin to build for it.</p>
-
-                    <blockquote class="about-quote rise">
-                        <p>The best way to find yourself is to lose yourself in the service of others.</p>
-                        <footer>Mahatma Gandhi</footer>
-                    </blockquote>
-
-                    <p class="rise">My experiences have taught me that true problem solving begins with listening. I am
-                        dedicated to bridging the gap between pure logic and the people it is meant to serve.</p>
-
-                    <ul class="about-points">
-                        <li class="rise"><strong>Advocating for residents</strong>At weekly Meet-the-People Sessions, I
-                            translate emotional struggles into actionable government appeals. This role has taught me
-                            real problem solving beyond textbooks.</li>
-                        <li class="rise"><strong>Grassroots coordination</strong>Working with the Siglap Youth Network
-                            and the Eastwood Ria Network, I identify and address daily community hurdles.</li>
-                        <li class="rise"><strong>Connecting with people</strong>As an emcee, I focus on understanding
-                            human interaction. Whether managing the energy of a room or a small group, I am learning to
-                            communicate with heart.</li>
+    <main id="top">
+        <!-- Hero -->
+        <section class="hero" aria-labelledby="hero-name">
+            <div class="wrap hero-grid">
+                <div>
+                    <h1 class="rise" id="hero-name" translate="no">Siraj Munir</h1>
+                    <p class="hero-tag rise" style="--i:1">Driven to learn, committed to serve, growing to make a
+                        greater impact.</p>
+                    <ul class="chips rise" style="--i:2" aria-label="Roles">
+                        <li>Siglap Youth Network Executive Member</li>
+                        <li>Eastwood Ria Network Executive Member</li>
+                        <li>Professional emcee</li>
+                        <li>Aspiring engineer</li>
                     </ul>
+                    <div class="actions rise" style="--i:3">
+                        <a class="pill" href="#testimonials">Read Testimonials</a>
+                        <a class="pill ghost" href="#contact">Get in Touch</a>
+                    </div>
+                    <dl class="stats rise" style="--i:4">
+                        <div>
+                            <dt>People reached</dt>
+                            <dd><span class="count" data-to="10000">10,000</span>+</dd>
+                        </div>
+                        <div>
+                            <dt>Volunteer hours</dt>
+                            <dd><span class="count" data-to="1000">1,000</span>+</dd>
+                        </div>
+                        <div>
+                            <dt>Residents engaged</dt>
+                            <dd><span class="count" data-to="1500">1,500</span>+</dd>
+                        </div>
+                    </dl>
+                </div>
+                <div class="hero-photo rise" style="--i:2">
+                    <img src="img/siraj-headshot.jpg" alt="Portrait of Siraj Munir" width="843" height="1124"
+                        fetchpriority="high" id="hero-img">
+                    <p class="badge"><strong>6th place, national</strong>Singapore Futures Youth Competition</p>
+                </div>
+            </div>
+            <div class="strip" id="strip-wrap" aria-label="Event photos">
+                <button class="strip-pause" id="strip-pause" type="button" aria-pressed="false">Pause
+                    Photos</button>
+                <div class="strip-track" id="strip"></div>
+            </div>
+        </section>
 
-                    <p class="about-goal rise">I serve my community today so that I can craft inclusive engineering
-                        solutions tomorrow. My ambition is to become a builder who ensures everyone can prosper
-                        together.</p>
+        <!-- Testimonials (first, per brief) -->
+        <section class="section" id="testimonials" aria-labelledby="t-head">
+            <div class="wrap">
+                <div class="head rise">
+                    <h2 id="t-head">Testimonials</h2>
+                    <p>Guidance that shapes my perspective and approach.</p>
+                </div>
+                <div class="quotes">
+                    <article class="quote rise">
+                        <div class="quote-person">
+                            <img src="img/maliki-pic.jpg" alt="" width="56" height="56" loading="lazy"
+                                style="object-position: 30% 30%;">
+                            <div><strong>Dr Maliki Osman</strong><span>Former Minister in the Prime Minister's
+                                    Office</span></div>
+                        </div>
+                        <blockquote>“Siraj demonstrates exceptional empathy and a genuine willingness to learn.”
+                        </blockquote>
+                        <details class="more">
+                            <summary><span class="more-label">Read More</span><span class="less">Show Less</span></summary>
+                            <div class="more-body">
+                                <p>“His remarkable ability to listen to residents and coordinate operations sets him
+                                    apart.”</p>
+                                <p>Senior Advisor, Nanyang Technological University (NTU) &amp; Distinguished Fellow.
+                                    Former Minister in the Prime Minister's Office, Second Minister for Education and
+                                    Second Minister for Foreign Affairs. Former Mayor of South East District.</p>
+                            </div>
+                        </details>
+                        <a class="link pdf" href="testimonial_maliki.pdf#view=FitH" target="_blank"
+                            rel="noopener">Full Testimonial (PDF)</a>
+                    </article>
 
-                    <div class="about-sign rise">
-                        <strong>Siraj Munir</strong>
-                        <span>Singapore</span>
+                    <article class="quote rise" style="--i:1">
+                        <div class="quote-person">
+                            <img class="logo" src="pap logo.svg" alt="" width="56" height="56" loading="lazy">
+                            <div><strong>Linus Ng</strong><span>Branch Secretary, PAP Bedok Branch</span></div>
+                        </div>
+                        <blockquote>“Siraj brings commitment and teamwork to grassroots learning.”</blockquote>
+                        <details class="more">
+                            <summary><span class="more-label">Read More</span><span class="less">Show Less</span></summary>
+                            <div class="more-body">
+                                <p>“As a dedicated volunteer writer, he handles sensitive information professionally
+                                    and shows a high level of empathy, maturity, and precision in advocating for our
+                                    residents.”</p>
+                            </div>
+                        </details>
+                        <a class="link pdf" href="Recommendation_Siraj_PAP.pdf#view=FitH" target="_blank"
+                            rel="noopener">Full Testimonial (PDF)</a>
+                    </article>
+
+                    <article class="quote rise" style="--i:2">
+                        <div class="quote-person">
+                            <img src="img/errn-pic.jpg" alt="" width="56" height="56" loading="lazy">
+                            <div><strong>Mdm Sharifah Zainon</strong><span>Chairman, Eastwood Ria Residents
+                                    Network</span></div>
+                        </div>
+                        <blockquote>“Siraj consistently shows a positive attitude towards community service.”
+                        </blockquote>
+                        <details class="more">
+                            <summary><span class="more-label">Read More</span><span class="less">Show Less</span></summary>
+                            <div class="more-body">
+                                <p>“He is approachable, respectful and highly reliable. His maturity and strong sense
+                                    of responsibility reflect a genuine interest in serving the community.”</p>
+                            </div>
+                        </details>
+                        <a class="link pdf" href="Testimonial%20Mdm%20Sharifah.pdf#view=FitH" target="_blank"
+                            rel="noopener">Full Testimonial (PDF)</a>
+                    </article>
+                </div>
+                <p class="center rise"><a class="pill" href="testimonial%20v8.pdf#view=FitH" target="_blank"
+                        rel="noopener">Read All Testimonials</a></p>
+            </div>
+        </section>
+
+        <!-- Highlights bento -->
+        <section class="section parchment" id="highlights" aria-labelledby="h-head">
+            <div class="wrap">
+                <div class="head rise">
+                    <h2 id="h-head">Highlights</h2>
+                    <p>Achievements, roles and recognition at a glance.</p>
+                </div>
+                <div class="bento">
+                    <a class="tile photo span-2 tall grow" href="#certificates">
+                        <img src="img/sfyc-pic.jpg" alt="Siraj's team at the Singapore Futures Youth Competition" width="1600" height="1067"
+                            loading="lazy">
+                        <span class="label"><strong>6th place nationally</strong><span>Singapore Futures Youth
+                                Competition, NUS Lee Kuan Yew School of Public Policy</span></span>
+                    </a>
+                    <div class="tile blue grow" style="--i:1">
+                        <span class="kicker">CoderZ robotics</span>
+                        <span class="big">2nd place</span>
+                        <p>National coding and robotics competition.</p>
+                    </div>
+                    <div class="tile grow" style="--i:2">
+                        <span class="kicker">Edusave Merit Award</span>
+                        <span class="big">Top 25%</span>
+                        <p>Of the cohort academically.</p>
+                    </div>
+                    <div class="tile grow" style="--i:3">
+                        <span class="kicker">Executive Member</span>
+                        <span class="big">2 networks</span>
+                        <p>Siglap Youth Network and Eastwood Ria Network.</p>
+                    </div>
+                    <div class="tile grow" style="--i:4">
+                        <span class="kicker">National Service</span>
+                        <span class="big">Company IC</span>
+                        <p>HTA 202 Intake.</p>
+                    </div>
+                    <a class="tile photo span-2 grow" style="--i:5" href="#events">
+                        <img src="img/preusem-pic.jpg" alt="Siraj emceeing the Pre-University Seminar" width="1600" height="1067" loading="lazy"
+                            style="object-position: 30% 45%;">
+                        <span class="label"><strong>Official emcee</strong><span>Pre-U Seminar 2025 and the Edusave
+                                Awards</span></span>
+                    </a>
+                    <div class="tile span-2 grow" style="--i:6">
+                        <span class="kicker">Edusave awards, 2022 to 2023</span>
+                        <span class="big">4 awards</span>
+                        <p>Merit Award, two Certificates of Academic Achievement and a Good Progress Award.</p>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Key events: choosing one puts it on the stage -->
-            <section class="chapter" id="events" data-stage="events" aria-labelledby="e-head">
-                <div class="measure">
-                    <h2 class="display rise" id="e-head">Key events</h2>
-                    <p class="events-intro rise" style="--i:1">Experiences that broaden my understanding of community.
-                        Choose one to see it.</p>
+        <!-- Mission: scroll-driven word reveal -->
+        <section class="mission" aria-label="Mission">
+            <div class="mission-sticky">
+                <div class="wrap">
+                    <p class="mission-text" id="mission-text">I serve my community today so that I can craft
+                        <span data-key>inclusive</span> <span data-key>engineering</span> solutions tomorrow, as a
+                        builder who ensures everyone can prosper together.</p>
+                </div>
+            </div>
+        </section>
 
-                    <ul class="event-list" id="event-list">
-                        <li class="rise"><button class="event" data-src="img/siglap-pets-day.jpg" data-pos="65% 56%"
-                                data-alt="Siglap Pets Day 2025"><span class="event-title">Siglap Pets Day
-                                    2025</span><span class="event-note">Coordinating operations for 1,500+
-                                    attendees</span></button></li>
-                        <li class="rise"><button class="event" data-src="img/edusave-pic2.jpg" data-pos="59% 42%"
-                                data-alt="Siglap Edusave Awards Presentation Ceremony 2025"><span
-                                    class="event-title">Edusave Awards</span><span class="event-note">Official
-                                    emcee</span></button></li>
-                        <li class="rise"><button class="event" data-src="img/preusem-pic.jpg" data-pos="19% 45%"
-                                data-alt="Pre-University Seminar 2025"><span class="event-title">Pre-U Seminar
-                                    2025</span><span class="event-note">Official emcee</span></button></li>
-                        <li class="rise"><button class="event" data-src="img/mps-ops.jpg" data-pos="71% 45%"
-                                data-alt="Weekly Meet-the-People Session operations"><span class="event-title">Weekly
-                                    MPS operations</span><span class="event-note">Resident advocacy</span></button>
-                        </li>
-                        <li class="rise"><button class="event" data-src="img/errn-pic-1.jpg" data-pos="54% 54%"
-                                data-alt="Eastwood Ria Network"><span class="event-title">Eastwood Ria
-                                    Network</span><span class="event-note">Community initiatives</span></button></li>
-                        <li class="rise"><button class="event" data-src="img/yn-pic-1.jpg" data-pos="59% 51%"
-                                data-alt="Siglap Youth Network"><span class="event-title">Youth Network</span><span
-                                    class="event-note">Executive Member</span></button></li>
-                        <li class="rise"><button class="event" data-src="img/sfyc-pic.jpg" data-pos="20% 50%"
-                                data-alt="Singapore Futures Youth Competition 2024"><span class="event-title">SFYC
-                                    2024</span><span class="event-note">6th place, Lee Kuan Yew School of Public
-                                    Policy, NUS</span></button></li>
-                        <li class="rise"><button class="event" data-src="img/pap-ops.jpg" data-pos="49% 26%"
-                                data-alt="GE2025 campaign operations"><span class="event-title">GE2025 campaign
-                                    ops</span><span class="event-note">Logistics and strategy</span></button></li>
-                        <li class="rise"><button class="event" data-src="img/wyse-pic.jpg" data-pos="85% 49%"
-                                data-alt="Wyse Active"><span class="event-title">Wyse Active</span><span
-                                    class="event-note">Welfare programmes</span></button></li>
-                        <li class="rise"><button class="event" data-src="img/sg60-record.jpg" data-pos="50% 40%"
-                                data-alt="SG60 record attempt"><span class="event-title">SG60 record</span><span
-                                    class="event-note">Celebrating Singapore's 60th year</span></button></li>
+        <!-- About -->
+        <section class="section parchment about" id="about" aria-labelledby="a-head">
+            <div class="wrap about-grid">
+                <div class="about-photo grow">
+                    <img src="img/preusem-pic.jpg" alt="Siraj on stage with students at the Pre-University Seminar" width="1600" height="1067"
+                        loading="lazy" id="about-img">
+                </div>
+                <div>
+                    <h2 class="rise" id="a-head">Engineering for the Community</h2>
+                    <p class="lead rise" style="--i:1">My mission is to earn my degree in engineering so that I may
+                        build a more inclusive world, where technical solutions are always grounded in human
+                        empathy.</p>
+                    <ul class="pillars-mini rise" style="--i:2">
+                        <li><strong>Advocating for residents</strong><span class="muted">Turning residents' struggles
+                                into government appeals at weekly Meet-the-People Sessions.</span></li>
+                        <li><strong>Grassroots coordination</strong><span class="muted">Addressing daily community
+                                hurdles with the Siglap Youth Network and the Eastwood Ria Network.</span></li>
+                        <li><strong>Connecting with people</strong><span class="muted">Learning to communicate with
+                                heart as an emcee.</span></li>
                     </ul>
+                    <details class="more rise" style="--i:3">
+                        <summary><span class="more-label">Read More</span><span class="less">Show Less</span>
+                        </summary>
+                        <div class="more-body">
+                            <p><strong>Why engineering?</strong> I believe that the most profound technical skills are
+                                those that include the human element. The world faces deep social and ethical
+                                problems that require us to be directly on the ground. This is why I immerse myself in
+                                my community today: I want to understand exactly how the real world works before I
+                                begin to build for it.</p>
+                            <p><strong>Evidence of commitment.</strong> My experiences have taught me that true problem
+                                solving begins with listening. I am dedicated to bridging the gap between pure logic
+                                and the people it is meant to serve.</p>
+                            <p>At weekly Meet the People Sessions, I translate emotional struggles into actionable
+                                government appeals. This role has taught me real problem solving beyond textbooks.
+                                Working with the Siglap Youth Network and Eastwood Ria Network, I identify and address
+                                daily community hurdles. As an emcee, I focus on understanding human interaction:
+                                managing room energy or small groups, learning to communicate with heart.</p>
+                            <blockquote class="about-quote">“The best way to find yourself is to lose yourself in the
+                                service of others.”<cite>Mahatma Gandhi</cite></blockquote>
+                        </div>
+                    </details>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Engagements -->
-            <section class="chapter" id="engagements" data-stage="engagements" aria-labelledby="g-head">
-                <div class="measure">
-                    <h2 class="display rise" id="g-head">Engagements</h2>
-                    <p class="rise" style="--i:1; color: var(--muted); margin-bottom: 56px;">The pillars of my growth and
-                        service journey.</p>
-                    <ol class="pillars">
-                        <li class="rise">
-                            <h3>Youth collaboration</h3>
-                            <p>Executive Member of the Siglap Youth Network. Collaborating with diverse youths taught me
-                                the importance of inclusive strategic planning and collective crisis management across
-                                1,000+ volunteer hours.</p>
-                            <p class="tags">Leadership, strategy</p>
-                        </li>
-                        <li class="rise">
-                            <h3>Grassroots operations</h3>
-                            <p>Expanding awareness of community policy under Dr Maliki Osman and MOS Dinesh Vasu Dash.
-                                Weekly MPS operations allow me to listen directly to residents and build practical
-                                problem-solving skills.</p>
-                            <p class="tags">Policy, advocacy</p>
-                        </li>
-                        <li class="rise">
-                            <h3>Leading by heart</h3>
-                            <p>From emceeing large-scale community events to facilitating small group discussions, I
-                                focus on creating meaningful connections and fostering a sense of shared purpose within
-                                the community.</p>
-                        </li>
-                        <li class="rise">
-                            <h3>Community welfare</h3>
-                            <p>Active involvement in Wyse Active (disability care), elderly initiatives, and the
-                                Eastwood Ria Network (ERRN). These experiences ground me in humility and highlight the
-                                importance of human connections.</p>
-                        </li>
-                        <li class="rise">
-                            <h3>National Service</h3>
-                            <p>Serving as Company IC for HTA 202 Intake. A profound opportunity to learn empathy, foster
-                                brotherhood, and understand team dynamics while striving for operational excellence.</p>
-                            <p class="tags">Duty, discipline</p>
-                        </li>
-                    </ol>
+        <!-- Key events -->
+        <section class="section" id="events" aria-labelledby="e-head">
+            <div class="wrap">
+                <div class="head rise">
+                    <h2 id="e-head">Key Events</h2>
+                    <p>Experiences that broaden my understanding of community. Tap a photo to enlarge it.</p>
                 </div>
-            </section>
-        </main>
-    </div>
+                <ul class="events" id="events-list"></ul>
+            </div>
+            <dialog class="lightbox" id="lightbox" aria-labelledby="lb-title">
+                <img id="lb-img" src="" alt="" width="1600" height="1200">
+                <div class="lightbox-caption">
+                    <div><strong id="lb-title"></strong><span class="muted" id="lb-note"></span></div>
+                    <button class="lightbox-close" id="lb-close" aria-label="Close photo">×</button>
+                </div>
+            </dialog>
+        </section>
 
-    <!-- Certificates: the split ends, one printed sheet on the competition photograph -->
-    <section class="certs" id="certificates" aria-labelledby="c-head">
-        <img class="certs-bg" src="img/sfyc-pic.jpg" alt="" width="1600" height="1067" loading="lazy">
-        <div class="certs-side rise">
-            <p>Academic excellence and specialised certifications. Each title opens the original certificate.</p>
-        </div>
-        <div class="sheet rise" style="--i:1">
-            <h2 class="display" id="c-head">Certificates</h2>
-            <p class="sheet-note">Awards and competitions, 2022 to 2024</p>
-
-            <div class="sheet-group">
-                <h3>Competitions</h3>
-                <ul>
-                    <li><a class="cert is-featured" href="Singapore%20Youth%20Competition%202024%20G6%20copy.pdf#view=FitH"
-                            target="_blank" rel="noopener"><span class="cert-name">Singapore Futures Youth
-                                Competition</span><span class="cert-year">2024</span><span class="cert-desc">Organised
-                                by the NUS Lee Kuan Yew School of Public Policy. Recognised for exceptional leadership
-                                and strategic problem-solving at a national level, achieving 6th place overall. My most
-                                valued achievement to date, demonstrating capability in policy analysis and
-                                foresight.</span></a></li>
-                    <li><a class="cert" href="CoderZ%202022%20cert.pdf#view=FitH" target="_blank"
-                            rel="noopener"><span class="cert-name">CoderZ</span><span
-                                class="cert-year">2022</span><span class="cert-desc">National coding and robotics
-                                competition, 2nd place overall for technical excellence.</span></a></li>
+        <!-- Engagements -->
+        <section class="section parchment" id="engagements" aria-labelledby="g-head">
+            <div class="wrap">
+                <div class="head rise">
+                    <h2 id="g-head">Engagements</h2>
+                    <p>The pillars of my growth and service journey.</p>
+                </div>
+                <ul class="engage">
+                    <li class="rise">
+                        <h3>Youth collaboration</h3>
+                        <p class="sum">Executive Member of the Siglap Youth Network, across 1,000+ volunteer hours.</p>
+                        <details class="more">
+                            <summary><span class="more-label">Read More</span><span class="less">Show Less</span></summary>
+                            <div class="more-body">
+                                <p>Collaborating with diverse youths taught me the importance of inclusive strategic
+                                    planning and collective crisis management across 1,000+ volunteer hours.</p>
+                            </div>
+                        </details>
+                        <p class="tags">Leadership · Strategy</p>
+                    </li>
+                    <li class="rise">
+                        <h3>Grassroots operations</h3>
+                        <p class="sum">Weekly Meet-the-People Sessions, listening directly to residents.</p>
+                        <details class="more">
+                            <summary><span class="more-label">Read More</span><span class="less">Show Less</span></summary>
+                            <div class="more-body">
+                                <p>Expanding awareness of community policy under Dr Maliki Osman and MOS Dinesh Vasu
+                                    Dash. Weekly MPS operations allow me to listen directly to residents and build
+                                    practical problem-solving skills.</p>
+                            </div>
+                        </details>
+                        <p class="tags">Policy · Advocacy</p>
+                    </li>
+                    <li class="rise">
+                        <h3>Leading by heart</h3>
+                        <p class="sum">From emceeing large-scale events to facilitating small group discussions.</p>
+                        <details class="more">
+                            <summary><span class="more-label">Read More</span><span class="less">Show Less</span></summary>
+                            <div class="more-body">
+                                <p>I focus on creating meaningful connections and fostering a sense of shared purpose
+                                    within the community.</p>
+                            </div>
+                        </details>
+                    </li>
+                    <li class="rise">
+                        <h3>Community welfare</h3>
+                        <p class="sum">Wyse Active, elderly initiatives and the Eastwood Ria Network.</p>
+                        <details class="more">
+                            <summary><span class="more-label">Read More</span><span class="less">Show Less</span></summary>
+                            <div class="more-body">
+                                <p>Active involvement in Wyse Active (disability care), elderly initiatives, and the
+                                    Eastwood Ria Network (ERRN). These experiences ground me in humility and highlight
+                                    the importance of human connections.</p>
+                            </div>
+                        </details>
+                    </li>
+                    <li class="rise">
+                        <h3>National Service</h3>
+                        <p class="sum">Company IC for HTA 202 Intake.</p>
+                        <details class="more">
+                            <summary><span class="more-label">Read More</span><span class="less">Show Less</span></summary>
+                            <div class="more-body">
+                                <p>A profound opportunity to learn empathy, foster brotherhood, and understand team
+                                    dynamics while striving for operational excellence.</p>
+                            </div>
+                        </details>
+                        <p class="tags">Duty · Discipline</p>
+                    </li>
                 </ul>
             </div>
+        </section>
 
-            <div class="sheet-group">
-                <h3>Academic awards</h3>
-                <ul>
-                    <li><a class="cert" href="EMA%202023.pdf#view=FitH" target="_blank" rel="noopener"><span
-                                class="cert-name">Edusave Merit Award (EMA)</span><span
-                                class="cert-year">2023</span><span class="cert-desc">Awarded for being in the top 25%
-                                of the cohort academically.</span></a></li>
-                    <li><a class="cert" href="ECAA%202023.pdf#view=FitH" target="_blank" rel="noopener"><span
-                                class="cert-name">Edusave Certificate of Academic Achievement (ECAA)</span><span
-                                class="cert-year">2023</span><span class="cert-desc">Sustaining a high level of academic
-                                excellence.</span></a></li>
-                    <li><a class="cert" href="ECAA%202022.pdf#view=FitH" target="_blank" rel="noopener"><span
-                                class="cert-name">Edusave Certificate of Academic Achievement (ECAA)</span><span
-                                class="cert-year">2022</span><span class="cert-desc">Awarded across consecutive years
-                                for academic excellence.</span></a></li>
-                    <li><a class="cert" href="EGPA%202022.pdf#view=FitH" target="_blank" rel="noopener"><span
-                                class="cert-name">Edusave Good Progress Award (EGPA)</span><span
-                                class="cert-year">2022</span><span class="cert-desc">Recognition of significant
-                                academic improvement and consistency.</span></a></li>
-                </ul>
+        <!-- Certificates -->
+        <section class="section" id="certificates" aria-labelledby="c-head">
+            <div class="wrap">
+                <div class="head rise">
+                    <h2 id="c-head">Certificates</h2>
+                    <p>Academic excellence and specialised certifications.</p>
+                </div>
+                <div class="certs">
+                    <article class="cert featured grow">
+                        <span class="kicker">Competition · 2024</span>
+                        <h3>Singapore Futures Youth Competition</h3>
+                        <p>Organised by the NUS Lee Kuan Yew School of Public Policy. 6th place overall for leadership
+                            and strategic problem-solving at a national level. My most valued achievement to date.</p>
+                        <div class="links"><a class="link"
+                                href="Singapore%20Youth%20Competition%202024%20G6%20copy.pdf#view=FitH"
+                                target="_blank" rel="noopener">View Certificate</a></div>
+                    </article>
+                    <article class="cert grow" style="--i:1">
+                        <span class="kicker">Competition · 2022</span>
+                        <h3>CoderZ</h3>
+                        <p>National coding and robotics competition, 2nd place overall.</p>
+                        <div class="links"><a class="link" href="CoderZ%202022%20cert.pdf#view=FitH"
+                                target="_blank" rel="noopener">View Certificate</a></div>
+                    </article>
+                    <article class="cert grow" style="--i:2">
+                        <span class="kicker">Edusave · 2023</span>
+                        <h3>Merit Award (EMA)</h3>
+                        <p>Top 25% of the cohort academically.</p>
+                        <div class="links"><a class="link" href="EMA%202023.pdf#view=FitH" target="_blank"
+                                rel="noopener">View Certificate</a></div>
+                    </article>
+                    <article class="cert grow" style="--i:3">
+                        <span class="kicker">Edusave · 2022 and 2023</span>
+                        <h3>Certificate of Academic Achievement (ECAA)</h3>
+                        <p>A high level of academic excellence sustained over multiple years.</p>
+                        <div class="links"><a class="link" href="ECAA%202023.pdf#view=FitH" target="_blank"
+                                rel="noopener">2023</a><a class="link" href="ECAA%202022.pdf#view=FitH"
+                                target="_blank" rel="noopener">2022</a></div>
+                    </article>
+                    <article class="cert grow" style="--i:4">
+                        <span class="kicker">Edusave · 2022</span>
+                        <h3>Good Progress Award (EGPA)</h3>
+                        <p>Significant academic improvement and consistency.</p>
+                        <div class="links"><a class="link" href="EGPA%202022.pdf#view=FitH" target="_blank"
+                                rel="noopener">View Certificate</a></div>
+                    </article>
+                    <article class="cert grow" style="--i:5">
+                        <span class="kicker">Training · 2022</span>
+                        <h3>Innovation, Design and Engineering (IDE)</h3>
+                        <p>Completion of advanced technical training.</p>
+                        <div class="links"><a class="link" href="IDE%202022%20CERT.pdf#view=FitH" target="_blank"
+                                rel="noopener">View Certificate</a></div>
+                    </article>
+                    <article class="cert grow" style="--i:6">
+                        <span class="kicker">Training</span>
+                        <h3>SAIL Camp</h3>
+                        <p>Leadership and team-building through intensive outdoor and strategic challenges.</p>
+                        <div class="links"><a class="link" href="SAIL%20CAMP%20CERT.pdf#view=FitH" target="_blank"
+                                rel="noopener">View Certificate</a></div>
+                    </article>
+                </div>
             </div>
+        </section>
 
-            <div class="sheet-group">
-                <h3>Training</h3>
-                <ul>
-                    <li><a class="cert" href="IDE%202022%20CERT.pdf#view=FitH" target="_blank" rel="noopener"><span
-                                class="cert-name">Innovation, Design and Engineering (IDE)</span><span
-                                class="cert-year">2022</span><span class="cert-desc">Completion of advanced technical
-                                training.</span></a></li>
-                    <li><a class="cert" href="SAIL%20CAMP%20CERT.pdf#view=FitH" target="_blank" rel="noopener"><span
-                                class="cert-name">SAIL Camp</span><span class="cert-year"></span><span
-                                class="cert-desc">Leadership and team-building through intensive outdoor and strategic
-                                challenges.</span></a></li>
+        <!-- Capabilities -->
+        <section class="section parchment" aria-labelledby="k-head">
+            <div class="wrap">
+                <div class="head rise">
+                    <h2 id="k-head">Capabilities</h2>
+                    <p>Transferable skills honed through service and leadership.</p>
+                </div>
+                <ul class="caps">
+                    <li class="grow"><strong>Public speaking</strong> <span>· Professional emcee</span></li>
+                    <li class="grow" style="--i:1"><strong>Crisis management</strong> <span>· Youth
+                            leadership</span></li>
+                    <li class="grow" style="--i:2"><strong>Liaison</strong> <span>· Government relations</span></li>
+                    <li class="grow" style="--i:3"><strong>Social advocacy</strong> <span>· Community impact</span>
+                    </li>
                 </ul>
+                <p class="center rise"><a class="pill" href="mailto:sirajmunir.muzammil@gmail.com">Email Me</a></p>
             </div>
+        </section>
+    </main>
 
-            <p class="sheet-close">Certificates open as PDFs in a new tab.<br>Some files are large and may take a
-                moment.</p>
-        </div>
-    </section>
-
-    <!-- Where I serve -->
-    <section class="serve" aria-labelledby="s-head">
-        <h2 class="display rise" id="s-head">Where I serve</h2>
-        <div class="serve-cols rise" style="--i:1">
-            <ul>
-                <li>Networks</li>
-                <li>Siglap Youth Network</li>
-                <li>Eastwood Ria Residents Network</li>
-                <li>PAP Bedok Branch</li>
-                <li>Meet-the-People Sessions</li>
-                <li>Wyse Active</li>
-            </ul>
-            <ul>
-                <li>Roles</li>
-                <li>Executive Member</li>
-                <li>Professional emcee</li>
-                <li>Volunteer writer</li>
-                <li>Company IC, HTA 202 Intake</li>
-            </ul>
-            <ul>
-                <li>Capabilities</li>
-                <li>Public speaking</li>
-                <li>Crisis management</li>
-                <li>Government liaison</li>
-                <li>Social advocacy</li>
-            </ul>
-        </div>
-    </section>
-
-    <!-- Footer -->
+    <!-- Footer: Apple style -->
     <footer class="footer" id="contact">
-        <img class="footer-bg" src="img/yn-pic2.jpg" alt="" width="1600" height="1200" loading="lazy">
-        <div class="footer-top">
-            <ul>
-                <li><a href="#testimonials">Testimonials</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#events">Key events</a></li>
-                <li><a href="#engagements">Engagements</a></li>
-                <li><a href="#certificates">Certificates</a></li>
-            </ul>
-            <div class="footer-contact">
-                <p>For emceeing, community work or a conversation, I'd be glad to hear from you.</p>
-                <p><a class="link" href="mailto:sirajmunir.muzammil@gmail.com">sirajmunir.muzammil@gmail.com</a></p>
-                <p><a class="link" href="https://www.linkedin.com/in/siraj-munir-muzammil" target="_blank"
-                        rel="noopener noreferrer">LinkedIn</a></p>
+        <div class="wrap">
+            <p class="footer-note">Certificates and testimonials open as PDFs in a new tab. Some files are large and may
+                take a moment to load.</p>
+            <div class="footer-cols">
+                <div>
+                    <h3>Explore</h3>
+                    <ul>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#highlights">Highlights</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#events">Key Events</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Record</h3>
+                    <ul>
+                        <li><a href="#engagements">Engagements</a></li>
+                        <li><a href="#certificates">Certificates</a></li>
+                        <li><a href="testimonial%20v8.pdf#view=FitH" target="_blank" rel="noopener">All testimonials
+                                (PDF)</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="mailto:sirajmunir.muzammil@gmail.com">sirajmunir.muzammil@gmail.com</a></li>
+                        <li><a href="https://www.linkedin.com/in/siraj-munir-muzammil" target="_blank"
+                                rel="noopener noreferrer">LinkedIn</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Values</h3>
+                    <ul>
+                        <li>Service · Integrity · Resilience</li>
+                        <li>Adaptable · Journey</li>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <p class="display" id="footer-name" aria-hidden="true">siraj munir</p>
-            <p class="acrostic">
-                <span><b>S</b>ervice</span>
-                <span><b>I</b>ntegrity</span>
-                <span><b>R</b>esilience</span>
-                <span><b>A</b>daptable</span>
-                <span><b>J</b>ourney</span>
-            </p>
-            <p class="legal">Siraj Munir © 2026</p>
+            <div class="footer-legal">
+                <span>Copyright © 2026 Siraj Munir. All rights reserved.</span>
+                <span>Singapore</span>
+            </div>
         </div>
     </footer>
 
     <script>
-        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const isPhone = () => window.matchMedia('(max-width: 800px)').matches;
+        const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        // --- Mobile menu ---
-        const nav = document.getElementById('nav');
-        const menuToggle = document.getElementById('menu-toggle');
-        menuToggle.addEventListener('click', () => {
-            const open = nav.classList.toggle('is-open');
-            menuToggle.setAttribute('aria-expanded', open);
-            menuToggle.textContent = open ? 'Close' : 'Menu';
-            document.body.style.overflow = open ? 'hidden' : '';
-        });
-        nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-            nav.classList.remove('is-open');
-            menuToggle.setAttribute('aria-expanded', false);
-            menuToggle.textContent = 'Menu';
-            document.body.style.overflow = '';
-        }));
+        // --- Event photos: one list feeds the hero strip and the Key events grid ---
+        const events = [
+            ['siglap-pets-day', 'Siglap Pets Day 2025', 'Coordinating operations for 1,500+ attendees', '65% 56%'],
+            ['edusave-pic2', 'Edusave Awards', 'Official emcee', '59% 42%'],
+            ['preusem-pic', 'Pre-U Seminar 2025', 'Official emcee', '19% 45%'],
+            ['mps-ops', 'Weekly MPS operations', 'Resident advocacy', '71% 45%'],
+            ['errn-pic-1', 'Eastwood Ria Network', 'Community initiatives', '54% 54%'],
+            ['yn-pic-1', 'Youth Network', 'Executive Member', '59% 51%'],
+            ['sfyc-pic', 'SFYC 2024', '6th place, Lee Kuan Yew School of Public Policy, NUS', '20% 50%'],
+            ['pap-ops', 'GE2025 campaign ops', 'Logistics and strategy', '49% 26%'],
+            ['wyse-pic', 'Wyse Active', 'Welfare programmes', '85% 49%'],
+            ['sg60-record', 'SG60 record', "Celebrating Singapore's 60th year", '50% 40%'],
+        ];
 
-        // --- Section entrances: heading, then text, then picture ---
-        const riseObserver = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-in');
-                    riseObserver.unobserve(entry.target);
-                }
-            });
-        }, { rootMargin: '0px 0px -8% 0px' });
-        document.querySelectorAll('.rise').forEach(el => riseObserver.observe(el));
+        const stripFigs = events.map(([f, t, n, p]) =>
+            `<figure><img src="img/${f}.jpg" alt="${t}" width="300" height="200" loading="lazy" style="object-position:${p}"><figcaption><strong>${t}</strong>${n}</figcaption></figure>`).join('');
+        // the second copy is only for the seamless loop, so screen readers skip it
+        document.getElementById('strip').innerHTML = stripFigs +
+            stripFigs.replace(/<figure>/g, '<figure aria-hidden="true">');
 
-        // --- Stage: the fixed photograph follows the section being read ---
-        const stage = document.getElementById('stage');
-        const stageCaption = document.getElementById('stage-caption');
+        const list = document.getElementById('events-list');
+        list.innerHTML = events.map(([f, t, n, p], i) =>
+            `<li class="grow" style="--i:${i % 3}"><button class="event" type="button" data-i="${i}">` +
+            `<span class="event-img"><img src="img/${f}.jpg" alt="${t}" width="400" height="300" loading="lazy" style="object-position:${p}"></span>` +
+            `<strong>${t}</strong><span>${n}</span></button></li>`).join('');
 
-        function showOnStage(frame, key, src, alt, pos) {
-            let img = frame.querySelector(`img[data-key="${key}"]`);
-            if (!img && src) {
-                img = document.createElement('img');
-                img.dataset.key = key;
-                img.src = src;
-                img.alt = alt || '';
-                if (pos) img.style.objectPosition = pos;
-                frame.insertBefore(img, frame.querySelector('.stage-caption'));
-                // let the browser paint it before fading in
-                img.getBoundingClientRect();
-            }
-            if (!img) return;
-            frame.querySelectorAll('img').forEach(i => i.classList.toggle('is-on', i === img));
-        }
-
-        const sectionObserver = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                const key = entry.target.dataset.stage;
-                if (key === 'events') {
-                    const current = document.querySelector('.event.is-on') || document.querySelector('.event');
-                    selectEvent(current);
-                } else {
-                    showOnStage(stage, key);
-                    stageCaption.textContent = '';
-                }
-            });
-        }, { rootMargin: '-45% 0px -45% 0px' });
-        document.querySelectorAll('[data-stage]').forEach(s => sectionObserver.observe(s));
-
-        // --- Key events: the live thing. Choosing an event puts its photo on the stage ---
-        const events = [...document.querySelectorAll('.event')];
-        // on a phone there is no stage: each event carries its own photo
-        events.forEach(button => {
-            const img = document.createElement('img');
-            img.src = button.dataset.src;
-            img.alt = button.dataset.alt;
-            img.loading = 'lazy';
-            img.style.objectPosition = button.dataset.pos;
-            button.prepend(img);
+        const stripWrap = document.getElementById('strip-wrap');
+        const stripPause = document.getElementById('strip-pause');
+        stripPause.addEventListener('click', () => {
+            const paused = stripWrap.classList.toggle('is-paused');
+            stripPause.setAttribute('aria-pressed', paused);
+            stripPause.textContent = paused ? 'Play Photos' : 'Pause Photos';
         });
 
-        function selectEvent(button) {
-            if (!button) return;
-            events.forEach(e => e.classList.toggle('is-on', e === button));
-            const { src, alt, pos } = button.dataset;
-            const key = 'event-' + events.indexOf(button);
-            showOnStage(stage, key, src, alt, pos);
-            stageCaption.textContent = alt;
-        }
-
-        events.forEach(button => {
-            button.addEventListener('click', () => selectEvent(button));
-            button.addEventListener('mouseenter', () => { if (!isPhone()) selectEvent(button); });
-            button.addEventListener('focus', () => selectEvent(button));
+        // --- Lightbox ---
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lb-img');
+        list.addEventListener('click', e => {
+            const b = e.target.closest('.event');
+            if (!b) return;
+            const [f, t, n] = events[+b.dataset.i];
+            lbImg.src = `img/${f}.jpg`;
+            lbImg.alt = t;
+            document.getElementById('lb-title').textContent = t;
+            document.getElementById('lb-note').textContent = n;
+            lb.showModal();
         });
+        document.getElementById('lb-close').addEventListener('click', () => lb.close());
+        lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
 
-        // while scrolling through the list, the event in the middle of the screen takes the stage
-        const eventObserver = new IntersectionObserver(entries => {
-            entries.forEach(entry => { if (entry.isIntersecting) selectEvent(entry.target); });
-        }, { rootMargin: '-48% 0px -48% 0px' });
-        events.forEach(e => eventObserver.observe(e));
+        // --- Mobile menu (21st.dev header disclosure) ---
+        const toggle = document.getElementById('nav-toggle');
+        const panel = document.getElementById('nav-panel');
+        const setMenu = open => {
+            panel.classList.toggle('is-open', open);
+            toggle.setAttribute('aria-expanded', open);
+            toggle.setAttribute('aria-label', open ? 'Close main menu' : 'Open main menu');
+        };
+        toggle.addEventListener('click', () => setMenu(!panel.classList.contains('is-open')));
+        panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+
+        // --- Entrances ---
+        const io = new IntersectionObserver(entries => entries.forEach(en => {
+            if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+        }), { rootMargin: '0px 0px -10% 0px' });
+        document.querySelectorAll('.rise, .grow').forEach(el => io.observe(el));
+
+        // --- Active section in the header ---
+        const navLinks = [...document.querySelectorAll('.nav-links a')];
+        const so = new IntersectionObserver(entries => entries.forEach(en => {
+            if (!en.isIntersecting) return;
+            navLinks.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + en.target.id));
+        }), { rootMargin: '-45% 0px -50% 0px' });
+        document.querySelectorAll('main section[id]').forEach(s => so.observe(s));
 
         // --- Counters ---
-        const counterObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                const counter = entry.target;
-                const target = +counter.dataset.target;
-                observer.unobserve(counter);
-                if (reduceMotion) return;
-                const start = performance.now();
-                const duration = 1600;
-                const tick = now => {
-                    const t = Math.min((now - start) / duration, 1);
-                    const eased = 1 - Math.pow(1 - t, 3);
-                    counter.textContent = Math.round(target * eased).toLocaleString('en-SG');
-                    if (t < 1) requestAnimationFrame(tick);
-                };
-                requestAnimationFrame(tick);
-            });
-        }, { threshold: 0.5 });
-        document.querySelectorAll('.counter').forEach(c => counterObserver.observe(c));
+        const co = new IntersectionObserver(entries => entries.forEach(en => {
+            if (!en.isIntersecting) return;
+            co.unobserve(en.target);
+            if (reduce) return;
+            const el = en.target, to = +el.dataset.to, t0 = performance.now();
+            const tick = now => {
+                const t = Math.min((now - t0) / 1600, 1);
+                el.textContent = Math.round(to * (1 - Math.pow(1 - t, 3))).toLocaleString('en-SG');
+                if (t < 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+        }), { threshold: 0.6 });
+        document.querySelectorAll('.count').forEach(c => co.observe(c));
 
-        // --- Signature move: the name is heavy. It settles as the first screen leaves,
-        // and grows into place as the footer arrives ---
-        const wordmark = document.getElementById('wordmark');
-        const footerName = document.getElementById('footer-name');
-        const footer = document.getElementById('contact');
+        // --- Mission words: wrap each word so it can fill in ---
+        const mission = document.getElementById('mission-text');
+        const words = [];
+        [...mission.childNodes].forEach(node => {
+            if (node.nodeType === 3) {
+                const frag = document.createDocumentFragment();
+                node.textContent.split(/(\s+)/).forEach(part => {
+                    if (!part.trim()) { frag.append(part); return; }
+                    const s = document.createElement('span');
+                    s.className = 'w';
+                    s.textContent = part;
+                    words.push(s);
+                    frag.append(s);
+                });
+                node.replaceWith(frag);
+            } else {
+                node.classList.add('w', 'key');
+                words.push(node);
+            }
+        });
+
+        // --- Scroll-linked motion: hero parallax, about photo settles, mission fills ---
+        const heroImg = document.getElementById('hero-img');
+        const aboutImg = document.getElementById('about-img');
+        const missionSection = mission.closest('.mission');
         let ticking = false;
-
         function onScroll() {
             ticking = false;
-            const vh = window.innerHeight;
-            const heroProgress = Math.min(window.scrollY / vh, 1);
-            wordmark.style.transform = `scale(${1 - heroProgress * 0.07})`;
+            const vh = innerHeight;
+            heroImg.style.transform = `translateY(${Math.min(scrollY, vh) * -0.08}px)`;
 
-            const fRect = footer.getBoundingClientRect();
-            const fProgress = Math.min(Math.max((vh - fRect.top) / vh, 0), 1);
-            footerName.style.transform = `scale(${0.93 + fProgress * 0.07})`;
+            const a = aboutImg.getBoundingClientRect();
+            const ap = Math.min(Math.max((vh - a.top) / (vh + a.height), 0), 1);
+            aboutImg.style.transform = `scale(${1.15 - ap * 0.15})`;
+
+            const m = missionSection.getBoundingClientRect();
+            const mp = Math.min(Math.max(-m.top / (m.height - vh), 0), 1);
+            const lit = Math.round(mp * 1.15 * words.length);
+            words.forEach((w, i) => w.classList.toggle('on', i < lit));
         }
-
-        if (!reduceMotion) {
-            window.addEventListener('scroll', () => {
-                if (!ticking) {
-                    requestAnimationFrame(onScroll);
-                    ticking = true;
-                }
+        if (reduce) {
+            words.forEach(w => w.classList.add('on'));
+        } else {
+            addEventListener('scroll', () => {
+                if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
             }, { passive: true });
             onScroll();
         }
-
     </script>
 </body>
 
