@@ -88,7 +88,7 @@
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 64px;
+            scroll-padding-top: 88px;
             -webkit-text-size-adjust: 100%;
         }
 
@@ -321,22 +321,50 @@
             }
         }
 
-        /* ---------- Header: 21st.dev "Header Navbar" (karthikmudunuri), ported to HTML/CSS ---------- */
+        /* ---------- Liquid glass: functional layer only (nav, pause button, photo pop-up caption) ----------
+           Cards, tiles and text stay solid: Apple keeps glass off the content layer. */
+        .nav,
+        .strip-pause,
+        .lightbox-caption {
+            background: rgba(255, 255, 255, 0.52);
+            -webkit-backdrop-filter: blur(24px) saturate(2.2) brightness(1.08);
+            backdrop-filter: blur(24px) saturate(2.2) brightness(1.08);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow:
+                0 0 0 1px rgba(0, 0, 0, 0.07),
+                0 14px 40px rgba(0, 0, 0, 0.16),
+                0 2px 4px rgba(0, 0, 0, 0.08),
+                inset 0 1px 1px rgba(255, 255, 255, 1),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.06),
+                inset 0 0 22px rgba(255, 255, 255, 0.35);
+        }
+
+        /* ---------- Header: floating glass pill, 21st.dev "Navbar 1" / "Header Navbar" layouts ---------- */
         .nav {
-            position: sticky;
-            top: 0;
+            position: fixed;
+            top: 14px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
             z-index: 50;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+            width: min(880px, calc(100% - 24px));
+            border-radius: 28px;
+        }
+
+        .nav::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            pointer-events: none;
+            background: linear-gradient(115deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 32%,
+                    rgba(255, 255, 255, 0) 68%, rgba(255, 255, 255, 0.28) 100%);
         }
 
         .nav-row {
-            max-width: var(--wrap);
-            margin: 0 auto;
-            padding: 0 24px;
-            height: 56px;
+            position: relative;
+            height: 54px;
+            padding: 0 7px 0 22px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -344,41 +372,80 @@
 
         .nav-logo {
             font-weight: 600;
-            font-size: 19px;
+            font-size: var(--body);
             letter-spacing: -0.02em;
         }
 
         .nav-links {
+            position: relative;
             display: flex;
+            align-items: center;
+            gap: 2px;
         }
 
         .nav-links a {
-            padding: 18px 14px;
+            position: relative;
+            z-index: 1;
+            padding: 9px 16px;
+            border-radius: 999px;
             font-size: var(--caption);
-            transition: background-color 0.2s, color 0.2s;
+            transition: background-color 0.25s, color 0.25s, transform 0.2s var(--ease);
         }
 
         .nav-links a:hover {
-            background: var(--parchment);
+            background: rgba(255, 255, 255, 0.5);
         }
 
-        .nav-links a.is-active,
-        .nav-links a.cta {
+        .nav-links a:active {
+            transform: scale(0.95);
+        }
+
+        .nav-links a.is-active {
             color: var(--link);
+        }
+
+        .nav-links a.cta {
+            margin-left: 4px;
+            padding: 9px 18px;
+            background: var(--blue);
+            color: #fff;
+        }
+
+        .nav-links a.cta:hover {
+            background: var(--blue-hover);
+        }
+
+        /* The selected-tab highlight: a glass capsule that slides to the section you are in */
+        .nav-pill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.82);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.10), inset 0 1px 1px #fff, inset 0 -1px 1px rgba(0, 0, 0, 0.05);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.5s var(--ease), width 0.5s var(--ease), height 0.5s var(--ease), opacity 0.3s;
         }
 
         .nav-toggle {
             display: none;
             width: 44px;
             height: 44px;
-            border-radius: 10px;
+            border-radius: 50%;
             align-items: center;
             justify-content: center;
-            transition: background-color 0.2s;
+            transition: background-color 0.2s, transform 0.2s var(--ease);
         }
 
         .nav-toggle:hover {
-            background: var(--parchment);
+            background: rgba(255, 255, 255, 0.55);
+        }
+
+        .nav-toggle:active {
+            transform: scale(0.92);
         }
 
         .nav-toggle span {
@@ -403,8 +470,9 @@
         }
 
         .nav-panel {
+            position: relative;
             display: none;
-            padding: 8px 24px 24px;
+            padding: 2px 22px 16px;
             perspective: 600px;
         }
 
@@ -439,7 +507,7 @@
             grid-template-columns: 1.1fr 0.9fr;
             gap: 56px;
             align-items: center;
-            padding-top: 72px;
+            padding-top: 128px;
             padding-bottom: 56px;
         }
 
@@ -549,7 +617,6 @@
             min-height: 36px;
             padding: 6px 16px;
             border-radius: 999px;
-            background: var(--canvas);
             font-size: var(--caption);
             color: var(--ink);
             transition: transform 0.2s var(--ease);
@@ -908,15 +975,26 @@
             }
         }
 
+        .lightbox {
+            overflow: hidden;
+            background: var(--parchment);
+        }
+
         .lightbox img {
             width: 100%;
-            max-height: 72vh;
+            max-height: 82vh;
             object-fit: contain;
             background: var(--parchment);
         }
 
         .lightbox-caption {
-            padding: 20px 24px;
+            position: absolute;
+            left: 16px;
+            right: 16px;
+            bottom: 16px;
+            border-radius: 28px;
+            background: rgba(255, 255, 255, 0.62);
+            padding: 12px 12px 12px 22px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -933,7 +1011,8 @@
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            background: rgba(210, 210, 215, 0.64);
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: inset 0 1px 1px #fff, 0 1px 3px rgba(0, 0, 0, 0.12);
             font-size: 22px;
             flex-shrink: 0;
             transition: transform 0.2s var(--ease);
@@ -1197,7 +1276,7 @@
             }
 
             .hero-grid {
-                padding-top: 36px;
+                padding-top: 100px;
             }
 
             .stats {
@@ -1245,6 +1324,43 @@
                 grid-row: auto;
             }
         }
+
+        /* ---------- Glass fallbacks (kept last so nothing overrides them) ---------- */
+        @media (prefers-reduced-transparency: reduce) {
+
+            .nav,
+            .strip-pause,
+            .lightbox-caption {
+                background: rgba(255, 255, 255, 0.97);
+                -webkit-backdrop-filter: none;
+                backdrop-filter: none;
+            }
+
+            .nav::before {
+                display: none;
+            }
+        }
+
+        @media (prefers-contrast: more) {
+
+            .nav,
+            .strip-pause,
+            .lightbox-caption {
+                background: #fff;
+                border-color: var(--ink);
+                -webkit-backdrop-filter: none;
+                backdrop-filter: none;
+            }
+        }
+
+        @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+
+            .nav,
+            .strip-pause,
+            .lightbox-caption {
+                background: rgba(255, 255, 255, 0.94);
+            }
+        }
     </style>
 </head>
 
@@ -1257,6 +1373,7 @@
         <div class="nav-row">
             <a class="nav-logo" href="#top" translate="no">Siraj Munir</a>
             <nav class="nav-links" aria-label="Main">
+                <span class="nav-pill" id="nav-pill" aria-hidden="true"></span>
                 <a href="#testimonials">Testimonials</a>
                 <a href="#highlights">Highlights</a>
                 <a href="#about">About</a>
@@ -1789,11 +1906,31 @@
         document.querySelectorAll('.rise, .grow').forEach(el => io.observe(el));
 
         // --- Active section in the header ---
-        const navLinks = [...document.querySelectorAll('.nav-links a')];
+        const navLinks = [...document.querySelectorAll('.nav-links a:not(.cta)')];
+        const navPill = document.getElementById('nav-pill');
+        let navLock = 0;
+        function movePill() {
+            const a = navLinks.find(l => l.classList.contains('is-active'));
+            if (!a || !a.offsetWidth) { navPill.style.opacity = 0; return; }
+            navPill.style.width = a.offsetWidth + 'px';
+            navPill.style.height = a.offsetHeight + 'px';
+            navPill.style.transform = `translate(${a.offsetLeft}px, ${a.offsetTop}px)`;
+            navPill.style.opacity = 1;
+        }
+        function setActive(id) {
+            navLinks.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + id));
+            movePill();
+        }
+        navLinks.forEach(a => a.addEventListener('click', () => {
+            navLock = Date.now() + 1200;
+            setActive(a.getAttribute('href').slice(1));
+        }));
         const so = new IntersectionObserver(entries => entries.forEach(en => {
-            if (!en.isIntersecting) return;
-            navLinks.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + en.target.id));
+            if (!en.isIntersecting || Date.now() < navLock) return;
+            setActive(en.target.id);
         }), { rootMargin: '-45% 0px -50% 0px' });
+        addEventListener('resize', movePill);
+        if (document.fonts) document.fonts.ready.then(movePill);
         document.querySelectorAll('main section[id]').forEach(s => so.observe(s));
 
         // --- Counters ---
