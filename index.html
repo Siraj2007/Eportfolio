@@ -321,10 +321,9 @@
             }
         }
 
-        /* ---------- Liquid glass: functional layer only (nav, pause button, photo pop-up caption) ----------
+        /* ---------- Liquid glass: functional layer only (nav, photo pop-up caption) ----------
            Cards, tiles and text stay solid: Apple keeps glass off the content layer. */
         .nav,
-        .strip-pause,
         .lightbox-caption {
             background: rgba(255, 255, 255, 0.52);
             -webkit-backdrop-filter: blur(24px) saturate(2.2) brightness(1.08);
@@ -602,28 +601,12 @@
         }
 
         .strip:hover .strip-track,
-        .strip:focus-within .strip-track,
-        .strip.is-paused .strip-track {
+        .strip:focus-within .strip-track {
             animation-play-state: paused;
         }
 
         .strip {
             position: relative;
-        }
-
-        .strip-pause {
-            display: block;
-            margin: 0 auto 16px;
-            min-height: 36px;
-            padding: 6px 16px;
-            border-radius: 999px;
-            font-size: var(--caption);
-            color: var(--ink);
-            transition: transform 0.2s var(--ease);
-        }
-
-        .strip-pause:active {
-            transform: scale(0.95);
         }
 
         .strip figure {
@@ -920,7 +903,7 @@
         }
 
         .event-img {
-            border-radius: var(--radius);
+            border-radius: var(--radius-lg);
             overflow: hidden;
             background: var(--parchment);
         }
@@ -993,7 +976,9 @@
             right: 16px;
             bottom: 16px;
             border-radius: 28px;
-            background: rgba(255, 255, 255, 0.62);
+            background: rgba(255, 255, 255, 0.8);
+            -webkit-backdrop-filter: blur(40px) saturate(1.9) brightness(1.06);
+            backdrop-filter: blur(40px) saturate(1.9) brightness(1.06);
             padding: 12px 12px 12px 22px;
             display: flex;
             justify-content: space-between;
@@ -1236,10 +1221,6 @@
             .strip {
                 overflow-x: auto;
             }
-
-            .strip-pause {
-                display: none;
-            }
         }
 
         /* ---------- Tablet ---------- */
@@ -1329,7 +1310,6 @@
         @media (prefers-reduced-transparency: reduce) {
 
             .nav,
-            .strip-pause,
             .lightbox-caption {
                 background: rgba(255, 255, 255, 0.97);
                 -webkit-backdrop-filter: none;
@@ -1344,7 +1324,6 @@
         @media (prefers-contrast: more) {
 
             .nav,
-            .strip-pause,
             .lightbox-caption {
                 background: #fff;
                 border-color: var(--ink);
@@ -1356,7 +1335,6 @@
         @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
 
             .nav,
-            .strip-pause,
             .lightbox-caption {
                 background: rgba(255, 255, 255, 0.94);
             }
@@ -1433,8 +1411,6 @@
                 </div>
             </div>
             <div class="strip" id="strip-wrap" aria-label="Event photos">
-                <button class="strip-pause" id="strip-pause" type="button" aria-pressed="false">Pause
-                    Photos</button>
                 <div class="strip-track" id="strip"></div>
             </div>
         </section>
@@ -1863,14 +1839,6 @@
             `<li class="grow" style="--i:${i % 3}"><button class="event" type="button" data-i="${i}">` +
             `<span class="event-img"><img src="img/${f}.jpg" alt="${t}" width="400" height="300" loading="lazy" style="object-position:${p}"></span>` +
             `<strong>${t}</strong><span>${n}</span></button></li>`).join('');
-
-        const stripWrap = document.getElementById('strip-wrap');
-        const stripPause = document.getElementById('strip-pause');
-        stripPause.addEventListener('click', () => {
-            const paused = stripWrap.classList.toggle('is-paused');
-            stripPause.setAttribute('aria-pressed', paused);
-            stripPause.textContent = paused ? 'Play Photos' : 'Pause Photos';
-        });
 
         // --- Lightbox ---
         const lb = document.getElementById('lightbox');
