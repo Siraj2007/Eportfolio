@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<!-- PROTOTYPE — throwaway. Three hero variants for the light Apple-clean redesign,
+     switchable with ?variant=A|B|C or the bar at the bottom. Not linked from the site. -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero mock-ups (prototype)</title>
+    <meta name="robots" content="noindex">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Apple tokens (awesome-design-md/apple), accent per Siraj: #0071e3 */
+        :root {
+            --blue: #0071e3;
+            --ink: #1d1d1f;
+            --muted: #6e6e73;
+            --canvas: #ffffff;
+            --parchment: #f5f5f7;
+            --hairline: #e0e0e0;
+            --font: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font);
+            color: var(--ink);
+            background: var(--canvas);
+            font-size: 17px;
+            line-height: 1.47;
+            letter-spacing: -0.022em;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .variant {
+            display: none;
+        }
+
+        .variant.is-on {
+            display: block;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: 11px 22px;
+            border-radius: 999px;
+            font-size: 17px;
+            background: var(--blue);
+            color: #fff;
+            transition: transform 0.2s var(--ease), background-color 0.2s;
+        }
+
+        .pill:hover {
+            background: #0077ed;
+        }
+
+        .pill:active {
+            transform: scale(0.95);
+        }
+
+        .pill.ghost {
+            background: transparent;
+            color: var(--blue);
+            box-shadow: inset 0 0 0 1px var(--blue);
+        }
+
+        .pill.ghost:hover {
+            background: rgba(0, 113, 227, 0.06);
+        }
+
+        .muted {
+            color: var(--muted);
+        }
+
+        /* ---------- Header 1: 21st.dev "Navbar 1" (preetsuthar17), ported to HTML ---------- */
+        .nav1-wrap {
+            display: flex;
+            justify-content: center;
+            padding: 24px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+        }
+
+        .nav1 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 768px;
+            padding: 10px 10px 10px 24px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-radius: 999px;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.04);
+            animation: drop 0.6s var(--ease) both;
+        }
+
+        .nav1-logo {
+            font-weight: 600;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav1-logo img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: top;
+            transition: transform 0.3s var(--ease);
+        }
+
+        .nav1-logo:hover img {
+            transform: rotate(10deg);
+        }
+
+        .nav1-links {
+            display: flex;
+            gap: 28px;
+            font-size: 14px;
+        }
+
+        .nav1-links a {
+            transition: color 0.2s, transform 0.2s;
+            display: inline-block;
+        }
+
+        .nav1-links a:hover {
+            color: var(--muted);
+            transform: scale(1.05);
+        }
+
+        .nav1 .pill {
+            font-size: 14px;
+            min-height: 36px;
+            padding: 8px 18px;
+        }
+
+        @keyframes drop {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+
+        /* ---------- Header 2: 21st.dev "Header Navbar" (karthikmudunuri), ported ---------- */
+        .nav2 {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+        }
+
+        .nav2-row {
+            max-width: 1120px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 24px;
+            height: 56px;
+        }
+
+        .nav2-logo {
+            font-weight: 600;
+            font-size: 19px;
+        }
+
+        .nav2-links {
+            display: flex;
+        }
+
+        .nav2-links a {
+            padding: 16px 16px;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+
+        .nav2-links a:hover {
+            background: var(--parchment);
+        }
+
+        .nav2-links a.cta {
+            color: var(--blue);
+        }
+
+        /* ---------- Shared: photo strip ---------- */
+        .strip {
+            overflow: hidden;
+            padding: 8px 0 64px;
+        }
+
+        .strip-track {
+            display: flex;
+            gap: 16px;
+            width: max-content;
+            animation: marquee 50s linear infinite;
+        }
+
+        .strip:hover .strip-track {
+            animation-play-state: paused;
+        }
+
+        .strip figure {
+            margin: 0;
+            width: 300px;
+        }
+
+        .strip img {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 18px;
+            transition: transform 0.5s var(--ease);
+        }
+
+        .strip figure:hover img {
+            transform: scale(1.03);
+        }
+
+        .strip figcaption {
+            font-size: 14px;
+            margin-top: 10px;
+            color: var(--muted);
+        }
+
+        .strip figcaption b {
+            color: var(--ink);
+            font-weight: 600;
+            display: block;
+        }
+
+        @keyframes marquee {
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        .rise {
+            opacity: 0;
+            transform: translateY(24px);
+            animation: rise 0.9s var(--ease) forwards;
+            animation-delay: calc(var(--i, 0) * 90ms + 150ms);
+        }
+
+        @keyframes rise {
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* ---------- Variant A: centred Apple tile ---------- */
+        .a-hero {
+            text-align: center;
+            padding: 40px 24px 0;
+        }
+
+        .a-hero h1 {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 600;
+            letter-spacing: -0.045em;
+            line-height: 1.02;
+            margin: 0;
+        }
+
+        .a-hero .tag {
+            font-size: clamp(21px, 2.4vw, 28px);
+            margin: 14px 0 0;
+        }
+
+        .a-hero .roles {
+            margin: 12px auto 0;
+            max-width: 560px;
+        }
+
+        .a-ctas {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            margin: 28px 0 48px;
+            flex-wrap: wrap;
+        }
+
+        .a-portrait {
+            width: min(420px, 80vw);
+            margin: 0 auto;
+            border-radius: 28px;
+            overflow: hidden;
+            background: var(--parchment);
+            box-shadow: 3px 5px 30px rgba(0, 0, 0, 0.18);
+            will-change: transform;
+        }
+
+        .a-portrait img {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            object-position: 50% 15%;
+        }
+
+        .a-stats {
+            display: flex;
+            justify-content: center;
+            gap: clamp(28px, 6vw, 96px);
+            padding: 56px 24px 48px;
+            flex-wrap: wrap;
+        }
+
+        .stat b {
+            display: block;
+            font-size: clamp(36px, 4vw, 48px);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        .stat span {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        /* ---------- Variant B: split, parchment ---------- */
+        .b-hero {
+            background: var(--parchment);
+        }
+
+        .b-grid {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 72px 24px 56px;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 56px;
+            align-items: center;
+        }
+
+        .b-hero h1 {
+            font-size: clamp(44px, 6vw, 80px);
+            font-weight: 600;
+            letter-spacing: -0.045em;
+            line-height: 1.02;
+            margin: 0 0 18px;
+        }
+
+        .b-hero .tag {
+            font-size: clamp(20px, 2vw, 24px);
+            font-weight: 300;
+            margin: 0 0 28px;
+            max-width: 30ch;
+        }
+
+        .b-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 32px;
+        }
+
+        .b-chips span {
+            background: #fff;
+            border-radius: 999px;
+            padding: 8px 14px;
+            font-size: 14px;
+        }
+
+        .b-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .b-photo {
+            position: relative;
+        }
+
+        .b-photo img {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            object-position: 50% 15%;
+            border-radius: 28px;
+            background: #fff;
+            box-shadow: 3px 5px 30px rgba(0, 0, 0, 0.22);
+            will-change: transform;
+        }
+
+        .b-badge {
+            position: absolute;
+            left: -28px;
+            bottom: 36px;
+            background: #fff;
+            border-radius: 18px;
+            padding: 14px 18px;
+            font-size: 14px;
+            box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.25);
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .b-badge b {
+            display: block;
+            font-size: 17px;
+        }
+
+        @keyframes float {
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .b-strip {
+            background: var(--parchment);
+        }
+
+        /* ---------- Variant C: bento hero ---------- */
+        .c-wrap {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 24px 24px 64px;
+        }
+
+        .bento {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 180px;
+            gap: 16px;
+        }
+
+        .tile {
+            background: var(--parchment);
+            border-radius: 28px;
+            padding: 24px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.4s var(--ease);
+        }
+
+        .tile:hover {
+            transform: scale(1.015);
+        }
+
+        .t-name {
+            grid-column: span 2;
+            grid-row: span 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .t-name h1 {
+            font-size: clamp(44px, 5.4vw, 72px);
+            font-weight: 600;
+            letter-spacing: -0.045em;
+            line-height: 1;
+            margin: 0 0 14px;
+        }
+
+        .t-name p {
+            margin: 0 0 20px;
+            font-size: 19px;
+        }
+
+        .t-photo {
+            grid-column: span 1;
+            grid-row: span 2;
+            padding: 0;
+            background: #fff;
+        }
+
+        .t-photo img,
+        .t-event img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .t-photo img {
+            object-position: 50% 15%;
+        }
+
+        .t-stat {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .t-stat b {
+            font-size: 44px;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            line-height: 1;
+        }
+
+        .t-blue {
+            background: var(--blue);
+            color: #fff;
+        }
+
+        .t-blue .muted {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .t-event {
+            padding: 0;
+        }
+
+        .t-event span {
+            position: absolute;
+            left: 16px;
+            bottom: 14px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 999px;
+            padding: 6px 12px;
+            font-size: 13px;
+        }
+
+        .t-wide {
+            grid-column: span 2;
+        }
+
+        .t-quote {
+            grid-column: span 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .t-quote p {
+            margin: 0;
+            font-size: 21px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.25;
+        }
+
+        /* ---------- Phone ---------- */
+        @media (max-width: 760px) {
+
+            .nav1-links,
+            .nav2-links a:not(.cta) {
+                display: none;
+            }
+
+            .b-grid {
+                grid-template-columns: 1fr;
+                padding-top: 32px;
+                gap: 32px;
+            }
+
+            .b-badge {
+                left: 12px;
+            }
+
+            .b-stats {
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+
+            .b-stats .stat b,
+            .t-stat b {
+                font-size: 30px;
+            }
+
+            .tile {
+                padding: 18px;
+            }
+
+            .tile.t-event,
+            .tile.t-photo {
+                padding: 0;
+            }
+
+            .bento {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: 150px;
+            }
+
+            .t-name,
+            .t-quote,
+            .t-wide {
+                grid-column: span 2;
+            }
+
+            .strip figure,
+            .strip img {
+                width: 220px;
+            }
+
+            .strip img {
+                height: 150px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .strip-track,
+            .b-badge,
+            .nav1,
+            .rise {
+                animation: none !important;
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* ---------- Prototype switcher (not part of the design) ---------- */
+        .proto-bar {
+            position: fixed;
+            left: 50%;
+            bottom: 20px;
+            transform: translateX(-50%);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: #111;
+            color: #fff;
+            border-radius: 999px;
+            padding: 6px;
+            font: 600 14px/1 system-ui, sans-serif;
+            letter-spacing: 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .proto-bar button {
+            background: #333;
+            color: #fff;
+            border: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .proto-bar span {
+            padding: 0 14px;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===================== Variant A ===================== -->
+    <section class="variant" data-variant="A" data-name="Centred Apple tile + floating navbar">
+        <div class="nav1-wrap">
+            <nav class="nav1" aria-label="Main">
+                <a class="nav1-logo" href="#"><img src="img/siraj-headshot-square.jpg" alt="">Siraj Munir</a>
+                <div class="nav1-links">
+                    <a href="#">Testimonials</a><a href="#">About</a><a href="#">Events</a><a
+                        href="#">Certificates</a>
+                </div>
+                <a class="pill" href="#">Contact</a>
+            </nav>
+        </div>
+        <div class="a-hero">
+            <h1 class="rise">Siraj Munir</h1>
+            <p class="tag rise" style="--i:1">Learn. Serve. Make an impact.</p>
+            <p class="roles muted rise" style="--i:2">Siglap Youth Network &amp; Eastwood Ria Network Executive
+                Member · Professional emcee · Aspiring engineer</p>
+            <div class="a-ctas rise" style="--i:3">
+                <a class="pill" href="#">Read testimonials</a>
+                <a class="pill ghost" href="#">Get in touch</a>
+            </div>
+            <div class="a-portrait rise" style="--i:4" id="a-portrait"><img src="img/siraj-headshot.jpg"
+                    alt="Siraj Munir"></div>
+        </div>
+        <div class="a-stats">
+            <div class="stat"><b>10,000+</b><span>People reached</span></div>
+            <div class="stat"><b>1,000+</b><span>Volunteer hours</span></div>
+            <div class="stat"><b>1,500+</b><span>Residents engaged</span></div>
+        </div>
+        <div class="strip" data-strip></div>
+    </section>
+
+    <!-- ===================== Variant B ===================== -->
+    <section class="variant" data-variant="B" data-name="Split hero + thin Apple bar">
+        <nav class="nav2" aria-label="Main">
+            <div class="nav2-row">
+                <a class="nav2-logo" href="#">Siraj Munir</a>
+                <div class="nav2-links">
+                    <a href="#">Testimonials</a><a href="#">About</a><a href="#">Events</a><a
+                        href="#">Certificates</a><a class="cta" href="#">Contact</a>
+                </div>
+            </div>
+        </nav>
+        <div class="b-hero">
+            <div class="b-grid">
+                <div>
+                    <h1 class="rise">Siraj Munir</h1>
+                    <p class="tag rise" style="--i:1">Driven to learn, committed to serve, growing to make a greater
+                        impact.</p>
+                    <div class="b-chips rise" style="--i:2">
+                        <span>Siglap Youth Network</span><span>Eastwood Ria Network</span><span>Professional
+                            emcee</span><span>Aspiring engineer</span>
+                    </div>
+                    <div class="rise" style="--i:3; display:flex; gap:14px; flex-wrap:wrap;">
+                        <a class="pill" href="#">Read testimonials</a>
+                        <a class="pill ghost" href="#">Get in touch</a>
+                    </div>
+                    <div class="b-stats rise" style="--i:4">
+                        <div class="stat"><b>10k+</b><span>People reached</span></div>
+                        <div class="stat"><b>1,000+</b><span>Volunteer hours</span></div>
+                        <div class="stat"><b>1,500+</b><span>Residents engaged</span></div>
+                    </div>
+                </div>
+                <div class="b-photo rise" style="--i:2">
+                    <img src="img/siraj-headshot.jpg" alt="Siraj Munir" id="b-photo">
+                    <div class="b-badge"><b>6th place, national</b>Singapore Futures Youth Competition</div>
+                </div>
+            </div>
+        </div>
+        <div class="strip b-strip" data-strip></div>
+    </section>
+
+    <!-- ===================== Variant C ===================== -->
+    <section class="variant" data-variant="C" data-name="Bento hero + floating navbar">
+        <div class="nav1-wrap">
+            <nav class="nav1" aria-label="Main">
+                <a class="nav1-logo" href="#"><img src="img/siraj-headshot-square.jpg" alt="">Siraj Munir</a>
+                <div class="nav1-links">
+                    <a href="#">Testimonials</a><a href="#">About</a><a href="#">Events</a><a
+                        href="#">Certificates</a>
+                </div>
+                <a class="pill" href="#">Contact</a>
+            </nav>
+        </div>
+        <div class="c-wrap">
+            <div class="bento">
+                <div class="tile t-name rise">
+                    <h1>Siraj Munir</h1>
+                    <p class="muted">Community leader, professional emcee and aspiring engineer.</p>
+                    <div style="display:flex; gap:12px; flex-wrap:wrap;"><a class="pill" href="#">Read
+                            testimonials</a><a class="pill ghost" href="#">Contact</a></div>
+                </div>
+                <div class="tile t-photo rise" style="--i:1"><img src="img/siraj-headshot.jpg" alt="Siraj Munir">
+                </div>
+                <div class="tile t-stat t-blue rise" style="--i:2"><span class="muted">People
+                        reached</span><b>10,000+</b></div>
+                <div class="tile t-stat rise" style="--i:3"><span class="muted">Volunteer hours</span><b>1,000+</b>
+                </div>
+                <div class="tile t-event t-wide rise" style="--i:4"><img src="img/preusem-pic.jpg"
+                        alt="Emceeing the Pre-U Seminar"><span>Official emcee, Pre-U Seminar 2025</span></div>
+                <div class="tile t-quote rise" style="--i:5">
+                    <p>"Siraj demonstrates exceptional empathy and a genuine willingness to learn."</p>
+                    <span class="muted">Dr Maliki Osman</span>
+                </div>
+                <div class="tile t-event rise" style="--i:6"><img src="img/sfyc-pic.jpg" alt="SFYC"><span>SFYC 6th
+                        place</span></div>
+                <div class="tile t-stat rise" style="--i:7"><span class="muted">Residents
+                        engaged</span><b>1,500+</b></div>
+                <div class="tile t-quote rise" style="--i:8">
+                    <p>2nd place nationally at CoderZ robotics. Edusave Merit Award, top 25% of cohort.</p>
+                    <span class="muted">Certificates</span>
+                </div>
+            </div>
+        </div>
+        <div class="strip" data-strip></div>
+    </section>
+
+    <div class="proto-bar" role="toolbar" aria-label="Prototype variant switcher">
+        <button id="prev" aria-label="Previous variant">‹</button>
+        <span id="label"></span>
+        <button id="next" aria-label="Next variant">›</button>
+    </div>
+
+    <script>
+        // Action strip: event photos, duplicated for a seamless loop
+        const events = [
+            ['siglap-pets-day', 'Siglap Pets Day 2025', '1,500+ attendees'],
+            ['edusave-pic2', 'Edusave Awards', 'Official emcee'],
+            ['preusem-pic', 'Pre-U Seminar 2025', 'Official emcee'],
+            ['mps-ops', 'Weekly MPS', 'Resident advocacy'],
+            ['errn-pic-1', 'Eastwood Ria Network', 'Community initiatives'],
+            ['yn-pic-1', 'Youth Network', 'Executive Member'],
+            ['sfyc-pic', 'SFYC 2024', '6th place, NUS LKYSPP'],
+            ['pap-ops', 'GE2025 campaign ops', 'Logistics and strategy'],
+            ['wyse-pic', 'Wyse Active', 'Welfare programmes'],
+            ['sg60-record', 'SG60 record', "Singapore's 60th year"],
+        ];
+        const figs = events.map(([f, t, s]) =>
+            `<figure><img src="img/${f}.jpg" alt="${t}" loading="lazy"><figcaption><b>${t}</b>${s}</figcaption></figure>`).join('');
+        document.querySelectorAll('[data-strip]').forEach(el =>
+            el.innerHTML = `<div class="strip-track">${figs}${figs}</div>`);
+
+        // Rich motion: portrait scales/parallaxes with scroll
+        const aPortrait = document.getElementById('a-portrait');
+        const bPhoto = document.getElementById('b-photo');
+        addEventListener('scroll', () => {
+            const y = scrollY;
+            aPortrait.style.transform = `scale(${1 + Math.min(y / 2000, 0.12)})`;
+            bPhoto.style.transform = `translateY(${y * -0.08}px)`;
+        }, { passive: true });
+
+        // Variant switcher
+        const variants = [...document.querySelectorAll('.variant')];
+        const keys = variants.map(v => v.dataset.variant);
+        function show(key) {
+            variants.forEach(v => v.classList.toggle('is-on', v.dataset.variant === key));
+            const v = variants.find(v => v.dataset.variant === key);
+            document.getElementById('label').textContent = `${key} (${v.dataset.name})`;
+            const url = new URL(location);
+            url.searchParams.set('variant', key);
+            history.replaceState(null, '', url);
+            scrollTo(0, 0);
+        }
+        function step(d) {
+            const cur = new URL(location).searchParams.get('variant') || 'A';
+            show(keys[(keys.indexOf(cur) + d + keys.length) % keys.length]);
+        }
+        document.getElementById('prev').onclick = () => step(-1);
+        document.getElementById('next').onclick = () => step(1);
+        addEventListener('keydown', e => {
+            if (e.target.closest('input, textarea, [contenteditable]')) return;
+            if (e.key === 'ArrowLeft') step(-1);
+            if (e.key === 'ArrowRight') step(1);
+        });
+        show(keys.includes(new URL(location).searchParams.get('variant')) ? new URL(location).searchParams.get('variant') : 'A');
+    </script>
+</body>
+
+</html>
